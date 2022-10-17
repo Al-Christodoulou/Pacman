@@ -7,6 +7,10 @@ void Player::think()
 		moveUp();
 }
 
+Player::Player(int x, int y, wchar_t texture)
+	: Character{ x, y, texture }
+{}
+
 Player::Player(wchar_t texture)
 	: Character{ texture }
 {}
