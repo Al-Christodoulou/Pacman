@@ -9,6 +9,8 @@ protected:
 
 public:
 	unsigned int getPos() const;
+	float getVirtualX() const;
+	float getVirtualY() const;
 	wchar_t getTex() const;
 
 	Entity(int, int, wchar_t);

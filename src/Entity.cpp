@@ -2,8 +2,18 @@
 
 unsigned int Entity::getPos() const
 {
-	return static_cast<unsigned int>(m_y +
+	return static_cast<unsigned int>(m_x +
 		static_cast<unsigned int>(m_y) * gScreenWidth);
+}
+
+float Entity::getVirtualX() const
+{
+	return m_x;
+}
+
+float Entity::getVirtualY() const
+{
+	return m_y;
 }
 
 wchar_t Entity::getTex() const { return m_texture; }

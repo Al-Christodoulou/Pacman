@@ -14,7 +14,7 @@ void PacMan::renderAllEntities()
 	{
 		const Entity* curEnt{ m_entitymgr.getEntity(i) };
 		if (curEnt)
-			m_screen[i] = curEnt->getTex();
+			m_screen[curEnt->getPos()] = curEnt->getTex();
 	}
 }
 
