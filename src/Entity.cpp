@@ -1,9 +1,14 @@
 #include "Entity.h"
 
+unsigned int Entity::interpretXY(float x, float y)
+{
+	return static_cast<unsigned int>(x +
+		static_cast<unsigned int>(y) * gScreenWidth);
+}
+
 unsigned int Entity::getPos() const
 {
-	return static_cast<unsigned int>(m_x +
-		static_cast<unsigned int>(m_y) * gScreenWidth);
+	return interpretXY(m_x, m_y);
 }
 
 float Entity::getVirtualX() const

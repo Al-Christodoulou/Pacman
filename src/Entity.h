@@ -8,6 +8,7 @@ protected:
 	wchar_t m_texture{ L'#' };
 
 public:
+	static unsigned int interpretXY(float, float);
 	unsigned int getPos() const;
 	float getVirtualX() const;
 	float getVirtualY() const;

@@ -1,6 +1,7 @@
 #pragma once
 #include "Entity.h"
 
+// an abstract class that defines a movable entity with thinking logic
 class Character : public Entity
 {
 private:
@@ -12,6 +13,7 @@ public:
 	void moveLeft();
 	void moveRight();
 
+	bool willEntCollide(const Entity&, bool onX);
 	bool isXBorderColliding();
 	bool isYBorderColliding();
 
