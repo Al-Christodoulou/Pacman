@@ -46,11 +46,3 @@ Player* EntityMgr::createPlayer(wchar_t texture)
 	m_entities.push_back(std::move(entUniPtr));
 	return static_cast<Player*>(m_entities[m_entities.size() - 1].get());
 }
-
-/*EntityMgr::EntityMgr()
-{
-	for (int i{ 0 }; i < m_entities.size(); i++)
-	{
-		m_entities[i] = nullptr;
-	}
-}*/
