@@ -21,6 +21,7 @@ void PacMan::renderAllEntities()
 void PacMan::run()
 {
 	//Player* player{ new Player{static_cast<wchar_t>(0x555)} };
+	Player* player{ m_entitymgr.createPlayer(gScreenWidth / 2, gScreenHeight / 2, 0x555) };
 	while (true)
 	{
 		Engine::tick();

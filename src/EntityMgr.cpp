@@ -1,10 +1,7 @@
 #include <utility>
 #include "EntityMgr.h"
 
-// TODO: fix the compile error
-// HACK: convert from unique_ptr<Player> to unique_ptr<Entity> (without losing
-// the data)
-std::unique_ptr<Entity> EntityMgr::convPlyToEnt(std::unique_ptr<Character> uniPtrChar)
+std::unique_ptr<Entity> EntityMgr::convPlyToEnt(std::unique_ptr<Player>& uniPtrChar)
 {
 	Entity* entPtr{ static_cast<Entity*>(uniPtrChar.release()) };
 	return std::unique_ptr<Entity>{ entPtr };
@@ -34,17 +31,19 @@ Entity* EntityMgr::createEnt(wchar_t texture)
 
 Player* EntityMgr::createPlayer(int x, int y, wchar_t texture)
 {
-	std::unique_ptr<Entity> entUniPtr{ convPlyToEnt(std::make_unique<Player>(x, y, texture)) };
+	std::unique_ptr<Player> ply{ std::make_unique<Player>(x, y, texture) };
+	std::unique_ptr<Entity> entUniPtr{ convPlyToEnt(ply) };
 
-	m_entities.push_back(entUniPtr);
+	m_entities.push_back(std::move(entUniPtr));
 	return static_cast<Player*>(m_entities[m_entities.size() - 1].get());
 }
 
 Player* EntityMgr::createPlayer(wchar_t texture)
 {
-	std::unique_ptr<Entity> entUniPtr{ convPlyToEnt(std::make_unique<Player>(texture)) };
+	std::unique_ptr<Player> ply{ std::make_unique<Player>(texture) };
+	std::unique_ptr<Entity> entUniPtr{ convPlyToEnt(ply) };
 
-	m_entities.push_back(entUniPtr);
+	m_entities.push_back(std::move(entUniPtr));
 	return static_cast<Player*>(m_entities[m_entities.size() - 1].get());
 }
 

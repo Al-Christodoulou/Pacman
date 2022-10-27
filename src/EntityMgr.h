@@ -13,7 +13,7 @@ private:
 	using EntityArray = std::vector<std::unique_ptr<Entity>>;
 	EntityArray m_entities{};
 
-	std::unique_ptr<Entity> convPlyToEnt(std::unique_ptr<Character>);
+	std::unique_ptr<Entity> convPlyToEnt(std::unique_ptr<Player>&);
 
 public:
 	const Entity* const getEntity(unsigned int) const;
