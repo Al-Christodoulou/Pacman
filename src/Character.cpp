@@ -31,7 +31,7 @@ bool Character::willEntCollide(const Entity& other, bool onX)
 	if (onX)
 		predictedPos = interpretXY(m_x + delta, m_y);
 	else
-		predictedPos = interpretXY(m_x, m_y + delta);
+		predictedPos = interpretXY(m_x, m_y + delta - 1.0f);
 	if (other.getPos() == predictedPos)
 		return true;
 	return false;
