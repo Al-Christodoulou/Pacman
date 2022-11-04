@@ -31,7 +31,7 @@ void Engine::tick()
 {
 	std::chrono::duration<float> deltaTime{ std::chrono::system_clock::now() - sTimeNow };
 	sDeltaTime = deltaTime.count();
-	sTimeNow = std::chrono::system_clock::now(); // TODO: how to handle deltaTime
+	sTimeNow = std::chrono::system_clock::now();
 }
 
 float Engine::getDeltaTime()

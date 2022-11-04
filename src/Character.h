@@ -17,7 +17,19 @@ public:
 	bool isXBorderColliding();
 	bool isYBorderColliding();
 
+	float getSpeed();
+
 	virtual void think() = 0;
+
+	friend bool operator==(const Character& c1, const Character& c2)
+	{
+		return &c1 == &c2;
+	}
+
+	friend bool operator!=(const Character& c1, const Character& c2)
+	{
+		return !(c1 == c2);
+	}
 
 	Character(int, int, wchar_t);
 	Character(wchar_t);

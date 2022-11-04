@@ -49,6 +49,8 @@ bool Character::isYBorderColliding()
 		static_cast<unsigned int>(m_y) == gScreenHeight;
 }
 
+float Character::getSpeed() { return m_speed; }
+
 Character::Character(int x, int y, wchar_t texture)
 	: Entity{ x, y, texture }
 {}
