@@ -4,24 +4,28 @@ void Character::moveUp()
 {
 	if (!isYBorderColliding()) m_y -= m_speed * Engine::getDeltaTime();
 	if (isYBorderColliding()) m_y += m_speed * Engine::getDeltaTime();
+	m_lastAction = MoveAction::UP;
 }
 
 void Character::moveDown()
 {
 	if (!isYBorderColliding()) m_y += m_speed * Engine::getDeltaTime();
 	if (isYBorderColliding()) m_y -= m_speed * Engine::getDeltaTime();
+	m_lastAction = MoveAction::DOWN;
 }
 
 void Character::moveLeft()
 {
 	if (!isXBorderColliding()) m_x -= m_speed * Engine::getDeltaTime();
 	if (isXBorderColliding()) m_x += m_speed * Engine::getDeltaTime();
+	m_lastAction = MoveAction::LEFT;
 }
 
 void Character::moveRight()
 {
 	if (!isXBorderColliding()) m_x += m_speed * Engine::getDeltaTime();
 	if (isXBorderColliding()) m_x -= m_speed * Engine::getDeltaTime();
+	m_lastAction = MoveAction::RIGHT;
 }
 
 bool Character::willEntCollide(const Entity& other, bool onX)
@@ -50,6 +54,7 @@ bool Character::isYBorderColliding()
 }
 
 float Character::getSpeed() { return m_speed; }
+Character::MoveAction Character::getLastAction() const { return m_lastAction; }
 
 Character::Character(int x, int y, wchar_t texture)
 	: Entity{ x, y, texture, EntityType::Character }
