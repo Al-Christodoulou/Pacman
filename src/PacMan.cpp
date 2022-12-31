@@ -22,9 +22,15 @@ void PacMan::renderAllEntities()
 void PacMan::run()
 {
 	Player* player{ m_entitymgr.createPlayer(gScreenWidth / 2, gScreenHeight / 2, 0x555) };
-	//for (int i{ 0 }; i < 50; i++)
-	//	m_entitymgr.createEnt(Random::get(0, gScreenWidth), Random::get(0, gScreenHeight), L'#');
-	m_entitymgr.createEnt((gScreenWidth / 2), (gScreenHeight / 2) - 4, L'#');
+	for (int i{ 0 }; i < 50; i++)
+		m_entitymgr.createEnt(Random::get(0, gScreenWidth), Random::get(0, gScreenHeight), L'#');
+	//m_entitymgr.createEnt((gScreenWidth / 2), (gScreenHeight / 2) - 4, L'#');
+	//m_entitymgr.createEnt((gScreenWidth / 2) - 1, (gScreenHeight / 2) - 4, L'#');
+	//m_entitymgr.createEnt((gScreenWidth / 2) + 1, (gScreenHeight / 2) - 4, L'#');
+	//
+	//m_entitymgr.createEnt((gScreenWidth / 2), (gScreenHeight / 2) - 3, L'#');
+	//m_entitymgr.createEnt((gScreenWidth / 2) - 1, (gScreenHeight / 2) - 3, L'#');
+	//m_entitymgr.createEnt((gScreenWidth / 2) + 1, (gScreenHeight / 2) - 3, L'#');
 
 	while (true)
 	{
@@ -32,35 +38,8 @@ void PacMan::run()
 		fillscreen(L' ');
 		renderAllEntities();
 
-		if (GetAsyncKeyState(L'W') & 0x8000)
-		{
-			for (unsigned int i{ 0 }; i < m_entitymgr.getArraySize(); i++)
-			{
-				if (m_entitymgr.getEntity(i) == player ||
-					!player->willEntCollide(*m_entitymgr.getEntity(i), false))
-				{
-					//swprintf_s(m_screen + gScreenWidth * 3, 30, L"BANG!");
-					//const float delta{ player->getSpeed() * Engine::getDeltaTime() };
-					//unsigned int predictedPos{ Entity::interpretXY(player->getVirtualX(), player->getVirtualY() + delta + 1.0f) };
-					//m_screen[predictedPos] = L'@';
-					player->moveUp();
-					break;
-				}
-			}
-		}
-
-		if (GetAsyncKeyState(L'A') & 0x8000)
-		{
-			for (unsigned int i{ 0 }; i < m_entitymgr.getArraySize(); i++)
-			{
-				if (!player->willEntCollide(*m_entitymgr.getEntity(i), true) &&
-					m_entitymgr.getEntity(i) != player)
-				{
-					player->moveLeft();
-					break;
-				}
-			}
-		}
+		player->think();
+		m_entitymgr.checkViolationFor(*player);
 
 		swprintf_s(m_screen, 50, L"X: %f, Y: %f",
 			player->getVirtualX(), player->getVirtualY()
