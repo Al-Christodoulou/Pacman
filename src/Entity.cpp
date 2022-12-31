@@ -23,14 +23,16 @@ float Entity::getVirtualY() const
 
 wchar_t Entity::getTex() const { return m_texture; }
 
-Entity::Entity(int x, int y, wchar_t texture)
+Entity::Entity(int x, int y, wchar_t texture, EntityType enttype)
 {
 	m_x = static_cast<float>(x);
 	m_y = static_cast<float>(y);
 	m_texture = texture;
+	m_entitytype = enttype;
 }
 
-Entity::Entity(wchar_t texture)
+Entity::Entity(wchar_t texture, EntityType enttype)
 {
 	m_texture = texture;
+	m_entitytype = enttype;
 }

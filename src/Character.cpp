@@ -52,9 +52,9 @@ bool Character::isYBorderColliding()
 float Character::getSpeed() { return m_speed; }
 
 Character::Character(int x, int y, wchar_t texture)
-	: Entity{ x, y, texture }
+	: Entity{ x, y, texture, EntityType::Character }
 {}
 
 Character::Character(wchar_t texture)
-	: Entity{ texture }
+	: Entity{ texture, EntityType::Character }
 {}

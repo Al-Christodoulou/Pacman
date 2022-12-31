@@ -14,6 +14,13 @@ public:
 	float getVirtualY() const;
 	wchar_t getTex() const;
 
-	Entity(int, int, wchar_t);
-	Entity(wchar_t);
+	enum class EntityType
+	{
+		Default,
+		Character,
+		max_entity_types
+	} m_entitytype;
+
+	Entity(int, int, wchar_t, EntityType);
+	Entity(wchar_t, EntityType);
 };
