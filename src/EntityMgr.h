@@ -25,4 +25,7 @@ public:
 
 	Player* createPlayer(int, int, wchar_t);
 	Player* createPlayer(wchar_t);
+
+	// maybe temporary
+	void checkViolationFor(Character&);
 };

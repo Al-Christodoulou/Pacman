@@ -19,13 +19,13 @@ unsigned int EntityMgr::getArraySize() const
 
 Entity* EntityMgr::createEnt(int x, int y, wchar_t texture)
 {
-	m_entities.push_back(std::make_unique<Entity>(x, y, texture));
+	m_entities.push_back(std::make_unique<Entity>(x, y, texture, Entity::EntityType::Default));
 	return m_entities[m_entities.size() - 1].get();
 }
 
 Entity* EntityMgr::createEnt(wchar_t texture)
 {
-	m_entities.push_back(std::make_unique<Entity>(texture));
+	m_entities.push_back(std::make_unique<Entity>(texture, Entity::EntityType::Default));
 	return m_entities[m_entities.size() - 1].get();
 }
 
@@ -45,4 +45,30 @@ Player* EntityMgr::createPlayer(wchar_t texture)
 
 	m_entities.push_back(std::move(entUniPtr));
 	return static_cast<Player*>(m_entities[m_entities.size() - 1].get());
+}
+
+void EntityMgr::checkViolationFor(Character& character)
+{
+	for (const auto& curEnt : m_entities)
+	{
+		// make sure we don't check against the same character
+		if (*static_cast<Character*>(curEnt.get()) != character)
+		{
+			// if we have a violation, revert the last movement of character
+			if (curEnt.get()->getPos() == character.getPos())
+			{
+				switch (character.getLastAction())
+				{
+				case Character::MoveAction::UP: character.moveDown();
+					break;
+				case Character::MoveAction::DOWN: character.moveUp();
+					break;
+				case Character::MoveAction::LEFT: character.moveRight();
+					break;
+				case Character::MoveAction::RIGHT: character.moveLeft();
+					break;
+				}
+			}
+		}
+	}
 }
