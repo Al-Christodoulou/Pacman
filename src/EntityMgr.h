@@ -13,7 +13,14 @@ private:
 	using EntityArray = std::vector<std::unique_ptr<Entity>>;
 	EntityArray m_entities{};
 
-	std::unique_ptr<Entity> convPlyToEnt(std::unique_ptr<Player>&);
+	// takes a Player, Ghost, ... pointer and upcasts it to an Entity
+	// pointer in order to be able to move it inside m_entities
+	template <typename T>
+	std::unique_ptr<Entity> upcastToEnt(std::unique_ptr<T>& e)
+	{
+		Entity* entPtr{ static_cast<Entity*>(e.release()) };
+		return std::unique_ptr<Entity>{ entPtr };
+	}
 
 public:
 	const Entity* const getEntity(unsigned int) const;
