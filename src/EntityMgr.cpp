@@ -61,6 +61,15 @@ Player* EntityMgr::pushPlayer(std::unique_ptr<Player> player)
 	return static_cast<Player*>(m_entities[m_entities.size() - 1].get());
 }
 
+Ghost* EntityMgr::createGhost(int x, int y)
+{
+	std::unique_ptr<Ghost> ght{ std::make_unique<Ghost>(x, y) };
+	std::unique_ptr<Entity> entGht{ upcastToEnt(ght) };
+
+	m_entities.push_back(std::move(entGht));
+	return static_cast<Ghost*>(m_entities[m_entities.size() - 1].get());
+}
+
 /*
 * Checks if two entities lie in the same position. if so, then we have a
 * violation and this returns true

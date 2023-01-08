@@ -6,6 +6,7 @@
 #include "Entity.h"
 #include "Character.h"
 #include "Player.h"
+#include "Ghost.h"
 
 class EntityMgr
 {
@@ -34,6 +35,8 @@ public:
 	Player* createPlayer(int, int, wchar_t);
 	Player* createPlayer(wchar_t);
 	Player* pushPlayer(std::unique_ptr<Player>);
+
+	Ghost* createGhost(int, int);
 
 	// no copying or moving of EntityMgr is allowed
 	EntityMgr(const EntityMgr&) = delete;
