@@ -8,16 +8,6 @@ private:
 	float m_speed{ 20.0f }; // the speed of the entity in pixels per second
 
 public:
-	enum class MoveAction
-	{
-		UP, DOWN, LEFT, RIGHT,
-		max_actions
-	};
-
-// TODO: this is ugly
-private:
-	MoveAction m_lastAction{ MoveAction::UP };
-public:
 
 	void moveUp();
 	void moveDown();
@@ -29,7 +19,6 @@ public:
 	bool isYBorderColliding();
 
 	float getSpeed();
-	MoveAction getLastAction() const;
 
 	virtual void think() = 0;
 

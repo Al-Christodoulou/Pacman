@@ -1,31 +1,32 @@
 #include "Character.h"
+#include "EntityMgr.h"
 
 void Character::moveUp()
 {
-	if (!isYBorderColliding()) m_y -= m_speed * Engine::getDeltaTime();
-	if (isYBorderColliding()) m_y += m_speed * Engine::getDeltaTime();
-	m_lastAction = MoveAction::UP;
+	const float delta{ m_speed * Engine::getDeltaTime() };
+	if (!isYBorderColliding()) m_y -= delta;
+	if (isYBorderColliding() || gEntMgr.checkViolationFor(*this)) m_y += delta;
 }
 
 void Character::moveDown()
 {
-	if (!isYBorderColliding()) m_y += m_speed * Engine::getDeltaTime();
-	if (isYBorderColliding()) m_y -= m_speed * Engine::getDeltaTime();
-	m_lastAction = MoveAction::DOWN;
+	const float delta{ m_speed * Engine::getDeltaTime() };
+	if (!isYBorderColliding()) m_y += delta;
+	if (isYBorderColliding() || gEntMgr.checkViolationFor(*this)) m_y -= delta;
 }
 
 void Character::moveLeft()
 {
-	if (!isXBorderColliding()) m_x -= m_speed * Engine::getDeltaTime();
-	if (isXBorderColliding()) m_x += m_speed * Engine::getDeltaTime();
-	m_lastAction = MoveAction::LEFT;
+	const float delta{ m_speed * Engine::getDeltaTime() };
+	if (!isXBorderColliding()) m_x -= delta;
+	if (isXBorderColliding() || gEntMgr.checkViolationFor(*this)) m_x += delta;
 }
 
 void Character::moveRight()
 {
+	const float delta{ m_speed * Engine::getDeltaTime() };
 	if (!isXBorderColliding()) m_x += m_speed * Engine::getDeltaTime();
-	if (isXBorderColliding()) m_x -= m_speed * Engine::getDeltaTime();
-	m_lastAction = MoveAction::RIGHT;
+	if (isXBorderColliding() || gEntMgr.checkViolationFor(*this)) m_x -= m_speed * Engine::getDeltaTime();
 }
 
 bool Character::willEntCollide(const Entity& other, bool onX)
@@ -54,7 +55,6 @@ bool Character::isYBorderColliding()
 }
 
 float Character::getSpeed() { return m_speed; }
-Character::MoveAction Character::getLastAction() const { return m_lastAction; }
 
 Character::Character(int x, int y, wchar_t texture)
 	: Entity{ x, y, texture, EntityType::Character }
