@@ -26,7 +26,7 @@ void Character::moveRight()
 {
 	const float delta{ m_speed * Engine::getDeltaTime() };
 	if (!isXBorderColliding()) m_x += m_speed * Engine::getDeltaTime();
-	if (isXBorderColliding() || gEntMgr.checkViolationFor(*this)) m_x -= m_speed * Engine::getDeltaTime();
+	if (isXBorderColliding() || gEntMgr.checkViolationFor(*this)) m_x -= delta;
 }
 
 bool Character::isXBorderColliding()
