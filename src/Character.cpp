@@ -29,19 +29,6 @@ void Character::moveRight()
 	if (isXBorderColliding() || gEntMgr.checkViolationFor(*this)) m_x -= m_speed * Engine::getDeltaTime();
 }
 
-bool Character::willEntCollide(const Entity& other, bool onX)
-{
-	unsigned int predictedPos{};
-	const float delta{ m_speed * Engine::getDeltaTime() };
-	if (onX)
-		predictedPos = interpretXY(m_x + delta, m_y);
-	else
-		predictedPos = interpretXY(m_x, m_y + delta - 1.0f);
-	if (other.getPos() == predictedPos)
-		return true;
-	return false;
-}
-
 bool Character::isXBorderColliding()
 {
 	return static_cast<unsigned int>(m_x) == 0 ||

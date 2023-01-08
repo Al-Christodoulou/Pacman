@@ -14,7 +14,6 @@ public:
 	void moveLeft();
 	void moveRight();
 
-	bool willEntCollide(const Entity&, bool onX);
 	bool isXBorderColliding();
 	bool isYBorderColliding();
 
