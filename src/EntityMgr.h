@@ -29,9 +29,11 @@ public:
 
 	Entity* createEnt(int, int, wchar_t);
 	Entity* createEnt(wchar_t);
+	Entity* pushEnt(std::unique_ptr<Entity>);
 
 	Player* createPlayer(int, int, wchar_t);
 	Player* createPlayer(wchar_t);
+	Player* pushPlayer(std::unique_ptr<Player>);
 
 	// no copying or moving of EntityMgr is allowed
 	EntityMgr(const EntityMgr&) = delete;
