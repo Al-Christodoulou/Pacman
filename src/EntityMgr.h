@@ -29,3 +29,6 @@ public:
 	// maybe temporary
 	void checkViolationFor(Character&);
 };
+
+// EntityMgr is a global variable so each character can easily call its methods
+extern EntityMgr gEntMgr;

@@ -1,6 +1,8 @@
 #include <utility>
 #include "EntityMgr.h"
 
+EntityMgr gEntMgr{};
+
 std::unique_ptr<Entity> EntityMgr::convPlyToEnt(std::unique_ptr<Player>& uniPtrChar)
 {
 	Entity* entPtr{ static_cast<Entity*>(uniPtrChar.release()) };
