@@ -49,28 +49,21 @@ Player* EntityMgr::createPlayer(wchar_t texture)
 	return static_cast<Player*>(m_entities[m_entities.size() - 1].get());
 }
 
-void EntityMgr::checkViolationFor(Character& character)
+/*
+* Checks if two entities lie in the same position. if so, then we have a
+* violation and this returns true
+*/
+bool EntityMgr::checkViolationFor(const Character& character)
 {
 	for (const auto& curEnt : m_entities)
 	{
 		// make sure we don't check against the same character
 		if (*static_cast<Character*>(curEnt.get()) != character)
 		{
-			// if we have a violation, revert the last movement of character
+			// if we have a violation, return true
 			if (curEnt.get()->getPos() == character.getPos())
-			{
-				switch (character.getLastAction())
-				{
-				case Character::MoveAction::UP: character.moveDown();
-					break;
-				case Character::MoveAction::DOWN: character.moveUp();
-					break;
-				case Character::MoveAction::LEFT: character.moveRight();
-					break;
-				case Character::MoveAction::RIGHT: character.moveLeft();
-					break;
-				}
-			}
+				return true;
 		}
 	}
+	return false;
 }

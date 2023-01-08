@@ -26,8 +26,13 @@ public:
 	Player* createPlayer(int, int, wchar_t);
 	Player* createPlayer(wchar_t);
 
+	// no copying or moving of EntityMgr is allowed
+	EntityMgr(const EntityMgr&) = delete;
+	EntityMgr(EntityMgr&&) = delete;
+	EntityMgr() = default;
+
 	// maybe temporary
-	void checkViolationFor(Character&);
+	bool checkViolationFor(const Character&);
 };
 
 // EntityMgr is a global variable so each character can easily call its methods
