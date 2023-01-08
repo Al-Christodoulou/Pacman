@@ -7,7 +7,7 @@ class PacMan
 private:
 	wchar_t* m_screen{ new wchar_t[gScreenTotalPxs] };
 	Engine m_engine{};
-	EntityMgr m_entitymgr{};
+	//EntityMgr m_entitymgr{};
 
 public:
 	void fillscreen(wchar_t data);
