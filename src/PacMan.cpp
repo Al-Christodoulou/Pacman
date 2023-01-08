@@ -32,18 +32,22 @@ void PacMan::run()
 	gEntMgr.createEnt((gScreenWidth / 2) - 1, (gScreenHeight / 2) - 3, L'#');
 	gEntMgr.createEnt((gScreenWidth / 2) + 1, (gScreenHeight / 2) - 3, L'#');
 
+	Ghost* ghost{ gEntMgr.createGhost((gScreenWidth / 2) - 3, (gScreenHeight / 2) - 5) };
+
 	while (true)
 	{
+		Sleep(16);
 		Engine::tick();
 		fillscreen(L' ');
 		renderAllEntities();
 
 		player->think();
+		ghost->think();
 
 		swprintf_s(m_screen, 40, L"X: %f, Y: %f",
 			player->getVirtualX(), player->getVirtualY()
 		);
-		//swprintf_s(m_screen, 30, L"DT: %f", m_engine.getDeltaTime());
+		swprintf_s(m_screen + gScreenWidth, 30, L"DT: %f", m_engine.getDeltaTime());
 
 		m_engine.renderScreen(m_screen);
 	}
