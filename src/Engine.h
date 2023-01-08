@@ -6,12 +6,12 @@ constexpr unsigned int gScreenWidth{ 120 };
 constexpr unsigned int gScreenHeight{ 40 };
 constexpr unsigned int gScreenTotalPxs{ gScreenWidth * gScreenHeight };
 
-using timep = std::chrono::system_clock::time_point;
+using timep_t = std::chrono::system_clock::time_point;
 
 class Engine
 {
 private:
-	static timep sTimeNow;
+	static timep_t sTimeNow;
 	static float sDeltaTime;
 	HANDLE m_hConsole{ CreateConsoleScreenBuffer(GENERIC_READ | GENERIC_WRITE, 0, 0, CONSOLE_TEXTMODE_BUFFER, 0) };
 

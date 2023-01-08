@@ -1,7 +1,7 @@
 #include <Windows.h>
 #include "Engine.h"
 
-timep Engine::sTimeNow{ std::chrono::system_clock::now() };
+timep_t Engine::sTimeNow{ std::chrono::system_clock::now() };
 float Engine::sDeltaTime{ 0.0f };
 
 void Engine::setupFont()
