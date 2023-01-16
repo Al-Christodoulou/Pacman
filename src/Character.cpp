@@ -3,41 +3,44 @@
 
 void Character::moveUp()
 {
-	const float delta{ m_speed * Engine::getDeltaTime() };
-	if (!isYBorderColliding()) m_y -= delta;
-	if (isYBorderColliding() || gEntMgr.checkViolationFor(*this)) m_y += delta;
+	performMove(m_y, true, &Character::isYBorderColliding);
 }
 
 void Character::moveDown()
 {
-	const float delta{ m_speed * Engine::getDeltaTime() };
-	if (!isYBorderColliding()) m_y += delta;
-	if (isYBorderColliding() || gEntMgr.checkViolationFor(*this)) m_y -= delta;
+	performMove(m_y, false, &Character::isYBorderColliding);
 }
 
 void Character::moveLeft()
 {
-	const float delta{ m_speed * Engine::getDeltaTime() };
-	if (!isXBorderColliding()) m_x -= delta;
-	if (isXBorderColliding() || gEntMgr.checkViolationFor(*this)) m_x += delta;
+	performMove(m_x, true, &Character::isXBorderColliding);
 }
 
 void Character::moveRight()
 {
-	const float delta{ m_speed * Engine::getDeltaTime() };
-	if (!isXBorderColliding()) m_x += m_speed * Engine::getDeltaTime();
-	if (isXBorderColliding() || gEntMgr.checkViolationFor(*this)) m_x -= delta;
+	performMove(m_x, false, &Character::isXBorderColliding);
+}
+
+void Character::performMove(float& coord, bool upOrLeft, bool(Character::*func)())
+{
+	float delta{ m_speed * Engine::getDeltaTime() };
+	if (upOrLeft)
+		delta *= -1; // -1 so += becomes -= and -= becomes +=
+
+	// func is either isXBorderColliding or isYBorderColliding
+	if (!(this->*func)()) coord += delta;
+	if (((this->*func)()) || gEntMgr.checkViolationFor(*this)) coord -= delta;
 }
 
 bool Character::isXBorderColliding()
 {
-	return static_cast<unsigned int>(m_x) == 0 ||
+	return m_x < 0 ||
 		static_cast<unsigned int>(m_x) == gScreenWidth;
 }
 
 bool Character::isYBorderColliding()
 {
-	return static_cast<unsigned int>(m_y) == 0 ||
+	return m_y < 0 ||
 		static_cast<unsigned int>(m_y) == gScreenHeight;
 }
 
