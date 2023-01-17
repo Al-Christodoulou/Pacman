@@ -9,8 +9,7 @@ private:
 	timep_t m_updateMoveDirTimestamp{ std::chrono::system_clock::now() };
 	enum class MoveDir
 	{
-		UP, DOWN, LEFT, RIGHT,
-		max_actions
+		UP, DOWN, LEFT, RIGHT, max_actions
 	} m_movedir{ MoveDir::LEFT };
 
 public:

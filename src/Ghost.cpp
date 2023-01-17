@@ -18,7 +18,7 @@ void Ghost::think()
 	if (std::chrono::system_clock::now() > m_updateMoveDirTimestamp)
 	{
 		m_updateMoveDirTimestamp = std::chrono::system_clock::now() + std::chrono::milliseconds(cUpdateMoveDirDelay);
-		MoveDir newMoveDir{ static_cast<MoveDir>(Random::get(0, static_cast<int>(MoveDir::max_actions))) };
+		MoveDir newMoveDir{ static_cast<MoveDir>(Random::get(0, static_cast<int>(MoveDir::max_actions) - 1)) };
 		m_movedir = newMoveDir;
 	}
 }
