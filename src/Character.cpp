@@ -35,13 +35,13 @@ void Character::performMove(float& coord, bool upOrLeft, bool(Character::*func)(
 bool Character::isXBorderColliding()
 {
 	return m_x < 0 ||
-		static_cast<unsigned int>(m_x) == gScreenWidth;
+		static_cast<unsigned int>(m_x) >= gScreenWidth;
 }
 
 bool Character::isYBorderColliding()
 {
 	return m_y < 0 ||
-		static_cast<unsigned int>(m_y) == gScreenHeight;
+		static_cast<unsigned int>(m_y) >= gScreenHeight;
 }
 
 float Character::getSpeed() { return m_speed; }
