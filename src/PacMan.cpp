@@ -2,6 +2,7 @@
 #include "Character.h"
 #include "Player.h"
 #include "WanderingLouse.h"
+#include "Ghost.h"
 #include "Random.h"
 
 void PacMan::fillscreen(wchar_t data)
@@ -43,6 +44,9 @@ void PacMan::run()
 	WanderingLouse* louse{ gEntMgr.createEntSpecification<WanderingLouse>
 		((gScreenWidth / 2) - 3, (gScreenHeight / 2) - 5)
 	};
+	Ghost* ghost{ gEntMgr.createEntSpecification<Ghost>
+		((gScreenWidth / 2) - 5, (gScreenHeight - 2))
+	};
 
 	while (true)
 	{
@@ -53,6 +57,7 @@ void PacMan::run()
 
 		player->think();
 		louse->think();
+		ghost->think();
 		//for (Ghost* ghost : tempGhostVec)
 		//	ghost->think();
 
