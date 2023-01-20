@@ -12,7 +12,6 @@ using EntityArray = std::vector<std::unique_ptr<Entity>>;
 class EntityMgr
 {
 private:
-	using EntityArray = std::vector<std::unique_ptr<Entity>>;
 	EntityArray m_entities{};
 
 	// takes a Player, Ghost, ... pointer and upcasts it to an Entity
