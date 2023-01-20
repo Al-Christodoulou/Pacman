@@ -1,6 +1,12 @@
 #include "Character.h"
 #include "EntityMgr.h"
 
+void Character::setSpeed(float newSpeed)
+{
+	if (newSpeed > 0)
+		m_speed = newSpeed;
+}
+
 void Character::moveUp()
 {
 	performMove(m_y, true, &Character::isYBorderColliding);

@@ -7,6 +7,9 @@ class Character : public Entity
 private:
 	float m_speed{ 20.0f }; // the speed of the entity in pixels per second
 
+protected:
+	void setSpeed(float);
+
 public:
 	void moveUp();
 	void moveDown();
