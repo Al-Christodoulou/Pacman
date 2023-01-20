@@ -19,6 +19,8 @@ private:
 	template <typename T>
 	std::unique_ptr<Entity> upcastToEnt(std::unique_ptr<T>& e)
 	{
+		static_assert(std::is_convertible_v<T, Entity>,
+			"T must be part of the Entity hierarchy!");
 		Entity* entPtr{ static_cast<Entity*>(e.release()) };
 		return std::unique_ptr<Entity>{ entPtr };
 	}
@@ -36,7 +38,17 @@ public:
 	Player* createPlayer(wchar_t);
 	Player* pushPlayer(std::unique_ptr<Player>);
 
-	Ghost* createGhost(int, int);
+	// create an entity specification of type T (Wandering Louse, Ghost etc.),
+	// cast it to an Entity, push it to m_entities and return the pointer to it
+	template <typename T>
+	T* createEntSpecification(int x, int y)
+	{
+		std::unique_ptr<T> entSpec{ std::make_unique<T>(x, y) };
+		std::unique_ptr<Entity> entUpcast{ upcastToEnt(entSpec) };
+
+		m_entities.push_back(std::move(entUpcast));
+		return static_cast<T*>(m_entities[m_entities.size() - 1].get());
+	}
 
 	// no copying or moving of EntityMgr is allowed
 	EntityMgr(const EntityMgr&) = delete;
