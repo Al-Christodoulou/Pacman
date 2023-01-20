@@ -7,6 +7,8 @@
 #include "Character.h"
 #include "Player.h"
 
+using EntityArray = std::vector<std::unique_ptr<Entity>>;
+
 class EntityMgr
 {
 private:
