@@ -27,16 +27,18 @@ private:
 
 public:
 	const Entity* const getEntity(unsigned int) const;
+	const EntityArray& getEntities() const;
+	// search for an entity based on a given criteria
+	const Entity* const searchEntity(bool (*)(const std::unique_ptr<Entity>&));
+
 	unsigned int getArraySize() const; // NOTE: not really required, could just
 									// use gScreenTotalPxs
 
 	Entity* createEnt(int, int, wchar_t);
 	Entity* createEnt(wchar_t);
-	//Entity* pushEnt(std::unique_ptr<Entity>);
 
 	Player* createPlayer(int, int, wchar_t);
 	Player* createPlayer(wchar_t);
-	//Player* pushPlayer(std::unique_ptr<Player>);
 
 	template <typename T>
 	T* pushAnyEnt(std::unique_ptr<T> anyEnt)

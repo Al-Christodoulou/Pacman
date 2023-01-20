@@ -8,6 +8,20 @@ const Entity* const EntityMgr::getEntity(unsigned int index) const
 	return m_entities[index].get();
 }
 
+const EntityArray& EntityMgr::getEntities() const
+{
+	return m_entities;
+}
+
+const Entity* const EntityMgr::searchEntity(bool (*criteria)(const std::unique_ptr<Entity>& ent))
+{
+	auto iterator{ std::find_if(m_entities.begin(), m_entities.end(), criteria) };
+	if (iterator != std::end(m_entities))
+		return (*iterator).get();
+	else
+		return nullptr;
+}
+
 unsigned int EntityMgr::getArraySize() const
 {
 	return m_entities.size();
