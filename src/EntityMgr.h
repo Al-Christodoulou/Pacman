@@ -31,22 +31,36 @@ public:
 
 	Entity* createEnt(int, int, wchar_t);
 	Entity* createEnt(wchar_t);
-	Entity* pushEnt(std::unique_ptr<Entity>);
+	//Entity* pushEnt(std::unique_ptr<Entity>);
 
 	Player* createPlayer(int, int, wchar_t);
 	Player* createPlayer(wchar_t);
-	Player* pushPlayer(std::unique_ptr<Player>);
+	//Player* pushPlayer(std::unique_ptr<Player>);
+
+	template <typename T>
+	T* pushAnyEnt(std::unique_ptr<T> anyEnt)
+	{
+		// if T is Entity, no casting's needed
+		if constexpr (std::is_same_v<T, Entity>)
+		{
+			m_entities.push_back(std::move(anyEnt));
+			return m_entities[m_entities.size() - 1].get();
+		}
+		else // Ghost, etc.
+		{
+			std::unique_ptr<Entity> theEnt{ upcastToEnt(anyEnt) };
+			m_entities.push_back(std::move(theEnt));
+			return static_cast<T*>(m_entities[m_entities.size() - 1].get());
+		}
+	}
 
 	// create an entity specification of type T (Wandering Louse, Ghost etc.),
-	// cast it to an Entity, push it to m_entities and return the pointer to it
+	// as long as the constructor parameters for that entity are the defaults
+	// (x and y positions)
 	template <typename T>
 	T* createEntSpecification(int x, int y)
 	{
-		std::unique_ptr<T> entSpec{ std::make_unique<T>(x, y) };
-		std::unique_ptr<Entity> entUpcast{ upcastToEnt(entSpec) };
-
-		m_entities.push_back(std::move(entUpcast));
-		return static_cast<T*>(m_entities[m_entities.size() - 1].get());
+		return pushAnyEnt(std::move(std::make_unique<T>(x, y)));
 	}
 
 	// no copying or moving of EntityMgr is allowed
