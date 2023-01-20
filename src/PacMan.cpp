@@ -1,6 +1,7 @@
 #include "PacMan.h"
 #include "Character.h"
 #include "Player.h"
+#include "WanderingLouse.h"
 #include "Random.h"
 
 void PacMan::fillscreen(wchar_t data)
@@ -33,17 +34,27 @@ void PacMan::run()
 	gEntMgr.createEnt((gScreenWidth / 2) - 1, (gScreenHeight / 2) - 3, L'#');
 	gEntMgr.createEnt((gScreenWidth / 2) + 1, (gScreenHeight / 2) - 3, L'#');
 
-	Ghost* ghost{ gEntMgr.createGhost((gScreenWidth / 2) - 3, (gScreenHeight / 2) - 5) };
+	//std::vector<Ghost*> tempGhostVec{};
+	/*for (int i{0}; i < 100; i++)
+	{
+		for (int j{ 0 }; j < 50; j++)
+			tempGhostVec.push_back(gEntMgr.createGhost(1 + i, 1 + j));
+	}*/
+	WanderingLouse* louse{ gEntMgr.createEntSpecification<WanderingLouse>
+		((gScreenWidth / 2) - 3, (gScreenHeight / 2) - 5)
+	};
 
 	while (true)
 	{
-		Sleep(16);
+		//Sleep(20);
 		Engine::tick();
 		fillscreen(L' ');
 		renderAllEntities();
 
 		player->think();
-		ghost->think();
+		louse->think();
+		//for (Ghost* ghost : tempGhostVec)
+		//	ghost->think();
 
 		swprintf_s(m_screen, 40, L"X: %f, Y: %f",
 			player->getVirtualX(), player->getVirtualY()

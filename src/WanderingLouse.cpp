@@ -1,7 +1,7 @@
-#include "Ghost.h"
+#include "WanderingLouse.h"
 #include "Random.h"
 
-void Ghost::think()
+void WanderingLouse::think()
 {
 	switch (m_movedir)
 	{
@@ -23,6 +23,6 @@ void Ghost::think()
 	}
 }
 
-Ghost::Ghost(int x, int y)
+WanderingLouse::WanderingLouse(int x, int y)
 	: Character{ x, y, L'@' }
 {}

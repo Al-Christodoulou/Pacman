@@ -6,7 +6,6 @@
 #include "Entity.h"
 #include "Character.h"
 #include "Player.h"
-#include "Ghost.h"
 
 class EntityMgr
 {

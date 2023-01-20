@@ -2,7 +2,7 @@
 #include <chrono>
 #include "Character.h"
 
-class Ghost : public Character
+class WanderingLouse : public Character
 {
 private:
 	static constexpr inline int cUpdateMoveDirDelay{ 200 };
@@ -15,5 +15,5 @@ private:
 public:
 	void think() override;
 
-	Ghost(int, int);
+	WanderingLouse(int, int);
 };
