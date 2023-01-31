@@ -29,8 +29,10 @@
     <ClCompile Include="src\PacMan.cpp" />
     <ClCompile Include="src\Main.cpp" />
     <ClCompile Include="src\Random.cpp" />
+    <ClCompile Include="src\WindowMgr.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\IWindow.h" />
     <ClInclude Include="src\Ghost.h" />
     <ClInclude Include="src\WanderingLouse.h" />
     <ClInclude Include="src\Player.h" />
@@ -40,6 +42,7 @@
     <ClInclude Include="src\Engine.h" />
     <ClInclude Include="src\PacMan.h" />
     <ClInclude Include="src\Random.h" />
+    <ClInclude Include="src\WindowMgr.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
