@@ -1,8 +1,11 @@
 #pragma once
+#include "IWindow.h"
 #include <stack>
+
+using WindowStack_t = std::stack<std::reference_wrapper<IWindow>>;
 
 class WindowMgr
 {
 private:
-	std::stack<std::reference_wrapper<IWindow>> m_windowStack{};
+	WindowStack_t m_windowStack{};
 };
