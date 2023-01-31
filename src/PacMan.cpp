@@ -1,4 +1,5 @@
 #include "PacMan.h"
+#include "EntityMgr.h"
 #include "Character.h"
 #include "Player.h"
 #include "WanderingLouse.h"
