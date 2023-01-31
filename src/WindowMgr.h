@@ -1,8 +1,9 @@
 #pragma once
-#include "IWindow.h"
+#include "Window.h"
+#include <type_traits>
 #include <stack>
 
-using WindowStack_t = std::stack<std::reference_wrapper<IWindow>>;
+using WindowStack_t = std::stack<std::reference_wrapper<Window>>;
 
 class WindowMgr
 {
