@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Windows\GameWindow.cpp" />
     <ClCompile Include="src\Ghost.cpp" />
     <ClCompile Include="src\WanderingLouse.cpp" />
     <ClCompile Include="src\Player.cpp" />

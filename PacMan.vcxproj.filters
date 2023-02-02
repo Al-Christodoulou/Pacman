@@ -54,6 +54,9 @@
     <ClCompile Include="src\WindowMgr.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\Windows\GameWindow.cpp">
+      <Filter>Source Files\Windows</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Random.h">
@@ -88,6 +91,9 @@
     </ClInclude>
     <ClInclude Include="src\Window.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Windows\GameWindow.h">
+      <Filter>Header Files\Windows</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
