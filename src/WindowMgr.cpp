@@ -10,7 +10,7 @@ void WindowMgr::update()
 		m_windowStack.pop_back();
 
 	// all the windows will get rendered, from bottom to top
-	for (size_t i{ 0 }; i < m_windowStack.size() - 1; i++)
+	for (size_t i{ 0 }; i < m_windowStack.size(); i++)
 	{
 		m_windowStack[i].get()->render();
 	}

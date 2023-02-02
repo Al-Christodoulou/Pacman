@@ -3,7 +3,6 @@
 
 int main()
 {
-	PacMan pacman{};
-	pacman.run();
+	gPacMan.run();
 	return 0;
 }
