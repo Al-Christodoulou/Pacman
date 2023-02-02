@@ -32,7 +32,8 @@
     <ClCompile Include="src\WindowMgr.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\IWindow.h" />
+    <ClInclude Include="src\Windows\GameWindow.h" />
+    <ClInclude Include="src\Window.h" />
     <ClInclude Include="src\Ghost.h" />
     <ClInclude Include="src\WanderingLouse.h" />
     <ClInclude Include="src\Player.h" />
