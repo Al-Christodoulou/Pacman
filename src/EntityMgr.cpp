@@ -8,12 +8,13 @@ const Entity* const EntityMgr::getEntity(unsigned int index) const
 	return m_entities[index].get();
 }
 
-const EntityArray& EntityMgr::getEntities() const
+// had to remove the const from this so GameWindow can change the entities
+EntityArray& EntityMgr::getEntities()
 {
 	return m_entities;
 }
 
-const Entity* const EntityMgr::searchEntity(bool (*criteria)(const std::unique_ptr<Entity>& ent))
+const Entity* const EntityMgr::searchEntity(bool (*criteria)(const std::unique_ptr<Entity>& ent)) const
 {
 	auto iterator{ std::find_if(m_entities.begin(), m_entities.end(), criteria) };
 	if (iterator != std::end(m_entities))
@@ -51,7 +52,7 @@ Player* EntityMgr::createPlayer(wchar_t texture)
 * Checks if two entities lie in the same position. if so, then we have a
 * violation and this returns true
 */
-bool EntityMgr::checkViolationFor(const Character& character)
+bool EntityMgr::checkViolationFor(const Character& character) const
 {
 	for (const auto& curEnt : m_entities)
 	{

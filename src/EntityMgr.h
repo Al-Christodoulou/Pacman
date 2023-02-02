@@ -27,9 +27,9 @@ private:
 
 public:
 	const Entity* const getEntity(unsigned int) const;
-	const EntityArray& getEntities() const;
+	EntityArray& getEntities();
 	// search for an entity based on a given criteria
-	const Entity* const searchEntity(bool (*)(const std::unique_ptr<Entity>&));
+	const Entity* const searchEntity(bool (*)(const std::unique_ptr<Entity>&)) const;
 
 	unsigned int getArraySize() const; // NOTE: not really required, could just
 									// use gScreenTotalPxs
@@ -72,7 +72,7 @@ public:
 	EntityMgr() = default;
 
 	// maybe temporary
-	bool checkViolationFor(const Character&);
+	bool checkViolationFor(const Character&) const;
 };
 
 // EntityMgr is a global variable so each character can easily call its methods
