@@ -1,5 +1,6 @@
 #include "Character.h"
 #include "EntityMgr.h"
+#include "PacMan.h"
 
 void Character::setSpeed(float newSpeed)
 {
@@ -35,7 +36,7 @@ void Character::performMove(float& coord, bool upOrLeft, bool(Character::*func)(
 
 	// func is either isXBorderColliding or isYBorderColliding
 	if (!(this->*func)()) coord += delta;
-	if (((this->*func)()) || gEntMgr.checkViolationFor(*this)) coord -= delta;
+	if (((this->*func)()) || gPacMan.getWindowMgr().tryGetEntMgr()->checkViolationFor(*this)) coord -= delta;
 }
 
 bool Character::isXBorderColliding()

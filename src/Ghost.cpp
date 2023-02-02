@@ -1,5 +1,6 @@
 #include "Ghost.h"
 #include "EntityMgr.h"
+#include "PacMan.h"
 
 void Ghost::think()
 {
@@ -15,7 +16,7 @@ void Ghost::think()
 	{
 		if (m_x - (*iterator).get()->getVirtualX())
 	}*/
-	const Entity* const player{ gEntMgr.searchEntity(is_player) };
+	const Entity* const player{ gPacMan.getWindowMgr().tryGetEntMgr()->searchEntity(is_player) };
 	if (player) // if we found him
 	{
 		if (m_x - player->getVirtualX() > 0)
