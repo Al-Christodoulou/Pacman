@@ -74,6 +74,3 @@ public:
 	// maybe temporary
 	bool checkViolationFor(const Character&) const;
 };
-
-// EntityMgr is a global variable so each character can easily call its methods
-extern EntityMgr gEntMgr;

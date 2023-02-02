@@ -1,8 +1,6 @@
 #include <utility>
 #include "EntityMgr.h"
 
-EntityMgr gEntMgr{};
-
 const Entity* const EntityMgr::getEntity(unsigned int index) const
 {
 	return index <= m_entities.size() - 1 ? m_entities[index].get() : nullptr;
@@ -32,12 +30,12 @@ unsigned int EntityMgr::getArraySize() const
 
 Entity* EntityMgr::createEnt(int x, int y, wchar_t texture)
 {
-	return pushAnyEnt(std::move(std::make_unique<Entity>(x, y, texture, Entity::EntityType::Default)));
+	return pushAnyEnt(std::move(std::make_unique<Entity>(x, y, texture, EntityType::Default)));
 }
 
 Entity* EntityMgr::createEnt(wchar_t texture)
 {
-	return pushAnyEnt(std::move(std::make_unique<Entity>(texture, Entity::EntityType::Default)));
+	return pushAnyEnt(std::move(std::make_unique<Entity>(texture, EntityType::Default)));
 }
 
 Player* EntityMgr::createPlayer(int x, int y, wchar_t texture)
