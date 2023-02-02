@@ -12,16 +12,28 @@ void PacMan::fillscreen(wchar_t data)
 		m_screen[i] = data;
 }
 
-void PacMan::renderAllEntities()
+void PacMan::sendData(wchar_t* data, unsigned int size, unsigned int offset)
 {
-	for (unsigned int i{ 0 }; i < gEntMgr.getArraySize(); i++)
-	{
-		const Entity* curEnt{ gEntMgr.getEntity(i) };
-		if (curEnt)
-			if (curEnt->getPos() <= gScreenTotalPxs)
-				m_screen[curEnt->getPos()] = curEnt->getTex();
-	}
+	// if the data's gonna go out of bounds, don't do anything
+	if (offset + size > gScreenTotalPxs)
+		return;
+
+	for (unsigned int i{ 0 }; i < size; i++)
+		m_screen[i + offset] = data[i];
 }
+
+void PacMan::sendData(wchar_t c, unsigned int offset)
+{
+	if (offset <= gScreenTotalPxs)
+		m_screen[offset] = c;
+}
+
+/*void PacMan::swprintf_s(size_t _BufferCount, const wchar_t* _Format, ...)
+{
+	va_list args;
+	va_start(args, _Format);
+	::swprintf_s(m_screen, _BufferCount, _Format, )
+}*/
 
 void PacMan::run()
 {
