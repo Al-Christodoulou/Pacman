@@ -31,6 +31,8 @@ public:
 	{}
 
 	virtual ~Window() = default;
+	Window(const Window&) = delete;
+	Window(Window&&) = delete;
 
 	WindowType getWindowType() const { return m_winType; }
 
