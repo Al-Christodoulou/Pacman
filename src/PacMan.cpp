@@ -31,12 +31,15 @@ void PacMan::sendData(wchar_t c, unsigned int offset)
 		m_screen[offset] = c;
 }
 
-/*void PacMan::swprintf_s(size_t _BufferCount, const wchar_t* _Format, ...)
+// a wrapper around swprintf_s (with the v in front of swprint.. meaning
+// it takes a va_list as a parameter)
+void PacMan::swprintf_s(size_t _BufferCount, const wchar_t* _Format, ...)
 {
 	va_list args;
 	va_start(args, _Format);
-	::swprintf_s(m_screen, _BufferCount, _Format, )
-}*/
+	::vswprintf_s(m_screen, _BufferCount, _Format, args);
+	va_end(args);
+}
 
 void PacMan::run()
 {

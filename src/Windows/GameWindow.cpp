@@ -8,6 +8,8 @@ void GameWindow::render()
 {
 	gPacMan.fillscreen(L' ');
 	renderAllEntities();
+
+	gPacMan.swprintf_s(25, L"X: %.3f, Y: %.2f", m_player->getVirtualX(), m_player->getVirtualY());
 }
 
 void GameWindow::runLogic()

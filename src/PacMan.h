@@ -14,7 +14,7 @@ public:
 	// data, size of data, offset
 	void sendData(wchar_t*, unsigned int, unsigned int);
 	void sendData(wchar_t, unsigned int); // one character
-	//void swprintf_s(size_t, const wchar_t*, ...);
+	void swprintf_s(size_t, const wchar_t*, ...);
 
 	void run();
 	const WindowMgr& getWindowMgr();
