@@ -30,6 +30,8 @@ public:
 		: m_winType{ winType }
 	{}
 
+	virtual ~Window() = default;
+
 	WindowType getWindowType() const { return m_winType; }
 
 	bool doTerminate() const { return m_state_terminate; }
