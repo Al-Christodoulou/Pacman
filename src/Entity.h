@@ -26,4 +26,5 @@ public:
 
 	Entity(int, int, wchar_t, EntityType);
 	Entity(wchar_t, EntityType);
+	virtual ~Entity() {};
 };
