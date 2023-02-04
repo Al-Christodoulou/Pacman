@@ -45,6 +45,6 @@ void MainMenuWindow::render()
 
 void MainMenuWindow::runLogic()
 {
-	if (GetAsyncKeyState(VK_RETURN) & 0x1)
+	if (GetAsyncKeyState(VK_RETURN) & 0x8000)
 		gPacMan.getWindowMgr().pushGameWindow();
 }
