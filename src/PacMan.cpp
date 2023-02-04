@@ -15,7 +15,7 @@ void PacMan::fillscreen(wchar_t data)
 		m_screen[i] = data;
 }
 
-void PacMan::sendData(wchar_t* data, unsigned int size, unsigned int offset)
+void PacMan::sendData(const wchar_t* data, unsigned int size, unsigned int offset)
 {
 	// if the data's gonna go out of bounds, don't do anything
 	if (offset + size > gScreenTotalPxs)
@@ -25,7 +25,7 @@ void PacMan::sendData(wchar_t* data, unsigned int size, unsigned int offset)
 		m_screen[i + offset] = data[i];
 }
 
-void PacMan::sendData(wchar_t c, unsigned int offset)
+void PacMan::sendData(const wchar_t c, unsigned int offset)
 {
 	if (offset <= gScreenTotalPxs)
 		m_screen[offset] = c;

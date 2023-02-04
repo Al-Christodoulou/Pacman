@@ -12,8 +12,8 @@ private:
 public:
 	void fillscreen(wchar_t);
 	// data, size of data, offset
-	void sendData(wchar_t*, unsigned int, unsigned int);
-	void sendData(wchar_t, unsigned int); // one character
+	void sendData(const wchar_t*, unsigned int, unsigned int);
+	void sendData(const wchar_t, unsigned int); // one character
 	void swprintf_s(size_t, const wchar_t*, ...);
 
 	void run();
