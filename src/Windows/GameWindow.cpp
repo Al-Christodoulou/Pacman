@@ -26,6 +26,11 @@ void GameWindow::runLogic()
 		player->getVirtualX(), player->getVirtualY()
 	);
 	swprintf_s(m_screen + gScreenWidth, 30, L"DT: %f", m_engine.getDeltaTime());*/
+
+	// if the player presses escape, the GameWindow will terminate and we go back to the
+	// main menu
+	if (GetAsyncKeyState(VK_ESCAPE) & 0x1)
+		m_state_terminate = true;
 }
 
 void GameWindow::initEntities()
