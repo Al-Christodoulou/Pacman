@@ -55,4 +55,4 @@ void PacMan::run()
 	}
 }
 
-const WindowMgr& PacMan::getWindowMgr() { return m_windowMgr; }
+WindowMgr& PacMan::getWindowMgr() { return m_windowMgr; }

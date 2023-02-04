@@ -17,7 +17,7 @@ public:
 	void swprintf_s(size_t, const wchar_t*, ...);
 
 	void run();
-	const WindowMgr& getWindowMgr();
+	WindowMgr& getWindowMgr();
 
 	// no copying or moving is allowed
 	PacMan(const PacMan&) = delete;
