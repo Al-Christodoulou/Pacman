@@ -1,5 +1,6 @@
 #include "WindowMgr.h"
 #include "Windows/GameWindow.h"
+#include "Windows/MainMenuWindow.h"
 
 void WindowMgr::update()
 {
@@ -23,6 +24,14 @@ void WindowMgr::pushGameWindow()
 	//GameWindow gameWin{};
 	//m_windowStack.push_back(std::ref(static_cast<Window&>(gameWin)));
 	m_windowStack.push_back(std::make_unique<GameWindow>());
+}
+
+void WindowMgr::pushMainMenuWindow()
+{
+	auto uniquePtr{ std::make_unique<MainMenuWindow>() };
+	std::unique_ptr<Window> newPtr{ static_cast<Window*>(uniquePtr.release()) };
+
+	m_windowStack.push_back(std::move(newPtr));
 }
 
 const EntityMgr* const WindowMgr::tryGetEntMgr() const

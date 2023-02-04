@@ -44,7 +44,8 @@ void PacMan::swprintf_s(size_t _BufferCount, const wchar_t* _Format, ...)
 void PacMan::run()
 {
 	// start the game with the game window for now
-	m_windowMgr.pushGameWindow();
+	//m_windowMgr.pushGameWindow();
+	m_windowMgr.pushMainMenuWindow();
 
 	while (true)
 	{
