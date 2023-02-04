@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Windows\MainMenuWindow.cpp" />
     <ClCompile Include="src\Windows\GameWindow.cpp" />
     <ClCompile Include="src\Ghost.cpp" />
     <ClCompile Include="src\WanderingLouse.cpp" />
@@ -33,6 +34,7 @@
     <ClCompile Include="src\WindowMgr.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Windows\MainMenuWindow.h" />
     <ClInclude Include="src\Windows\GameWindow.h" />
     <ClInclude Include="src\Window.h" />
     <ClInclude Include="src\Ghost.h" />
