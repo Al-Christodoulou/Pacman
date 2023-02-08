@@ -2,7 +2,8 @@
 
 typedef void (*VoidFunc)();
 
-// a simple menu button, it doesn't need a derived class to function
+// a simple menu button, it doesn't need a derived class to function.
+// the rendering for it happens on a MenuList containing menu buttons
 class MenuButton
 {
 private:
