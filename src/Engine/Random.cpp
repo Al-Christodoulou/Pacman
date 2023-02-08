@@ -1,4 +1,4 @@
-#include "Random.h"
+#include "../Engine/Random.h"
 
 namespace Random {
 	int get(int min, int max)

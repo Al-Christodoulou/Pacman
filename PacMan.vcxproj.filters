@@ -19,18 +19,18 @@
     <Filter Include="Source Files\Windows">
       <UniqueIdentifier>{1a0a49d7-62ca-4db4-a855-98210022c832}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Engine">
+      <UniqueIdentifier>{6ee47b22-bb20-47ca-a739-136fb590b819}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Engine">
+      <UniqueIdentifier>{b599c442-f488-433a-bec2-0ba236daa261}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Random.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\PacMan.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Engine.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Entity.cpp">
@@ -60,18 +60,18 @@
     <ClCompile Include="src\Windows\MainMenuWindow.cpp">
       <Filter>Source Files\Windows</Filter>
     </ClCompile>
-    <ClCompile Include="src\MenuList.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="src\Engine\Engine.cpp">
+      <Filter>Source Files\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Engine\MenuList.cpp">
+      <Filter>Source Files\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Engine\Random.cpp">
+      <Filter>Source Files\Engine</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\Random.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\PacMan.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Engine.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Entity.h">
@@ -95,20 +95,26 @@
     <ClInclude Include="src\WindowMgr.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Window.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\Windows\GameWindow.h">
       <Filter>Header Files\Windows</Filter>
     </ClInclude>
     <ClInclude Include="src\Windows\MainMenuWindow.h">
       <Filter>Header Files\Windows</Filter>
     </ClInclude>
-    <ClInclude Include="src\MenuButton.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="src\Engine\Engine.h">
+      <Filter>Header Files\Engine</Filter>
     </ClInclude>
-    <ClInclude Include="src\MenuList.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="src\Engine\MenuButton.h">
+      <Filter>Header Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\MenuList.h">
+      <Filter>Header Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\Random.h">
+      <Filter>Header Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\Window.h">
+      <Filter>Header Files\Engine</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

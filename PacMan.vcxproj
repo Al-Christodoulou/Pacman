@@ -19,7 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\MenuList.cpp" />
+    <ClCompile Include="src\Engine\MenuList.cpp" />
     <ClCompile Include="src\Windows\MainMenuWindow.cpp" />
     <ClCompile Include="src\Windows\GameWindow.cpp" />
     <ClCompile Include="src\Ghost.cpp" />
@@ -28,27 +28,27 @@
     <ClCompile Include="src\EntityMgr.cpp" />
     <ClCompile Include="src\Character.cpp" />
     <ClCompile Include="src\Entity.cpp" />
-    <ClCompile Include="src\Engine.cpp" />
+    <ClCompile Include="src\Engine\Engine.cpp" />
     <ClCompile Include="src\PacMan.cpp" />
     <ClCompile Include="src\Main.cpp" />
-    <ClCompile Include="src\Random.cpp" />
+    <ClCompile Include="src\Engine\Random.cpp" />
     <ClCompile Include="src\WindowMgr.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\MenuList.h" />
-    <ClInclude Include="src\MenuButton.h" />
+    <ClInclude Include="src\Engine\MenuList.h" />
+    <ClInclude Include="src\Engine\MenuButton.h" />
     <ClInclude Include="src\Windows\MainMenuWindow.h" />
     <ClInclude Include="src\Windows\GameWindow.h" />
-    <ClInclude Include="src\Window.h" />
+    <ClInclude Include="src\Engine\Window.h" />
     <ClInclude Include="src\Ghost.h" />
     <ClInclude Include="src\WanderingLouse.h" />
     <ClInclude Include="src\Player.h" />
     <ClInclude Include="src\EntityMgr.h" />
     <ClInclude Include="src\Character.h" />
     <ClInclude Include="src\Entity.h" />
-    <ClInclude Include="src\Engine.h" />
+    <ClInclude Include="src\Engine\Engine.h" />
     <ClInclude Include="src\PacMan.h" />
-    <ClInclude Include="src\Random.h" />
+    <ClInclude Include="src\Engine\Random.h" />
     <ClInclude Include="src\WindowMgr.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

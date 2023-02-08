@@ -1,6 +1,6 @@
 #include "MainMenuWindow.h"
 #include "../PacMan.h"
-#include "../Random.h"
+#include "../Engine/Random.h"
 
 void MainMenuWindow::render()
 {

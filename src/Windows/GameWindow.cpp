@@ -1,6 +1,6 @@
 #include "GameWindow.h"
 #include "../PacMan.h"
-#include "../Random.h"
+#include "../Engine/Random.h"
 #include "../WanderingLouse.h"
 #include "../Ghost.h"
 
