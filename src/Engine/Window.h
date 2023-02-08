@@ -1,12 +1,6 @@
 #pragma once
 
-enum class WindowType
-{
-	GameWindow,
-	Other,
-	max_windows_types
-};
-
+template <typename WindowTypes>
 class Window
 {
 protected:
@@ -18,7 +12,7 @@ protected:
 	// the stack in its next loop
 	bool m_state_terminate{ false };
 
-	WindowType m_winType{};
+	WindowTypes m_winType{};
 
 public:
 	//virtual void onBegin() = 0;
@@ -26,7 +20,7 @@ public:
 	virtual void runLogic() = 0;
 	//virtual void onEnd() = 0;
 
-	Window(WindowType winType)
+	Window(WindowTypes winType)
 		: m_winType{ winType }
 	{}
 
@@ -34,7 +28,7 @@ public:
 	Window(const Window&) = delete;
 	Window(Window&&) = delete;
 
-	WindowType getWindowType() const { return m_winType; }
+	WindowTypes getWindowType() const { return m_winType; }
 
 	bool doTerminate() const { return m_state_terminate; }
 };
