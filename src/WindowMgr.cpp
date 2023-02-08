@@ -29,7 +29,7 @@ void WindowMgr::pushGameWindow()
 void WindowMgr::pushMainMenuWindow()
 {
 	auto uniquePtr{ std::make_unique<MainMenuWindow>() };
-	std::unique_ptr<Window> newPtr{ static_cast<Window*>(uniquePtr.release()) };
+	std::unique_ptr<PacmanWindow> newPtr{ static_cast<PacmanWindow*>(uniquePtr.release()) };
 
 	m_windowStack.push_back(std::move(newPtr));
 }
@@ -39,7 +39,7 @@ const EntityMgr* const WindowMgr::tryGetEntMgr() const
 	if (m_windowStack.empty())
 		return nullptr;
 
-	const Window* topWindow{ m_windowStack.back().get() };
+	const PacmanWindow* topWindow{ m_windowStack.back().get() };
 	return topWindow->getWindowType() == WindowType::GameWindow ?
 		&static_cast<const GameWindow*>(topWindow)->getEntMgr() :
 		nullptr;

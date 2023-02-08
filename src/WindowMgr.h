@@ -1,9 +1,11 @@
 #pragma once
 #include "Engine/Window.h"
+#include "WindowTypes.h"
 #include <vector>
 #include <memory>
 
-using WindowStack_t = std::vector<std::unique_ptr<Window>>;
+using PacmanWindow = Window<WindowType>;
+using WindowStack_t = std::vector<std::unique_ptr<PacmanWindow>>;
 class EntityMgr; // forward declare the class to avoid includes
 
 class WindowMgr

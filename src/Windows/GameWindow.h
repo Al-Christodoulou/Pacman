@@ -2,8 +2,9 @@
 #include "../Engine/Window.h"
 #include "../EntityMgr.h"
 #include "../Player.h"
+#include "../WindowTypes.h"
 
-class GameWindow : public Window
+class GameWindow : public Window<WindowType>
 {
 private:
 	EntityMgr m_entMgr{};

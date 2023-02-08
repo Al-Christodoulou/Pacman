@@ -1,7 +1,8 @@
 #pragma once
 #include "../Engine/Window.h"
+#include "../WindowTypes.h"
 
-class MainMenuWindow : public Window
+class MainMenuWindow : public Window<WindowType>
 {
 public:
 	void render() override;
