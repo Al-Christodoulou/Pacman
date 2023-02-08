@@ -50,6 +50,7 @@
     <ClInclude Include="src\PacMan.h" />
     <ClInclude Include="src\Engine\Random.h" />
     <ClInclude Include="src\WindowMgr.h" />
+    <ClInclude Include="src\WindowTypes.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
