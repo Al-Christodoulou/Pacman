@@ -48,3 +48,15 @@ void MainMenuWindow::runLogic()
 	if (GetAsyncKeyState(VK_RETURN) & 0x8000)
 		gPacMan.getWindowMgr().pushGameWindow();
 }
+
+MainMenuList MainMenuWindow::constructMainMenuList()
+{
+	auto startButtonPress{ []() { gPacMan.getWindowMgr().pushGameWindow(); } };
+	auto endButtonPress{ []() { /* this has to call an exit somehow */ } };
+
+	return { MenuButton{ startButtonPress }, MenuButton{ endButtonPress } };
+}
+
+MainMenuWindow::MainMenuWindow()
+	: Window(WindowType::Other), m_mainMenuList{ constructMainMenuList() }
+{}
