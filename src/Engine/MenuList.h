@@ -22,7 +22,7 @@ public:
 		if (m_selectedIndex == 0)
 			m_selectedIndex = m_maxIndex;
 		else
-			++m_selectedIndex;
+			--m_selectedIndex;
 	}
 
 	void goDown()
@@ -30,7 +30,7 @@ public:
 		if (m_selectedIndex == m_maxIndex)
 			m_selectedIndex = 0;
 		else
-			--m_selectedIndex;
+			++m_selectedIndex;
 	}
 
 	virtual void handleInput() = 0;
