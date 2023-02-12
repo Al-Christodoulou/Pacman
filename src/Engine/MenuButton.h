@@ -10,7 +10,7 @@ private:
 	const VoidFunc m_execFunc{ nullptr };
 
 public:
-	void onPress() { m_execFunc(); }
+	void onPress() const { m_execFunc(); }
 
 	MenuButton(VoidFunc func)
 		: m_execFunc{ func }
