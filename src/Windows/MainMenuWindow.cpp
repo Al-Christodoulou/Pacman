@@ -24,29 +24,12 @@ void MainMenuWindow::render()
 		gPacMan.sendData(titleText[i], width, baseOffset + gScreenWidth * i);
 	}
 
-	constexpr wchar_t startButton[3][23]{
-		L"/-- ---   ^   /--/ ---",
-		L"\\-\\  |   /-\\  |-/   | ",
-		L"--/  |  /   \\ |  \\  | "
-	};
-
-	constexpr wchar_t exitButton[3][17]{
-		L"\/--  \\\/  --- ---",
-		L"|--  \/\\   |   | ",
-		L"\\-- \/  \\ ---  | "
-	};
-
-	for (unsigned int i{ 0 }; i < 3; i++)
-	{
-		gPacMan.sendData(startButton[i], 23U, gScreenWidth * (16 + i) + gScreenWidth / 2 - 23 / 2);
-		gPacMan.sendData(exitButton[i], 17U, gScreenWidth * (21 + i) + gScreenWidth / 2 - 17 / 2);
-	}
+	m_mainMenuList.render();
 }
 
 void MainMenuWindow::runLogic()
 {
-	if (GetAsyncKeyState(VK_RETURN) & 0x8000)
-		gPacMan.getWindowMgr().pushGameWindow();
+	m_mainMenuList.handleInput();
 }
 
 MainMenuList MainMenuWindow::constructMainMenuList()
