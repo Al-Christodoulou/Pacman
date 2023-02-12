@@ -14,7 +14,7 @@ protected:
 
 public:
 	MenuList(std::initializer_list<MenuButton> buttons)
-		: m_buttons{ buttons }, m_maxIndex{ buttons.size() }
+		: m_buttons{ buttons }, m_maxIndex{ buttons.size() - 1 }
 	{}
 
 	void goUp()
@@ -32,6 +32,8 @@ public:
 		else
 			++m_selectedIndex;
 	}
+
+	unsigned int getIndex() { return m_selectedIndex; }
 
 	virtual void handleInput() = 0;
 };
