@@ -27,17 +27,33 @@ void MainMenuList::render()
 		L"\\-- \/  \\ ---  | "
 	};
 
+	// the line from where the menu list starts being drawn from
+	constexpr unsigned int baseLine{ 16 };
+	// the number of lines distance between the two menu buttons
+	constexpr unsigned int lineButtonDelta{ 5 };
+	constexpr unsigned int halfWidth{ gScreenWidth / 2 };
 	for (unsigned int i{ 0 }; i < 3; i++)
 	{
-		gPacMan.sendData(startButton[i], 23U, gScreenWidth * (16 + i) + gScreenWidth / 2 - 23 / 2);
-		gPacMan.sendData(exitButton[i], 17U, gScreenWidth * (21 + i) + gScreenWidth / 2 - 17 / 2);
+		gPacMan.sendDataf(startButton[i], 23U, baseLine + i, halfWidth - 23 / 2);
+		gPacMan.sendDataf(exitButton[i], 17U, baseLine + lineButtonDelta + i, halfWidth - 17 / 2);
 	}
 
-	// TODO: organize this better
-	unsigned int lineIndex{ gScreenWidth * (16 + m_selectedIndex * 5) };
-	gPacMan.sendData(L'\\', lineIndex + gScreenWidth / 2 - 16);
-	gPacMan.sendData(L'>', lineIndex + gScreenWidth + gScreenWidth / 2 - 15);
-	gPacMan.sendData(L'/', lineIndex + gScreenWidth * 2 + gScreenWidth / 2 - 16);
+	unsigned int lineIndex{ baseLine + m_selectedIndex * lineButtonDelta };
+	// the row of the currently selected menu, this is used to place the cursor just some chars before it
+	unsigned int selectedMenuRow{};
+	switch (m_selectedIndex)
+	{
+	case 0:
+		selectedMenuRow = 23;
+		break;
+	case 1:
+		selectedMenuRow = 17;
+		break;
+	}
+	constexpr unsigned int cursorAndMenuDistance{ 4 };
+	gPacMan.sendDataf(L'\\', lineIndex,    halfWidth - selectedMenuRow / 2 - cursorAndMenuDistance);
+	gPacMan.sendDataf(L'>', lineIndex + 1, halfWidth - selectedMenuRow / 2 - cursorAndMenuDistance + 1);
+	gPacMan.sendDataf(L'/', lineIndex + 2, halfWidth - selectedMenuRow / 2 - cursorAndMenuDistance);
 }
 
 MainMenuList::MainMenuList(std::initializer_list<MenuButton> buttons)
