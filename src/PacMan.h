@@ -16,6 +16,7 @@ public:
 	// sendDataf(ormatted)
 	// data, size of data, line, row
 	void sendDataf(const wchar_t*, unsigned int, unsigned int, unsigned int);
+	void sendDataf(const wchar_t, unsigned int, unsigned int); // one character
 	void sendData(const wchar_t, unsigned int); // one character
 	void swprintf_s(size_t, const wchar_t*, ...);
 
