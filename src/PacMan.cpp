@@ -25,6 +25,11 @@ void PacMan::sendData(const wchar_t* data, unsigned int size, unsigned int offse
 		m_screen[i + offset] = data[i];
 }
 
+void PacMan::sendDataf(const wchar_t* data, unsigned int size, unsigned int row, unsigned int column)
+{
+	sendData(data, size, row * gScreenWidth + column);
+}
+
 void PacMan::sendData(const wchar_t c, unsigned int offset)
 {
 	if (offset <= gScreenTotalPxs)
