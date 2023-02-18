@@ -37,7 +37,7 @@ MainMenuList MainMenuWindow::constructMainMenuList()
 	auto startButtonPress{ []() { gPacMan.getWindowMgr().pushGameWindow(); } };
 	auto endButtonPress{ []() { /* this has to call an exit somehow */ } };
 
-	return { MenuButton{ startButtonPress }, MenuButton{ endButtonPress } };
+	return MenuButtonArray_t<2>{ MenuButton{ startButtonPress }, MenuButton{ endButtonPress } };
 }
 
 MainMenuWindow::MainMenuWindow()
