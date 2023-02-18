@@ -22,9 +22,9 @@ void MainMenuList::render()
 	};
 
 	constexpr wchar_t exitButton[3][17]{
-		L"\/--  \\\/  --- ---",
-		L"|--  \/\\   |   | ",
-		L"\\-- \/  \\ ---  | "
+		L"/--  \\/  --- ---",
+		L"|--  /\\   |   | ",
+		L"\\-- /  \\ ---  | "
 	};
 
 	// the line from where the menu list starts being drawn from
