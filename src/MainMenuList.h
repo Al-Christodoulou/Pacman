@@ -1,11 +1,11 @@
 #pragma once
-#include "Engine/MenuList.h"
+#include "Engine/ConstMenuList.h"
 
-class MainMenuList : public MenuList
+class MainMenuList : public ConstMenuList<2>
 {
 public:
 	void handleInput() override;
 	void render();
 
-	MainMenuList(std::initializer_list<MenuButton>);
+	MainMenuList(const MenuButtonArray_t<2>&);
 };

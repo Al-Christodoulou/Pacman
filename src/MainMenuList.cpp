@@ -56,6 +56,6 @@ void MainMenuList::render()
 	gPacMan.sendDataf(L'/', lineIndex + 2, halfWidth - selectedMenuRow / 2 - cursorAndMenuDistance);
 }
 
-MainMenuList::MainMenuList(std::initializer_list<MenuButton> buttons)
-	: MenuList{ buttons }
+MainMenuList::MainMenuList(const MenuButtonArray_t<2>& menuArray)
+	: ConstMenuList{ menuArray }
 {}
