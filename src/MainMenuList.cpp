@@ -10,7 +10,7 @@ void MainMenuList::handleInput()
 		goDown();
 
 	if (GetAsyncKeyState(VK_RETURN) & 0x8000)
-		m_buttons[m_selectedIndex].onPress();
+		m_buttons[getIndex()].onPress();
 }
 
 void MainMenuList::render()
@@ -38,10 +38,10 @@ void MainMenuList::render()
 		gPacMan.sendDataf(exitButton[i], 17U, baseLine + lineButtonDelta + i, halfWidth - 17 / 2);
 	}
 
-	unsigned int lineIndex{ baseLine + m_selectedIndex * lineButtonDelta };
+	unsigned int lineIndex{ baseLine + getIndex() * lineButtonDelta };
 	// the row of the currently selected menu, this is used to place the cursor just some chars before it
 	unsigned int selectedMenuRow{};
-	switch (m_selectedIndex)
+	switch (getIndex())
 	{
 	case 0:
 		selectedMenuRow = 23;
