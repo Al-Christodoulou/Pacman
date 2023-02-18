@@ -35,6 +35,8 @@
     <ClCompile Include="src\WindowMgr.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Engine\ConstMenuList.h" />
+    <ClInclude Include="src\Engine\DynamicMenuList.h" />
     <ClInclude Include="src\MainMenuList.h" />
     <ClInclude Include="src\Engine\BaseMenuList.h" />
     <ClInclude Include="src\Engine\MenuButton.h" />
