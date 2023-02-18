@@ -17,13 +17,12 @@ public:
 	virtual ~BaseMenuList() = default;
 
 	unsigned int getIndex() { return m_selectedIndex; }
-
 	virtual void handleInput() = 0;
 
 protected:
-	// BaseMenuList isn't aware of m_maxIndex because:
-	// ConstMenuList's m_maxIndex => const
-	// DynamicMenuList's m_maxIndex => non-const,
+	// BaseMenuList can't be aware of the maximum menu index because:
+	// for ConstMenuList: it's the std::array size
+	// for DynamicMenuList: it's the std::vector size,
 	// so it has to be passed as a parameter here
 	void goUp(unsigned int maxIndex)
 	{

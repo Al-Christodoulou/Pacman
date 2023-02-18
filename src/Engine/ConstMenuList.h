@@ -10,20 +10,12 @@ class ConstMenuList : public BaseMenuList
 {
 protected:
 	const MenuButtonArray_t<Size> m_buttons;
-	const unsigned int m_maxIndex;
 
 public:
 	ConstMenuList(const MenuButtonArray_t<Size>& buttons)
-		: m_buttons{ buttons }, m_maxIndex{ buttons.size() - 1 }
+		: m_buttons{ buttons }
 	{}
 
-	void goUp()
-	{
-		BaseMenuList::goUp(Size - 1);
-	}
-
-	void goDown()
-	{
-		BaseMenuList::goDown(Size - 1);
-	}
+	void goUp() { BaseMenuList::goUp(Size - 1); }
+	void goDown() { BaseMenuList::goDown(Size - 1); }
 };
