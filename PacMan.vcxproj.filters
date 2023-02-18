@@ -107,7 +107,7 @@
     <ClInclude Include="src\Engine\MenuButton.h">
       <Filter>Header Files\Engine</Filter>
     </ClInclude>
-    <ClInclude Include="src\Engine\MenuList.h">
+    <ClInclude Include="src\Engine\BaseMenuList.h">
       <Filter>Header Files\Engine</Filter>
     </ClInclude>
     <ClInclude Include="src\Engine\Random.h">

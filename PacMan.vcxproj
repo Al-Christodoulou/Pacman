@@ -36,7 +36,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\MainMenuList.h" />
-    <ClInclude Include="src\Engine\MenuList.h" />
+    <ClInclude Include="src\Engine\BaseMenuList.h" />
     <ClInclude Include="src\Engine\MenuButton.h" />
     <ClInclude Include="src\Windows\MainMenuWindow.h" />
     <ClInclude Include="src\Windows\GameWindow.h" />
