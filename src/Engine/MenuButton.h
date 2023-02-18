@@ -3,7 +3,8 @@
 typedef void (*VoidFunc)();
 
 // a simple menu button, it doesn't need a derived class to function.
-// the rendering for it happens on a MenuList containing menu buttons
+// the rendering for it happens on a derived class of either ConstMenuList
+// or DynamicMenuList containing menu buttons
 class MenuButton
 {
 private:
