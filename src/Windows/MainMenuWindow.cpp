@@ -15,10 +15,6 @@ void MainMenuWindow::render()
 	};
 
 	gPacMan.fillscreen(L' ');
-
-	// the top left position of the text. gScreenWidth * 3 so it's
-	// on the 4th line, gScreenWidth / 2 so it starts in the middle
-	constexpr unsigned int baseOffset{ gScreenWidth * 3 + gScreenWidth / 2 - width / 2 };
 	for (unsigned int i{ 0 }; i < height; i++)
 	{
 		gPacMan.sendDataf(titleText[i], width, 3 + i, gScreenWidth / 2 - width / 2);
