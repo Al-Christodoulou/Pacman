@@ -21,7 +21,7 @@ void MainMenuWindow::render()
 	constexpr unsigned int baseOffset{ gScreenWidth * 3 + gScreenWidth / 2 - width / 2 };
 	for (unsigned int i{ 0 }; i < height; i++)
 	{
-		gPacMan.sendData(titleText[i], width, baseOffset + gScreenWidth * i);
+		gPacMan.sendDataf(titleText[i], width, 3 + i, gScreenWidth / 2 - width / 2);
 	}
 
 	m_mainMenuList.render();
