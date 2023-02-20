@@ -25,10 +25,10 @@
     <Filter Include="Source Files\Engine">
       <UniqueIdentifier>{b599c442-f488-433a-bec2-0ba236daa261}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Menus">
+    <Filter Include="Header Files\MenuLists">
       <UniqueIdentifier>{dccdba4d-7d96-42bc-b1c8-d3bad0554505}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Menus">
+    <Filter Include="Source Files\MenuLists">
       <UniqueIdentifier>{9c587fc5-2030-482c-bed8-9349da324a65}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -72,8 +72,8 @@
     <ClCompile Include="src\Engine\Random.cpp">
       <Filter>Source Files\Engine</Filter>
     </ClCompile>
-    <ClCompile Include="src\Menus\MainMenuList.cpp">
-      <Filter>Source Files\Menus</Filter>
+    <ClCompile Include="src\MenuLists\MainMenuList.cpp">
+      <Filter>Source Files\MenuLists</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -131,8 +131,8 @@
     <ClInclude Include="src\Engine\DynamicMenuList.h">
       <Filter>Header Files\Engine</Filter>
     </ClInclude>
-    <ClInclude Include="src\Menus\MainMenuList.h">
-      <Filter>Header Files\Menus</Filter>
+    <ClInclude Include="src\MenuLists\MainMenuList.h">
+      <Filter>Header Files\MenuLists</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
