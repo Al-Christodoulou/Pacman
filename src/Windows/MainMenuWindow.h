@@ -1,7 +1,7 @@
 #pragma once
 #include "../Engine/Window.h"
 #include "../WindowTypes.h"
-#include "../Menus/MainMenuList.h"
+#include "../MenuLists/MainMenuList.h"
 
 class MainMenuWindow : public Window<WindowType>
 {
