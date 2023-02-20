@@ -81,6 +81,9 @@
     <ClCompile Include="src\MenuLists\MapMenuList.cpp">
       <Filter>Source Files\MenuLists</Filter>
     </ClCompile>
+    <ClCompile Include="src\Windows\MapSelectorWindow.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\PacMan.h">
@@ -145,6 +148,9 @@
     </ClInclude>
     <ClInclude Include="src\MenuLists\MapMenuList.h">
       <Filter>Header Files\MenuLists</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Windows\MapSelectorWindow.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -35,6 +35,7 @@
     <ClCompile Include="src\Main.cpp" />
     <ClCompile Include="src\Engine\Random.cpp" />
     <ClCompile Include="src\WindowMgr.cpp" />
+    <ClCompile Include="src\Windows\MapSelectorWindow.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\MenuLists\MapMenuList.h" />
@@ -57,6 +58,7 @@
     <ClInclude Include="src\PacMan.h" />
     <ClInclude Include="src\Engine\Random.h" />
     <ClInclude Include="src\WindowMgr.h" />
+    <ClInclude Include="src\Windows\MapSelectorWindow.h" />
     <ClInclude Include="src\WindowTypes.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
