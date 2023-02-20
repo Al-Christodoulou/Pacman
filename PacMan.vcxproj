@@ -19,7 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\MainMenuList.cpp" />
+    <ClCompile Include="src\Menus\MainMenuList.cpp" />
     <ClCompile Include="src\Windows\MainMenuWindow.cpp" />
     <ClCompile Include="src\Windows\GameWindow.cpp" />
     <ClCompile Include="src\Ghost.cpp" />
@@ -37,7 +37,7 @@
   <ItemGroup>
     <ClInclude Include="src\Engine\ConstMenuList.h" />
     <ClInclude Include="src\Engine\DynamicMenuList.h" />
-    <ClInclude Include="src\MainMenuList.h" />
+    <ClInclude Include="src\Menus\MainMenuList.h" />
     <ClInclude Include="src\Engine\BaseMenuList.h" />
     <ClInclude Include="src\Engine\MenuButton.h" />
     <ClInclude Include="src\Windows\MainMenuWindow.h" />

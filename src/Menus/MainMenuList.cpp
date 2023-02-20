@@ -1,5 +1,5 @@
 #include "MainMenuList.h"
-#include "PacMan.h"
+#include "../PacMan.h"
 #include <Windows.h>
 
 void MainMenuList::handleInput()
