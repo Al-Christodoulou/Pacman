@@ -1,4 +1,5 @@
 #pragma once
+#include <string>
 #include "../Engine/DynamicMenuList.h"
 #include "../MapFile.h"
 
@@ -13,5 +14,7 @@ private:
 
 public:
 	MapMenuList();
+	std::wstring removeExtension(const wchar_t*);
+	std::string convertToString(const std::wstring&);
 	void readMapFiles();
 };
