@@ -15,11 +15,7 @@ void MainMenuWindow::render()
 	};
 
 	gPacMan.fillscreen(L' ');
-	for (unsigned int i{ 0 }; i < height; i++)
-	{
-		gPacMan.sendDataf(titleText[i], width, 3 + i, gScreenWidth / 2 - width / 2);
-	}
-
+	gPacMan.sendMultiData<height, width>(titleText, 3, gScreenWidth / 2 - width / 2);
 	m_mainMenuList.render();
 }
 
