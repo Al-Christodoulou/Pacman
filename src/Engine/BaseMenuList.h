@@ -1,6 +1,5 @@
 #pragma once
 #include <vector>
-#include <initializer_list>
 #include "MenuButton.h"
 
 // an abstract class that holds menu buttons, with a selected index
