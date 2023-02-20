@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\MapFile.cpp" />
     <ClCompile Include="src\MenuLists\MainMenuList.cpp" />
     <ClCompile Include="src\Windows\MainMenuWindow.cpp" />
     <ClCompile Include="src\Windows\GameWindow.cpp" />
@@ -35,6 +36,7 @@
     <ClCompile Include="src\WindowMgr.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\MapFile.h" />
     <ClInclude Include="src\Engine\ConstMenuList.h" />
     <ClInclude Include="src\Engine\DynamicMenuList.h" />
     <ClInclude Include="src\MenuLists\MainMenuList.h" />
