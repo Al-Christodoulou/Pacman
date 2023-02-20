@@ -78,6 +78,9 @@
     <ClCompile Include="src\MapFile.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\MenuLists\MapMenuList.cpp">
+      <Filter>Source Files\MenuLists</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\PacMan.h">
@@ -139,6 +142,9 @@
     </ClInclude>
     <ClInclude Include="src\MapFile.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MenuLists\MapMenuList.h">
+      <Filter>Header Files\MenuLists</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
