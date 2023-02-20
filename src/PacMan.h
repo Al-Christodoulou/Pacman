@@ -18,6 +18,13 @@ public:
 	void sendDataf(const wchar_t*, unsigned int, unsigned int, unsigned int);
 	void sendDataf(const wchar_t, unsigned int, unsigned int); // one character
 	void sendData(const wchar_t, unsigned int); // one character
+
+	template <unsigned int Rows, unsigned int Cols>
+	void sendMultiData(const wchar_t data[Rows][Cols], unsigned int row, unsigned int column)
+	{
+		for (int i{ 0 }; i < Rows; i++)
+			sendDataf(data[i], Cols, row + i, column);
+	}
 	void swprintf_s(size_t, const wchar_t*, ...);
 
 	void run();
