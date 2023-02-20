@@ -3,12 +3,12 @@
 #include "MapFile.h"
 #include "Engine/Engine.h"
 
-MapFile::MapFile(const char* filePath)
+MapFile::MapFile(const wchar_t* filePath)
 	: m_successful{ readFile(filePath) }
 {}
 
 // returns true if the file was successfully read
-bool MapFile::readFile(const char* filePath)
+bool MapFile::readFile(const wchar_t* filePath)
 {
 	std::ifstream inputFile{ filePath };
 	if (!inputFile.good())

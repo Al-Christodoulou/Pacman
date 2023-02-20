@@ -1,4 +1,5 @@
 #pragma once
+#include "PacMan.h"
 #include <array>
 
 using MapDataArray = std::array<std::string, gScreenHeight>;
@@ -11,8 +12,8 @@ private:
 	MapDataArray m_lines{};
 
 public:
-	MapFile(const char*);
-	bool readFile(const char*);
+	MapFile(const wchar_t*);
+	bool readFile(const wchar_t*);
 	const MapDataArray& getData();
 	operator bool();
 };
