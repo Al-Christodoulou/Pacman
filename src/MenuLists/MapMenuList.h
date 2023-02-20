@@ -8,6 +8,8 @@ class MapMenuList : public DynamicMenuList
 {
 private:
 	MapFileVector m_mapFiles{};
+	// maybe temporary
+	std::vector<std::string> m_mapFileNames{};
 
 public:
 	MapMenuList();
