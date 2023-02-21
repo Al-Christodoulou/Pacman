@@ -16,14 +16,6 @@ std::wstring MapMenuList::removeExtension(const wchar_t* inPath)
 	return path.substr(0, path.find_last_of(L'.'));
 }
 
-std::string MapMenuList::convertToString(const std::wstring& input)
-{
-	// wstring to string conversion
-	using convert_type = std::codecvt_utf8<wchar_t>;
-	std::wstring_convert<convert_type, wchar_t> converter{};
-	return converter.to_bytes(input);
-}
-
 void MapMenuList::readMapFiles()
 {
 	constexpr wchar_t mapFolder[]{ L"./maps" };
@@ -38,6 +30,6 @@ void MapMenuList::readMapFiles()
 	{
 		m_mapFiles.emplace_back(entry.path().c_str());
 		std::wstring mapName{ removeExtension(entry.path().filename().c_str()) };
-		m_mapFileNames.push_back(convertToString(mapName));
+		m_mapFileNames.push_back(mapName);
 	}
 }

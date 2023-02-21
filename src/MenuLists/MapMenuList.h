@@ -10,11 +10,10 @@ class MapMenuList : public DynamicMenuList
 private:
 	MapFileVector m_mapFiles{};
 	// maybe temporary
-	std::vector<std::string> m_mapFileNames{};
+	std::vector<std::wstring> m_mapFileNames{};
 
 public:
 	MapMenuList();
 	std::wstring removeExtension(const wchar_t*);
-	std::string convertToString(const std::wstring&);
 	void readMapFiles();
 };
