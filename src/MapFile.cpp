@@ -26,7 +26,7 @@ bool MapFile::readFile(const wchar_t* filePath)
 		++linesRead;
 	}
 
-	// if the file doesn't have exactly gScreenHeight lines.
+	// if the file doesn't have exactly gScreenHeight lines,
 	// it's invalid
 	if (linesRead != gScreenHeight)
 		return false;

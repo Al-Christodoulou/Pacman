@@ -39,9 +39,9 @@ void MainMenuList::renderCursor(unsigned int baseLine, unsigned int lineButtonDe
 {
 	constexpr unsigned int halfWidth{ gScreenWidth / 2 };
 
-	unsigned int lineIndex{ baseLine + getIndex() * lineButtonDelta };
+	const unsigned int lineIndex{ baseLine + getIndex() * lineButtonDelta };
 	// the width of the currently selected menu
-	unsigned int selectedMenuWidth{ getIndex() == 0 ? startBtnWidth : exitBtnWidth };
+	const unsigned int selectedMenuWidth{ getIndex() == 0 ? startBtnWidth : exitBtnWidth };
 
 	// this is used to place the cursor just some chars before the menu text
 	constexpr unsigned int cursorAndMenuDistance{ 4 };
