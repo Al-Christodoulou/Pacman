@@ -38,3 +38,13 @@ void MapMenuList::handleInput()
 	if (GetAsyncKeyState(L'S' & 0x8000))
 		goDown();
 }
+
+const MapFileVector& MapMenuList::getMapFiles()
+{
+	return m_mapFiles;
+}
+
+const std::vector<std::wstring>& MapMenuList::getMapFileNames()
+{
+	return m_mapFileNames;
+}
