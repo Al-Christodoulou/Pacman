@@ -33,3 +33,11 @@ void MapMenuList::readMapFiles()
 		m_mapFileNames.push_back(mapName);
 	}
 }
+
+void MapMenuList::handleInput()
+{
+	if (GetAsyncKeyState(L'W' & 0x8000))
+		goUp();
+	if (GetAsyncKeyState(L'S' & 0x8000))
+		goDown();
+}

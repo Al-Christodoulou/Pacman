@@ -16,4 +16,5 @@ public:
 	MapMenuList();
 	std::wstring removeExtension(const wchar_t*);
 	void readMapFiles();
+	void handleInput() override;
 };
