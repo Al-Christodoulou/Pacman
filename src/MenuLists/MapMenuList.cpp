@@ -1,7 +1,4 @@
 #include <filesystem>
-// these two are needed for wstring => string conversions
-#include <locale>
-#include <codecvt>
 #include "MapMenuList.h"
 
 MapMenuList::MapMenuList()
