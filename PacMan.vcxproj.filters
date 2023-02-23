@@ -82,7 +82,7 @@
       <Filter>Source Files\MenuLists</Filter>
     </ClCompile>
     <ClCompile Include="src\Windows\MapSelectorWindow.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Windows</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -150,7 +150,7 @@
       <Filter>Header Files\MenuLists</Filter>
     </ClInclude>
     <ClInclude Include="src\Windows\MapSelectorWindow.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Windows</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
