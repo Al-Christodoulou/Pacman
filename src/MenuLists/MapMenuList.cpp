@@ -27,9 +27,15 @@ void MapMenuList::readMapFiles()
 	// it inside m_mapFiles
 	for (const auto& entry : std::filesystem::directory_iterator(mapFolder))
 	{
+		// TODO: check if entry.path() refers to an actual file and not something
+		// else!
+		// TODO: emplace back the map file only if it was actually read correctly!
 		m_mapFiles.emplace_back(entry.path().c_str());
 		std::wstring mapName{ removeExtension(entry.path().filename().c_str()) };
 		m_mapFileNames.push_back(mapName);
+
+		// TODO: update m_buttons with a new MenuButton if the map file was read
+		// correctly!
 	}
 }
 
