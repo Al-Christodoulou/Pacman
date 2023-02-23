@@ -1,6 +1,7 @@
 #include "WindowMgr.h"
 #include "Windows/GameWindow.h"
 #include "Windows/MainMenuWindow.h"
+#include "Windows/MapSelectorWindow.h"
 
 void WindowMgr::update()
 {
@@ -29,6 +30,14 @@ void WindowMgr::pushGameWindow()
 void WindowMgr::pushMainMenuWindow()
 {
 	auto uniquePtr{ std::make_unique<MainMenuWindow>() };
+	std::unique_ptr<PacmanWindow> newPtr{ static_cast<PacmanWindow*>(uniquePtr.release()) };
+
+	m_windowStack.push_back(std::move(newPtr));
+}
+
+void WindowMgr::pushMapSelectorWindow()
+{
+	auto uniquePtr{ std::make_unique<MapSelectorWindow>() };
 	std::unique_ptr<PacmanWindow> newPtr{ static_cast<PacmanWindow*>(uniquePtr.release()) };
 
 	m_windowStack.push_back(std::move(newPtr));

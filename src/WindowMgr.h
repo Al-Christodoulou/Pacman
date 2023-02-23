@@ -18,6 +18,7 @@ public:
 
 	void pushGameWindow();
 	void pushMainMenuWindow();
+	void pushMapSelectorWindow();
 
 	// quite ugly. in order for a Character to search the entity
 	// array, the sequence of access is:
