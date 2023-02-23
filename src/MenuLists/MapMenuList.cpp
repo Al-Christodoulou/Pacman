@@ -45,9 +45,9 @@ void MapMenuList::insertIfMapFile(const std::filesystem::path& mapPath)
 
 void MapMenuList::handleInput()
 {
-	if (GetAsyncKeyState(L'W' & 0x1))
+	if (GetAsyncKeyState(L'W') & 0x1)
 		goUp();
-	if (GetAsyncKeyState(L'S' & 0x1))
+	else if (GetAsyncKeyState(L'S') & 0x1)
 		goDown();
 
 	if (GetAsyncKeyState(VK_RETURN) & 0x8000)

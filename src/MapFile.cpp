@@ -4,8 +4,9 @@
 #include "Engine/Engine.h"
 
 MapFile::MapFile(const wchar_t* filePath)
-	: m_successful{ readFile(filePath) }
-{}
+{
+	m_successful = readFile(filePath);
+}
 
 // returns true if the file was successfully read
 bool MapFile::readFile(const wchar_t* filePath)
