@@ -1,4 +1,3 @@
-#include <filesystem>
 #include "MapMenuList.h"
 
 MapMenuList::MapMenuList()
@@ -23,20 +22,25 @@ void MapMenuList::readMapFiles()
 	if (!std::filesystem::exists(mapFolder))
 		return;
 
-	// for each file in the maps folder, create a MapFile object and insert
-	// it inside m_mapFiles
+	// for each file in the maps folder, check it's validity and update
+	// m_mapFiles, m_mapFileNames & m_buttons if it's a valid map
 	for (const auto& entry : std::filesystem::directory_iterator(mapFolder))
-	{
-		// TODO: check if entry.path() refers to an actual file and not something
-		// else!
-		// TODO: emplace back the map file only if it was actually read correctly!
-		m_mapFiles.emplace_back(entry.path().c_str());
-		std::wstring mapName{ removeExtension(entry.path().filename().c_str()) };
-		m_mapFileNames.push_back(mapName);
+		insertIfMapFile(entry.path());
+}
 
-		// TODO: update m_buttons with a new MenuButton if the map file was read
-		// correctly!
-	}
+void MapMenuList::insertIfMapFile(const std::filesystem::path& mapPath)
+{
+	// if this path doesn't refer to a file, don't do anything
+	if (!std::filesystem::is_regular_file(mapPath))
+		return;
+
+	MapFile mapFile{ mapPath.c_str() };
+	if (!mapFile)
+		return;
+
+	m_mapFiles.push_back(mapFile);
+	m_mapFileNames.push_back(removeExtension(mapPath.filename().c_str()));
+	m_buttons.emplace_back([]() { /* TODO! */ });
 }
 
 void MapMenuList::handleInput()
