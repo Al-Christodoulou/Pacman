@@ -15,7 +15,9 @@ std::wstring MapMenuList::removeExtension(const wchar_t* inPath)
 
 void MapMenuList::readMapFiles()
 {
-	constexpr wchar_t mapFolder[]{ L"./maps" };
+	constexpr wchar_t mapFolderName[]{ L"/Win32 Debug/maps" };
+	std::wstring mapFolder{ std::filesystem::current_path().c_str() };
+	mapFolder.append(mapFolderName);
 
 	// if this folder doesn't exist, there's no maps
 	if (!std::filesystem::exists(mapFolder))
