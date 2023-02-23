@@ -61,14 +61,13 @@ void MapMenuList::render()
 	unsigned int i{ 0 };
 	for (const std::wstring& mapName : m_mapFileNames)
 	{
+		const unsigned int row{ baseLine + i * 2 };
 		const unsigned int column{ gScreenWidth / 2 - mapName.size() / 2 };
-		// if the file was successfully read, it can be rendered to the menu
-		if (m_mapFiles[i])
-			gPacMan.sendDataf(mapName.c_str(), mapName.size(), baseLine + i * 2, column);
+		gPacMan.sendDataf(mapName.c_str(), mapName.size(), row, column);
 
 		// render the cursor
 		if (getIndex() == i)
-			gPacMan.sendDataf(L'>', baseLine, column - 3);
+			gPacMan.sendDataf(L'>', row, column - 3);
 		i++;
 	}
 }
