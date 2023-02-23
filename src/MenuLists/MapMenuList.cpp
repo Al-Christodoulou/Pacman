@@ -35,10 +35,32 @@ void MapMenuList::readMapFiles()
 
 void MapMenuList::handleInput()
 {
-	if (GetAsyncKeyState(L'W' & 0x8000))
+	if (GetAsyncKeyState(L'W' & 0x1))
 		goUp();
-	if (GetAsyncKeyState(L'S' & 0x8000))
+	if (GetAsyncKeyState(L'S' & 0x1))
 		goDown();
+
+	if (GetAsyncKeyState(VK_RETURN) & 0x8000)
+		m_buttons[getIndex()].onPress();
+}
+
+void MapMenuList::render()
+{
+	constexpr unsigned int baseLine{ 5 };
+
+	unsigned int i{ 0 };
+	for (const std::wstring& mapName : m_mapFileNames)
+	{
+		const unsigned int column{ gScreenWidth / 2 - mapName.size() / 2 };
+		// if the file was successfully read, it can be rendered to the menu
+		if (m_mapFiles[i])
+			gPacMan.sendDataf(mapName.c_str(), mapName.size(), baseLine + i * 2, column);
+
+		// render the cursor
+		if (getIndex() == i)
+			gPacMan.sendDataf(L'>', baseLine, column - 3);
+		i++;
+	}
 }
 
 const MapFileVector& MapMenuList::getMapFiles()

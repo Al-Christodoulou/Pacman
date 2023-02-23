@@ -17,6 +17,7 @@ public:
 	std::wstring removeExtension(const wchar_t*);
 	void readMapFiles();
 	void handleInput() override;
+	void render();
 
 	const MapFileVector& getMapFiles();
 	const std::vector<std::wstring>& getMapFileNames();
