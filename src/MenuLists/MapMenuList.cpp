@@ -50,7 +50,7 @@ void MapMenuList::handleInput()
 	else if (GetAsyncKeyState(L'S') & 0x1)
 		goDown();
 
-	if (GetAsyncKeyState(VK_RETURN) & 0x8000)
+	if (GetAsyncKeyState(VK_RETURN) & 0x8000 && m_buttons.size() > 0)
 		m_buttons[getIndex()].onPress();
 }
 
