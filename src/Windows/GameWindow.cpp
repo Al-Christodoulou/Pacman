@@ -62,13 +62,13 @@ void GameWindow::initEntities(const MapFile& mapFile)
 			switch (mapDat[i][j])
 			{
 			case '#':
-				m_entMgr.createEnt(i, j, '#');
+				m_entMgr.createEnt(j, i, '#');
 				break;
 			case 'p': // player spawn point
-				m_player = m_entMgr.createPlayer(i, j, static_cast<wchar_t>(0x555));
+				m_player = m_entMgr.createPlayer(j, i, static_cast<wchar_t>(0x555));
 				break;
 			case 'e': // ghost enemy
-				m_entMgr.createEntSpecification<Ghost>(i, j);
+				m_entMgr.createEntSpecification<Ghost>(j, i);
 				break;
 			default:
 				break;
