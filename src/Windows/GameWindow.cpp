@@ -3,6 +3,7 @@
 #include "../Engine/Random.h"
 #include "../WanderingLouse.h"
 #include "../Ghost.h"
+#include "../MapFile.h"
 
 void GameWindow::render()
 {
@@ -33,9 +34,9 @@ void GameWindow::runLogic()
 		m_state_terminate = true;
 }
 
-void GameWindow::initEntities()
+void GameWindow::initEntities(const MapFile& mapFile)
 {
-	m_player = m_entMgr.createPlayer(gScreenWidth / 2, gScreenHeight / 2, 0x555);
+	/*m_player = m_entMgr.createPlayer(gScreenWidth / 2, gScreenHeight / 2, 0x555);
 
 	//for (int i{ 0 }; i < 50; i++)
 	//	m_entMgr.createEnt(Random::get(0, gScreenWidth), Random::get(0, gScreenHeight), L'#');
@@ -50,7 +51,30 @@ void GameWindow::initEntities()
 	m_entMgr.createEntSpecification<WanderingLouse>
 		((gScreenWidth / 2) - 3, (gScreenHeight / 2) - 5);
 	m_entMgr.createEntSpecification<Ghost>
-		((gScreenWidth / 2) - 5, (gScreenHeight - 2));
+		((gScreenWidth / 2) - 5, (gScreenHeight - 2));*/
+	const MapDataArray& mapDat{ mapFile.getData() };
+	// iterate through all the std::strings
+	for (size_t i{ 0 }; i < mapDat.size(); i++)
+	{
+		// iterate through all the chars of the std::string
+		for (size_t j{ 0 }; j < mapDat[i].size(); j++)
+		{
+			switch (mapDat[i][j])
+			{
+			case '#':
+				m_entMgr.createEnt(i, j, '#');
+				break;
+			case 'p': // player spawn point
+				m_player = m_entMgr.createPlayer(i, j, static_cast<wchar_t>(0x555));
+				break;
+			case 'e': // ghost enemy
+				m_entMgr.createEntSpecification<Ghost>(i, j);
+				break;
+			default:
+				break;
+			}
+		}
+	}
 }
 
 void GameWindow::renderAllEntities()
@@ -70,10 +94,10 @@ const EntityMgr& GameWindow::getEntMgr() const
 	return m_entMgr;
 }
 
-GameWindow::GameWindow()
+GameWindow::GameWindow(const MapFile& mapFile)
 	: Window(WindowType::GameWindow)
 {
-	initEntities();
+	initEntities(mapFile);
 	// m_state_begin isn't used for the GameWindow specifically, but
 	// it should be updated anyway
 	m_state_begin = false;

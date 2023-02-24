@@ -3,6 +3,9 @@
 #include "Windows/MainMenuWindow.h"
 #include "Windows/MapSelectorWindow.h"
 
+// yet another forward declaration
+class MapFile;
+
 void WindowMgr::update()
 {
 	// first make sure to pop any windows that are
@@ -20,11 +23,11 @@ void WindowMgr::update()
 	m_windowStack.back().get()->runLogic();
 }
 
-void WindowMgr::pushGameWindow()
+void WindowMgr::pushGameWindow(const MapFile& mapFile)
 {
 	//GameWindow gameWin{};
 	//m_windowStack.push_back(std::ref(static_cast<Window&>(gameWin)));
-	m_windowStack.push_back(std::make_unique<GameWindow>());
+	m_windowStack.push_back(std::make_unique<GameWindow>(mapFile));
 }
 
 void WindowMgr::pushMainMenuWindow()

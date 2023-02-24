@@ -4,6 +4,9 @@
 #include "../Player.h"
 #include "../WindowTypes.h"
 
+// forward declare to avoid includes
+class MapFile;
+
 class GameWindow : public Window<WindowType>
 {
 private:
@@ -14,10 +17,10 @@ public:
 	void render() override;
 	void runLogic() override;
 
-	void initEntities();
+	void initEntities(const MapFile&);
 	void renderAllEntities();
 
 	const EntityMgr& getEntMgr() const;
 
-	GameWindow();
+	GameWindow(const MapFile&);
 };

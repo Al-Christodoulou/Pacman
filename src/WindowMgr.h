@@ -7,6 +7,7 @@
 using PacmanWindow = Window<WindowType>;
 using WindowStack_t = std::vector<std::unique_ptr<PacmanWindow>>;
 class EntityMgr; // forward declare the class to avoid includes
+class MapFile;
 
 class WindowMgr
 {
@@ -16,7 +17,7 @@ private:
 public:
 	void update();
 
-	void pushGameWindow();
+	void pushGameWindow(const MapFile&);
 	void pushMainMenuWindow();
 	void pushMapSelectorWindow();
 
