@@ -14,6 +14,6 @@ private:
 public:
 	MapFile(const wchar_t*);
 	bool readFile(const wchar_t*);
-	const MapDataArray& getData();
+	const MapDataArray& getData() const;
 	operator bool() const;
 };

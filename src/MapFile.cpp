@@ -34,5 +34,5 @@ bool MapFile::readFile(const wchar_t* filePath)
 	return true;
 }
 
-const MapDataArray& MapFile::getData() { return m_lines; }
+const MapDataArray& MapFile::getData() const { return m_lines; }
 MapFile::operator bool() const { return m_successful; }
