@@ -152,5 +152,8 @@
     <ClInclude Include="src\Windows\MapSelectorWindow.h">
       <Filter>Header Files\Windows</Filter>
     </ClInclude>
+    <ClInclude Include="src\Engine\UniquePtrUtils.h">
+      <Filter>Header Files\Engine</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

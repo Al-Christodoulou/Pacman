@@ -3,6 +3,7 @@
 #include <vector>
 #include <memory>
 #include "Engine/Engine.h"
+#include "Engine/UniquePtrUtils.h"
 #include "Entity.h"
 #include "Character.h"
 #include "Player.h"
@@ -19,10 +20,7 @@ private:
 	template <typename T>
 	std::unique_ptr<Entity> upcastToEnt(std::unique_ptr<T>& e)
 	{
-		static_assert(std::is_convertible_v<T, Entity>,
-			"T must be part of the Entity hierarchy!");
-		Entity* entPtr{ static_cast<Entity*>(e.release()) };
-		return std::unique_ptr<Entity>{ entPtr };
+		return util::upcast<Entity, T>(e);
 	}
 
 public:
