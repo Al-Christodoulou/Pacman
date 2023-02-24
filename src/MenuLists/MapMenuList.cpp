@@ -40,7 +40,14 @@ void MapMenuList::insertIfMapFile(const std::filesystem::path& mapPath)
 
 	m_mapFiles.push_back(mapFile);
 	m_mapFileNames.push_back(removeExtension(mapPath.filename().c_str()));
-	m_buttons.emplace_back([]() { /* TODO! */ });
+
+	// the lambda has to have a variable that's not destroyed by the end of this function,
+	// so passing it the last MapFile inserted in m_mapFiles is the way to go
+	const MapFile& capturedMap{ m_mapFiles.back() };
+	// TODO: investigate why using a reference capture for capturedMap causes the MapFile
+	// reference to become corrupted the next time insertIfMapFile is called. for now this
+	// will make an unnessesary copy of MapFile and all its data
+	m_buttons.emplace_back([capturedMap]() { gPacMan.getWindowMgr().pushGameWindow(capturedMap); });
 }
 
 void MapMenuList::handleInput()
