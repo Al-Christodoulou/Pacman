@@ -28,26 +28,6 @@ unsigned int EntityMgr::getArraySize() const
 	return m_entities.size();
 }
 
-Entity* EntityMgr::createEnt(int x, int y, wchar_t texture)
-{
-	return pushAnyEnt(std::move(std::make_unique<Entity>(x, y, texture, EntityType::Default)));
-}
-
-Entity* EntityMgr::createEnt(wchar_t texture)
-{
-	return pushAnyEnt(std::move(std::make_unique<Entity>(texture, EntityType::Default)));
-}
-
-Player* EntityMgr::createPlayer(int x, int y, wchar_t texture)
-{
-	return pushAnyEnt(std::move(std::make_unique<Player>(x, y, texture)));
-}
-
-Player* EntityMgr::createPlayer(wchar_t texture)
-{
-	return pushAnyEnt(std::move(std::make_unique<Player>(texture)));
-}
-
 /*
 * Checks if two entities lie in the same position. if so, then we have a
 * violation and this returns true

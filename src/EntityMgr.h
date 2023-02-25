@@ -23,6 +23,13 @@ private:
 		return util::upcast<Entity, T>(std::move(e));
 	}
 
+	// create an entity specification of type T (Wandering Louse, Ghost etc.)
+	template <typename T = Entity, typename... Args>
+	T* createAnyEnt(Args... args)
+	{
+		return pushAnyEnt(std::move(std::make_unique<T>(args...)));
+	}
+
 public:
 	const Entity* const getEntity(unsigned int) const;
 	EntityArray& getEntities();
@@ -32,26 +39,24 @@ public:
 	unsigned int getArraySize() const; // NOTE: not really required, could just
 									// use gScreenTotalPxs
 
-	Entity* createEnt(int, int, wchar_t);
-	Entity* createEnt(wchar_t);
+	template <typename... Args>
+	Entity* createEnt(Args... args)
+	{
+		return createAnyEnt<Entity>(args..., EntityType::Default);
+	}
 
-	Player* createPlayer(int, int, wchar_t);
-	Player* createPlayer(wchar_t);
+	template <typename CharType, typename... Args>
+	CharType* createCharacter(Args... args)
+	{
+		static_assert(std::is_base_of_v<Character, CharType>, "Not a character!");
+		return createAnyEnt<CharType>(args...);
+	}
 
 	template <typename T>
 	T* pushAnyEnt(std::unique_ptr<T> anyEnt)
 	{
 		std::unique_ptr<Entity> upcasted{ upcastToEnt(std::move(anyEnt)) };
 		return static_cast<T*>(m_entities.emplace_back(std::move(upcasted)).get());
-	}
-
-	// create an entity specification of type T (Wandering Louse, Ghost etc.),
-	// as long as the constructor parameters for that entity are the defaults
-	// (x and y positions)
-	template <typename T>
-	T* createEntSpecification(int x, int y)
-	{
-		return pushAnyEnt(std::move(std::make_unique<T>(x, y)));
 	}
 
 	// no copying or moving of EntityMgr is allowed

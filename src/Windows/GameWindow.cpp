@@ -2,6 +2,7 @@
 #include "../PacMan.h"
 #include "../Engine/Random.h"
 #include "../WanderingLouse.h"
+#include "../Player.h"
 #include "../Ghost.h"
 #include "../MapFile.h"
 
@@ -65,10 +66,10 @@ void GameWindow::initEntities(const MapFile& mapFile)
 				m_entMgr.createEnt(j, i, '#');
 				break;
 			case 'p': // player spawn point
-				m_player = m_entMgr.createPlayer(j, i, static_cast<wchar_t>(0x555));
+				m_player = m_entMgr.createCharacter<Player>(j, i, static_cast<wchar_t>(0x555));
 				break;
 			case 'e': // ghost enemy
-				m_entMgr.createEntSpecification<Ghost>(j, i);
+				m_entMgr.createCharacter<Ghost>(j, i);
 				break;
 			default:
 				break;
