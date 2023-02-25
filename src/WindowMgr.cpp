@@ -23,21 +23,6 @@ void WindowMgr::update()
 	m_windowStack.back().get()->runLogic();
 }
 
-void WindowMgr::pushGameWindow(const MapFile& mapFile)
-{
-	pushAnyWindow<GameWindow>(mapFile);
-}
-
-void WindowMgr::pushMainMenuWindow()
-{
-	pushAnyWindow<MainMenuWindow>();
-}
-
-void WindowMgr::pushMapSelectorWindow()
-{
-	pushAnyWindow<MapSelectorWindow>();
-}
-
 const EntityMgr* const WindowMgr::tryGetEntMgr() const
 {
 	if (m_windowStack.empty())

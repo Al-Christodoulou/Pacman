@@ -5,6 +5,7 @@
 #include "Player.h"
 #include "WanderingLouse.h"
 #include "Ghost.h"
+#include "Windows/MainMenuWindow.h"
 
 PacMan gPacMan{};
 
@@ -54,7 +55,7 @@ void PacMan::run()
 {
 	// start the game with the game window for now
 	//m_windowMgr.pushGameWindow();
-	m_windowMgr.pushMainMenuWindow();
+	m_windowMgr.pushAnyWindow<MainMenuWindow>();
 
 	while (true)
 	{

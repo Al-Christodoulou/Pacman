@@ -1,4 +1,5 @@
 #include "MapMenuList.h"
+#include "../Windows/GameWindow.h"
 
 MapMenuList::MapMenuList()
 	: DynamicMenuList{}
@@ -47,7 +48,9 @@ void MapMenuList::insertIfMapFile(const std::filesystem::path& mapPath)
 	// TODO: investigate why using a reference capture for capturedMap causes the MapFile
 	// reference to become corrupted the next time insertIfMapFile is called. for now this
 	// will make an unnessesary copy of MapFile and all its data
-	m_buttons.emplace_back([capturedMap]() { gPacMan.getWindowMgr().pushGameWindow(capturedMap); });
+	m_buttons.emplace_back([capturedMap]() {
+		gPacMan.getWindowMgr().pushAnyWindow<GameWindow>(capturedMap);
+	});
 }
 
 void MapMenuList::handleInput()

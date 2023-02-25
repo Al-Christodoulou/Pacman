@@ -1,6 +1,7 @@
 #include "MainMenuWindow.h"
 #include "../PacMan.h"
 #include "../Engine/Random.h"
+#include "../Windows/MapSelectorWindow.h"
 
 void MainMenuWindow::render()
 {
@@ -26,7 +27,7 @@ void MainMenuWindow::runLogic()
 
 MainMenuList MainMenuWindow::constructMainMenuList()
 {
-	auto startButtonPress{ []() { gPacMan.getWindowMgr().pushMapSelectorWindow(); } };
+	auto startButtonPress{ []() { gPacMan.getWindowMgr().pushAnyWindow<MapSelectorWindow>(); } };
 	auto endButtonPress{ []() { /* this has to call an exit somehow */ } };
 
 	return MenuButtonArray_t<2>{ MenuButton{ startButtonPress }, MenuButton{ endButtonPress } };
