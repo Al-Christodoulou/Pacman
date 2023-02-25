@@ -18,9 +18,9 @@ private:
 	// takes a Player, Ghost, ... pointer and upcasts it to an Entity
 	// pointer in order to be able to move it inside m_entities
 	template <typename T>
-	std::unique_ptr<Entity> upcastToEnt(std::unique_ptr<T>& e)
+	std::unique_ptr<Entity> upcastToEnt(std::unique_ptr<T> e)
 	{
-		return util::upcast<Entity, T>(e);
+		return util::upcast<Entity, T>(std::move(e));
 	}
 
 public:
@@ -41,18 +41,8 @@ public:
 	template <typename T>
 	T* pushAnyEnt(std::unique_ptr<T> anyEnt)
 	{
-		// if T is Entity, no casting's needed
-		if constexpr (std::is_same_v<T, Entity>)
-		{
-			m_entities.push_back(std::move(anyEnt));
-			return m_entities[m_entities.size() - 1].get();
-		}
-		else // Ghost, etc.
-		{
-			std::unique_ptr<Entity> theEnt{ upcastToEnt(anyEnt) };
-			m_entities.push_back(std::move(theEnt));
-			return static_cast<T*>(m_entities[m_entities.size() - 1].get());
-		}
+		std::unique_ptr<Entity> upcasted{ upcastToEnt(std::move(anyEnt)) };
+		return static_cast<T*>(m_entities.emplace_back(std::move(upcasted)).get());
 	}
 
 	// create an entity specification of type T (Wandering Louse, Ghost etc.),
