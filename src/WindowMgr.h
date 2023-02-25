@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine/Window.h"
+#include "Engine/UniquePtrUtils.h"
 #include "WindowTypes.h"
 #include <vector>
 #include <memory>
@@ -16,6 +17,17 @@ private:
 
 public:
 	void update();
+
+	template <typename WinType, typename... Args>
+	void pushAnyWindow(Args... args)
+	{
+		auto uniquePtr{ std::make_unique<WinType>(args...) };
+		m_windowStack.push_back(
+			std::move(
+				util::upcast<PacmanWindow, WinType>(std::move(uniquePtr))
+			)
+		);
+	}
 
 	void pushGameWindow(const MapFile&);
 	void pushMainMenuWindow();

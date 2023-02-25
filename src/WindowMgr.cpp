@@ -25,25 +25,17 @@ void WindowMgr::update()
 
 void WindowMgr::pushGameWindow(const MapFile& mapFile)
 {
-	//GameWindow gameWin{};
-	//m_windowStack.push_back(std::ref(static_cast<Window&>(gameWin)));
-	m_windowStack.push_back(std::make_unique<GameWindow>(mapFile));
+	pushAnyWindow<GameWindow>(mapFile);
 }
 
 void WindowMgr::pushMainMenuWindow()
 {
-	auto uniquePtr{ std::make_unique<MainMenuWindow>() };
-	std::unique_ptr<PacmanWindow> newPtr{ static_cast<PacmanWindow*>(uniquePtr.release()) };
-
-	m_windowStack.push_back(std::move(newPtr));
+	pushAnyWindow<MainMenuWindow>();
 }
 
 void WindowMgr::pushMapSelectorWindow()
 {
-	auto uniquePtr{ std::make_unique<MapSelectorWindow>() };
-	std::unique_ptr<PacmanWindow> newPtr{ static_cast<PacmanWindow*>(uniquePtr.release()) };
-
-	m_windowStack.push_back(std::move(newPtr));
+	pushAnyWindow<MapSelectorWindow>();
 }
 
 const EntityMgr* const WindowMgr::tryGetEntMgr() const
