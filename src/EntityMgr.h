@@ -23,6 +23,13 @@ private:
 		return util::upcast<Entity, T>(std::move(e));
 	}
 
+	template <typename T>
+	T* pushAnyEnt(std::unique_ptr<T> anyEnt)
+	{
+		std::unique_ptr<Entity> upcasted{ upcastToEnt(std::move(anyEnt)) };
+		return static_cast<T*>(m_entities.emplace_back(std::move(upcasted)).get());
+	}
+
 	// create an entity specification of type T (Wandering Louse, Ghost etc.)
 	template <typename T = Entity, typename... Args>
 	T* createAnyEnt(Args... args)
@@ -50,13 +57,6 @@ public:
 	{
 		static_assert(std::is_base_of_v<Character, CharType>, "Not a character!");
 		return createAnyEnt<CharType>(args...);
-	}
-
-	template <typename T>
-	T* pushAnyEnt(std::unique_ptr<T> anyEnt)
-	{
-		std::unique_ptr<Entity> upcasted{ upcastToEnt(std::move(anyEnt)) };
-		return static_cast<T*>(m_entities.emplace_back(std::move(upcasted)).get());
 	}
 
 	// no copying or moving of EntityMgr is allowed
