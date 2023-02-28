@@ -1,7 +1,7 @@
 #pragma once
-#include "../Engine/ConstMenuList.h"
+#include "../Engine/BaseMenuList.h"
 
-class MainMenuList : public ConstMenuList<2>
+class MainMenuList : public BaseMenuList
 {
 private:
 	// a keyword train
@@ -30,9 +30,10 @@ private:
 	};
 
 public:
+	unsigned int getMaxIndex() override;
 	void handleInput() override;
 	void render();
 	void renderCursor(unsigned int, unsigned int);
 
-	MainMenuList(const MenuButtonArray_t<2>&);
+	MainMenuList();
 };

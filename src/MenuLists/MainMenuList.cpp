@@ -1,6 +1,12 @@
+#include <Windows.h>
 #include "MainMenuList.h"
 #include "../PacMan.h"
-#include <Windows.h>
+#include "../Windows/MapSelectorWindow.h"
+
+unsigned int MainMenuList::getMaxIndex()
+{
+	return 1U;
+}
 
 void MainMenuList::handleInput()
 {
@@ -10,7 +16,17 @@ void MainMenuList::handleInput()
 		goDown();
 
 	if (GetAsyncKeyState(VK_RETURN) & 0x8000)
-		m_buttons[getIndex()].onPress();
+	{
+		switch (getIndex())
+		{
+		case 0: // start
+			gPacMan.getWindowMgr().pushAnyWindow<MapSelectorWindow>();
+			break;
+		case 1: // exit
+			// this has to call an exit
+			break;
+		}
+	}
 }
 
 void MainMenuList::render()
@@ -50,6 +66,6 @@ void MainMenuList::renderCursor(unsigned int baseLine, unsigned int lineButtonDe
 		(cursor, lineIndex, halfWidth - selectedMenuWidth / 2 - cursorAndMenuDistance);
 }
 
-MainMenuList::MainMenuList(const MenuButtonArray_t<2>& menuArray)
-	: ConstMenuList{ menuArray }
+MainMenuList::MainMenuList()
+	: BaseMenuList{}
 {}
