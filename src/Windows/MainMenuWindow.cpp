@@ -25,14 +25,6 @@ void MainMenuWindow::runLogic()
 	m_mainMenuList.handleInput();
 }
 
-MainMenuList MainMenuWindow::constructMainMenuList()
-{
-	auto startButtonPress{ []() { gPacMan.getWindowMgr().pushAnyWindow<MapSelectorWindow>(); } };
-	auto endButtonPress{ []() { /* this has to call an exit somehow */ } };
-
-	return MenuButtonArray_t<2>{ MenuButton{ startButtonPress }, MenuButton{ endButtonPress } };
-}
-
 MainMenuWindow::MainMenuWindow()
-	: Window(WindowType::Other), m_mainMenuList{ constructMainMenuList() }
+	: Window(WindowType::Other)
 {}
