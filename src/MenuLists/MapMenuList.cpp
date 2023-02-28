@@ -2,7 +2,7 @@
 #include "../Windows/GameWindow.h"
 
 MapMenuList::MapMenuList()
-	: DynamicMenuList{}
+	: BaseMenuList{}
 {
 	readMapFiles();
 }
@@ -41,16 +41,11 @@ void MapMenuList::insertIfMapFile(const std::filesystem::path& mapPath)
 
 	m_mapFiles.push_back(mapFile);
 	m_mapFileNames.push_back(removeExtension(mapPath.filename().c_str()));
+}
 
-	// the lambda has to have a variable that's not destroyed by the end of this function,
-	// so passing it the last MapFile inserted in m_mapFiles is the way to go
-	const MapFile& capturedMap{ m_mapFiles.back() };
-	// TODO: investigate why using a reference capture for capturedMap causes the MapFile
-	// reference to become corrupted the next time insertIfMapFile is called. for now this
-	// will make an unnessesary copy of MapFile and all its data
-	m_buttons.emplace_back([capturedMap]() {
-		gPacMan.getWindowMgr().pushAnyWindow<GameWindow>(capturedMap);
-	});
+unsigned int MapMenuList::getMaxIndex()
+{
+	return m_mapFiles.size() - 1;
 }
 
 void MapMenuList::handleInput()
@@ -60,8 +55,8 @@ void MapMenuList::handleInput()
 	else if (GetAsyncKeyState(L'S') & 0x1)
 		goDown();
 
-	if (GetAsyncKeyState(VK_RETURN) & 0x8000 && m_buttons.size() > 0)
-		m_buttons[getIndex()].onPress();
+	if (GetAsyncKeyState(VK_RETURN) & 0x8000 && m_mapFiles.size() > 0)
+		gPacMan.getWindowMgr().pushAnyWindow<GameWindow>(m_mapFiles[getIndex()]);
 }
 
 void MapMenuList::render()
