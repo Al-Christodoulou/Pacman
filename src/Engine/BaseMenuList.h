@@ -1,6 +1,5 @@
 #pragma once
 #include <vector>
-#include "MenuButton.h"
 
 // an abstract class that holds menu buttons, with a selected index
 // that increases/decreases based on keyboard input. two derived
