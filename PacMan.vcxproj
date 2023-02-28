@@ -43,7 +43,6 @@
     <ClInclude Include="src\MapFile.h" />
     <ClInclude Include="src\MenuLists\MainMenuList.h" />
     <ClInclude Include="src\Engine\BaseMenuList.h" />
-    <ClInclude Include="src\Engine\MenuButton.h" />
     <ClInclude Include="src\Windows\MainMenuWindow.h" />
     <ClInclude Include="src\Windows\GameWindow.h" />
     <ClInclude Include="src\Engine\Window.h" />
