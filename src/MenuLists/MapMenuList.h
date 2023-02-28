@@ -1,12 +1,12 @@
 #pragma once
 #include <string>
 #include <filesystem>
-#include "../Engine/DynamicMenuList.h"
+#include "../Engine/BaseMenuList.h"
 #include "../MapFile.h"
 
 using MapFileVector = std::vector<MapFile>;
 
-class MapMenuList : public DynamicMenuList
+class MapMenuList : public BaseMenuList
 {
 private:
 	MapFileVector m_mapFiles{};
@@ -18,6 +18,7 @@ public:
 	std::wstring removeExtension(const wchar_t*);
 	void readMapFiles();
 	void insertIfMapFile(const std::filesystem::path&);
+	unsigned int getMaxIndex() override;
 	void handleInput() override;
 	void render();
 
