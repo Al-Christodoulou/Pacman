@@ -41,8 +41,6 @@
     <ClInclude Include="src\Engine\UniquePtrUtils.h" />
     <ClInclude Include="src\MenuLists\MapMenuList.h" />
     <ClInclude Include="src\MapFile.h" />
-    <ClInclude Include="src\Engine\ConstMenuList.h" />
-    <ClInclude Include="src\Engine\DynamicMenuList.h" />
     <ClInclude Include="src\MenuLists\MainMenuList.h" />
     <ClInclude Include="src\Engine\BaseMenuList.h" />
     <ClInclude Include="src\Engine\MenuButton.h" />
