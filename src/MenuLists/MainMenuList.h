@@ -5,9 +5,9 @@ class MainMenuList : public ConstMenuList<2>
 {
 private:
 	// a keyword train
-	static constexpr unsigned int textHeight{ 3 };
-	static constexpr unsigned int startBtnWidth{ 23 };
-	static constexpr unsigned int exitBtnWidth{ 17 };
+	static constexpr inline unsigned int textHeight{ 3 };
+	static constexpr inline unsigned int startBtnWidth{ 23 };
+	static constexpr inline unsigned int exitBtnWidth{ 17 };
 
 	static constexpr inline wchar_t startButton[textHeight][startBtnWidth]{
 		L"/-- ---   ^   /--/ ---",
