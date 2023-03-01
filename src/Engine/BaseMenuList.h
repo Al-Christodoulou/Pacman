@@ -1,10 +1,9 @@
 #pragma once
 #include <vector>
 
-// an abstract class that holds menu buttons, with a selected index
-// that increases/decreases based on keyboard input. two derived
-// classes exist: ConstMenuList for menu lists that don't change, and
-// DynamicMenuList for the opposite
+// an abstract menu list class, with a selected index integer
+// that increases/decreases based on keyboard input (inside
+// the overwritten handleInput() method
 class BaseMenuList
 {
 private:

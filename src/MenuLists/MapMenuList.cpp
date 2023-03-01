@@ -24,7 +24,7 @@ void MapMenuList::readMapFiles()
 		return;
 
 	// for each file in the maps folder, check it's validity and update
-	// m_mapFiles, m_mapFileNames & m_buttons if it's a valid map
+	// m_mapFiles & m_mapFileNames if it's a valid map
 	for (const auto& entry : std::filesystem::directory_iterator(mapFolder))
 		insertIfMapFile(entry.path());
 }
