@@ -14,7 +14,7 @@ public:
 	// data, size of data, offset
 	void sendData(const wchar_t*, unsigned int, unsigned int);
 	// sendDataf(ormatted)
-	// data, size of data, line, row
+	// data, size of data, row, column
 	void sendDataf(const wchar_t*, unsigned int, unsigned int, unsigned int);
 	void sendDataf(const wchar_t, unsigned int, unsigned int); // one character
 	void sendData(const wchar_t, unsigned int); // one character
