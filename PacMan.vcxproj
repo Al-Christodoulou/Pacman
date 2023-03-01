@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Windows\MessageWindow.cpp" />
     <ClCompile Include="src\MenuLists\MapMenuList.cpp" />
     <ClCompile Include="src\MapFile.cpp" />
     <ClCompile Include="src\MenuLists\MainMenuList.cpp" />
@@ -38,6 +39,7 @@
     <ClCompile Include="src\Windows\MapSelectorWindow.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Windows\MessageWindow.h" />
     <ClInclude Include="src\Engine\UniquePtrUtils.h" />
     <ClInclude Include="src\MenuLists\MapMenuList.h" />
     <ClInclude Include="src\MapFile.h" />
