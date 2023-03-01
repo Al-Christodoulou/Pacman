@@ -1,5 +1,6 @@
 #include "MapMenuList.h"
 #include "../Windows/GameWindow.h"
+#include "../Windows/MessageWindow.h"
 
 MapMenuList::MapMenuList()
 	: BaseMenuList{}
@@ -48,6 +49,15 @@ unsigned int MapMenuList::getMaxIndex()
 	return m_mapFiles.size() - 1;
 }
 
+bool MapMenuList::mapHasPlayerSpawn(const MapFile& map)
+{
+	for (const std::string& line : map.getData())
+		for (char c : line)
+			if (c == 'p')
+				return true;
+	return false;
+}
+
 void MapMenuList::handleInput()
 {
 	if (GetAsyncKeyState(L'W') & 0x1)
@@ -56,7 +66,16 @@ void MapMenuList::handleInput()
 		goDown();
 
 	if (GetAsyncKeyState(VK_RETURN) & 0x8000 && m_mapFiles.size() > 0)
-		gPacMan.getWindowMgr().pushAnyWindow<GameWindow>(m_mapFiles[getIndex()]);
+	{
+		// used for the "sv" (string_view) conversions after the quotes in
+		// pushAnyWindow<MessageWindow> below
+		using namespace std::string_view_literals;
+
+		if (mapHasPlayerSpawn(m_mapFiles[getIndex()]))
+			gPacMan.getWindowMgr().pushAnyWindow<GameWindow>(m_mapFiles[getIndex()]);
+		else
+			gPacMan.getWindowMgr().pushAnyWindow<MessageWindow>(30, 10, L"Error"sv, L"No player spawn point in map file."sv);
+	}
 }
 
 void MapMenuList::render()

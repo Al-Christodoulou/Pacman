@@ -19,6 +19,7 @@ public:
 	void readMapFiles();
 	void insertIfMapFile(const std::filesystem::path&);
 	unsigned int getMaxIndex() override;
+	bool mapHasPlayerSpawn(const MapFile& map);
 	void handleInput() override;
 	void render();
 
