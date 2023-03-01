@@ -13,6 +13,11 @@ private:
 
 public:
 	void render() override;
+	// render the horizontal content of the window (the horizontal
+	// bars and the empty space inside it)
+	void renderHorizontalCont(unsigned int, unsigned int, unsigned int);
+	void renderVertCont(unsigned int, unsigned int, unsigned int);
+	void renderText(unsigned int, unsigned int, unsigned int, unsigned int);
 	void runLogic() override;
 
 	// width, height, title, message text

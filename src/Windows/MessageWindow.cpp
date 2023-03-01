@@ -20,24 +20,38 @@ void MessageWindow::render()
 	gPacMan.sendDataf(L'\u255A', bottomLeftPosRow, topLeftPosColumn);
 	gPacMan.sendDataf(L'\u255D', bottomLeftPosRow, topRightPosColumn);
 	// the horizontal bars
+	renderHorizontalCont(topLeftPosRow, topLeftPosColumn, bottomLeftPosRow);
+	// the vertical bars
+	renderVertCont(topLeftPosRow, topLeftPosColumn, topRightPosColumn);
+	// all text rendering
+	renderText(topLeftPosRow, topLeftPosColumn, topRightPosColumn, bottomLeftPosRow);
+}
+
+void MessageWindow::renderHorizontalCont(unsigned int topLeftPosRow, unsigned int topLeftPosColumn, unsigned int bottomLeftPosRow)
+{
 	for (unsigned int i{ 1 }; i < m_width; i++)
 	{
 		gPacMan.sendDataf(L'\u2550', topLeftPosRow, topLeftPosColumn + i);
 		gPacMan.sendDataf(L'\u2550', bottomLeftPosRow, topLeftPosColumn + i);
-		
+
 		// make the insides of the message window empty
 		for (unsigned int j{ 1 }; j < m_height; j++)
 			gPacMan.sendDataf(L' ', topLeftPosRow + j, topLeftPosColumn + i);
 	}
-	// the vertical bars
+}
+
+void MessageWindow::renderVertCont(unsigned int topLeftPosRow, unsigned int topLeftPosColumn, unsigned int topRightPosColumn)
+{
 	for (unsigned int i{ 1 }; i < m_height; i++)
 	{
 		gPacMan.sendDataf(L'\u2551', topLeftPosRow + i, topLeftPosColumn);
 		gPacMan.sendDataf(L'\u2551', topLeftPosRow + i, topRightPosColumn);
 	}
+}
 
-	// all text rendering happens below, only single-line text is supported for now
-
+// only single - line text is supported for now
+void MessageWindow::renderText(unsigned int topLeftPosRow, unsigned int topLeftPosColumn, unsigned int topRightPosColumn, unsigned int bottomLeftPosRow)
+{
 	// a lambda for wrapping up offset calculations
 	auto calcOffset{ [](unsigned int row1, unsigned int row2, unsigned int txtSize) {
 		return (row1 + row2) / 2 - txtSize / 2;
@@ -56,7 +70,7 @@ void MessageWindow::render()
 	gPacMan.sendDataf(m_msg.data(), textSize, textRow, textColumn);
 
 	// the "OK" text
-	gPacMan.sendDataf(L"> OK <", 6, bottomLeftPosRow - textBorderDist, calcOffset(topLeftPosColumn, topRightPosColumn, 6) );
+	gPacMan.sendDataf(L"> OK <", 6, bottomLeftPosRow - textBorderDist, calcOffset(topLeftPosColumn, topRightPosColumn, 6));
 }
 
 void MessageWindow::runLogic()
