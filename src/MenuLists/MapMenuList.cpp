@@ -91,7 +91,10 @@ void MapMenuList::render()
 
 		// render the cursor
 		if (getIndex() == i)
+		{
 			gPacMan.sendDataf(L'>', row, column - 3);
+			gPacMan.sendDataf(L'<', row, column + mapName.size() + 3 - 1);
+		}
 		i++;
 	}
 }
