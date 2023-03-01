@@ -52,15 +52,18 @@ void MessageWindow::renderVertCont(unsigned int topLeftPosRow, unsigned int topL
 // only single - line text is supported for now
 void MessageWindow::renderText(unsigned int topLeftPosRow, unsigned int topLeftPosColumn, unsigned int topRightPosColumn, unsigned int bottomLeftPosRow)
 {
-	// a lambda for wrapping up offset calculations
-	auto calcOffset{ [](unsigned int row1, unsigned int row2, unsigned int txtSize) {
-		return (row1 + row2) / 2 - txtSize / 2;
+	// a lambda for wrapping up offset calculations. calculate the middle point between
+	// 2 columns, then adjust it for the text length (...-txtSize/2) so you get the
+	// right offset for the 1st character of the string you want to show on the window,
+	// so in the end it's oriented in the middle
+	auto calcOffset{ [](unsigned int col1, unsigned int col2, unsigned int txtSize) {
+		return (col1 + col2) / 2 - txtSize / 2;
 	} };
 
 	// the distance (+1) of the title and the OK button from the top & bottom borders
 	constexpr unsigned int textBorderDist{ 3 };
 
-	// the title
+	// the title, rendered 3 (textBorderDist) rows after the top border
 	gPacMan.sendDataf(m_title.data(), m_title.size(), topLeftPosRow + textBorderDist, calcOffset(topLeftPosColumn, topRightPosColumn, m_title.size()));
 
 	// if the text goes out of bounds, it will get cut off
@@ -69,7 +72,7 @@ void MessageWindow::renderText(unsigned int topLeftPosRow, unsigned int topLeftP
 	const unsigned int textColumn{ calcOffset(topLeftPosColumn, topRightPosColumn, textSize) };
 	gPacMan.sendDataf(m_msg.data(), textSize, textRow, textColumn);
 
-	// the "OK" text
+	// the "OK" text, rendered 3 (textBorderDist) rows before the bottom border
 	gPacMan.sendDataf(L"> OK <", 6, bottomLeftPosRow - textBorderDist, calcOffset(topLeftPosColumn, topRightPosColumn, 6));
 }
 
