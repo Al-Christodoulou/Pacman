@@ -84,6 +84,9 @@
     <ClCompile Include="src\Windows\MapSelectorWindow.cpp">
       <Filter>Source Files\Windows</Filter>
     </ClCompile>
+    <ClCompile Include="src\Windows\MessageWindow.cpp">
+      <Filter>Source Files\Windows</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\PacMan.h">
@@ -145,6 +148,9 @@
     </ClInclude>
     <ClInclude Include="src\Engine\UniquePtrUtils.h">
       <Filter>Header Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Windows\MessageWindow.h">
+      <Filter>Header Files\Windows</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
