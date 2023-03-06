@@ -1,4 +1,5 @@
 #include <Windows.h>
+#include <cmath>
 #include "MessageWindow.h"
 #include "../PacMan.h"
 
@@ -49,7 +50,6 @@ void MessageWindow::renderVertCont(unsigned int topLeftPosRow, unsigned int topL
 	}
 }
 
-// only single - line text is supported for now
 void MessageWindow::renderText(unsigned int topLeftPosRow, unsigned int topLeftPosColumn, unsigned int topRightPosColumn, unsigned int bottomLeftPosRow)
 {
 	// a lambda for wrapping up offset calculations. calculate the middle point between
@@ -61,16 +61,27 @@ void MessageWindow::renderText(unsigned int topLeftPosRow, unsigned int topLeftP
 	} };
 
 	// the distance (+1) of the title and the OK button from the top & bottom borders
-	constexpr unsigned int textBorderDist{ 3 };
+	constexpr unsigned int textBorderDist{ 2 };
 
 	// the title, rendered 3 (textBorderDist) rows after the top border
 	gPacMan.sendDataf(m_title.data(), m_title.size(), topLeftPosRow + textBorderDist, calcOffset(topLeftPosColumn, topRightPosColumn, m_title.size()));
 
-	// if the text goes out of bounds, it will get cut off
-	const unsigned int textSize{ m_msg.size() > m_width ? m_width - 1 : m_msg.size() };
-	const unsigned int textRow{ calcOffset(topLeftPosRow, bottomLeftPosRow, 0) };
-	const unsigned int textColumn{ calcOffset(topLeftPosColumn, topRightPosColumn, textSize) };
-	gPacMan.sendDataf(m_msg.data(), textSize, textRow, textColumn);
+	unsigned int linesNeeded{ static_cast<unsigned int>(
+		std::ceil(static_cast<float>(m_msg.size()) / m_width)
+	)};
+
+	for (unsigned int i{ 0 }; i < linesNeeded; i++)
+	{
+		const unsigned int textSize{
+			i == linesNeeded - 1 ?
+			m_msg.size() - (linesNeeded - 1) * (m_width - 1):
+			m_width - 1
+		};
+		const unsigned int textRow{ topLeftPosRow + textBorderDist * 2 + i };
+		const unsigned int textColumn{ calcOffset(topLeftPosColumn, topRightPosColumn, textSize) };
+
+		gPacMan.sendDataf(m_msg.data() + (m_width - 1) * i, textSize, textRow, textColumn);
+	}
 
 	// the "OK" text, rendered 3 (textBorderDist) rows before the bottom border
 	gPacMan.sendDataf(L"> OK <", 6, bottomLeftPosRow - textBorderDist, calcOffset(topLeftPosColumn, topRightPosColumn, 6));
