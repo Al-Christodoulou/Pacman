@@ -10,17 +10,16 @@ void WindowMgr::update()
 {
 	// first make sure to pop any windows that are
 	// marked for termination
-	while (m_windowStack.back().get()->doTerminate())
-	//while (m_windowStack.top().get().doTerminate())
+	while (m_windowStack.back()->doTerminate())
 		m_windowStack.pop_back();
 
 	// all the windows will get rendered, from bottom to top
 	for (size_t i{ 0 }; i < m_windowStack.size(); i++)
 	{
-		m_windowStack[i].get()->render();
+		m_windowStack[i]->render();
 	}
 	// but only the last one will have its logic run
-	m_windowStack.back().get()->runLogic();
+	m_windowStack.back()->runLogic();
 }
 
 const EntityMgr* const WindowMgr::tryGetEntMgr() const
