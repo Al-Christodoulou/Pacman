@@ -51,6 +51,16 @@ void PacMan::swprintf_s(size_t _BufferCount, const wchar_t* _Format, ...)
 	va_end(args);
 }
 
+bool PacMan::isKeyTapped(wchar_t key)
+{
+	return m_engine.isKeyTapped(key);
+}
+
+bool PacMan::isKeyHeld(wchar_t key)
+{
+	return m_engine.isKeyHeld(key);
+}
+
 void PacMan::run()
 {
 	// start the game with the game window for now
@@ -61,6 +71,7 @@ void PacMan::run()
 	{
 		//Sleep(20);
 		Engine::tick();
+		m_engine.updateKeyStates();
 		m_windowMgr.update();
 		m_engine.renderScreen(m_screen);
 	}
