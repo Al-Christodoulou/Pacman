@@ -27,6 +27,10 @@ public:
 	}
 	void swprintf_s(size_t, const wchar_t*, ...);
 
+	// wrappers for Engine::isKeyTapped & Engine::isKeyHeld
+	bool isKeyTapped(wchar_t);
+	bool isKeyHeld(wchar_t);
+
 	void run();
 	WindowMgr& getWindowMgr();
 

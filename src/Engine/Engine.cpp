@@ -39,6 +39,36 @@ float Engine::getDeltaTime()
 	return sDeltaTime;
 }
 
+void Engine::updateKeyStates()
+{
+	// TODO: if someone passes a lowercase letter to isKeyTapped
+	// or isKeyHeld, there may be a problem, since the virtual
+	// key codes for letters are all capitalized
+	for (int i{ 0 }; i < 255; i++)
+	{
+		if (GetAsyncKeyState(i) & 0x8000)
+		{
+			if (m_keyStates.m_isHeld[i])
+				m_keyStates.m_isTapped[i] = false;
+			else
+				m_keyStates.m_isTapped[i] = true;
+			m_keyStates.m_isHeld[i] = true;
+		}
+		else
+			m_keyStates.m_isHeld[i] = false;
+	}
+}
+
+bool Engine::isKeyTapped(wchar_t key)
+{
+	return m_keyStates.m_isTapped[static_cast<int>(key)];
+}
+
+bool Engine::isKeyHeld(wchar_t key)
+{
+	return m_keyStates.m_isHeld[static_cast<int>(key)];
+}
+
 void Engine::renderScreen(wchar_t* data)
 {
 	DWORD dwBytesWritten{};

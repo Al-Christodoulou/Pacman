@@ -65,7 +65,8 @@ void MapMenuList::handleInput()
 	else if (GetAsyncKeyState(L'S') & 0x1)
 		goDown();
 
-	if (GetAsyncKeyState(VK_RETURN) & 0x8000 && m_mapFiles.size() > 0)
+	//if (GetAsyncKeyState(VK_RETURN) & 0x8000 && m_mapFiles.size() > 0)
+	if (gPacMan.isKeyTapped(VK_RETURN) && m_mapFiles.size() > 0)
 	{
 		// used for the "sv" (string_view) conversions after the quotes in
 		// pushAnyWindow<MessageWindow> below
