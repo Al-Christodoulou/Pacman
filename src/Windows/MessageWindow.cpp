@@ -89,7 +89,7 @@ void MessageWindow::renderText(unsigned int topLeftPosRow, unsigned int topLeftP
 
 void MessageWindow::runLogic()
 {
-	if (GetAsyncKeyState(VK_RETURN) & 0x8000)
+	if (gPacMan.isKeyTapped(VK_RETURN))
 		m_state_terminate = true;
 }
 

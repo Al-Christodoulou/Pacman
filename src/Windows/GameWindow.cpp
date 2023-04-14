@@ -31,7 +31,7 @@ void GameWindow::runLogic()
 
 	// if the player presses escape, the GameWindow will terminate and we go back to the
 	// main menu
-	if (GetAsyncKeyState(VK_ESCAPE) & 0x1)
+	if (gPacMan.isKeyTapped(VK_ESCAPE))
 		m_state_terminate = true;
 }
 
