@@ -51,6 +51,15 @@ void PacMan::swprintf_s(size_t _BufferCount, const wchar_t* _Format, ...)
 	va_end(args);
 }
 
+// same as above, but with an offset
+void PacMan::swprintf_s(unsigned int offset, size_t _BufferCount, const wchar_t* _Format, ...)
+{
+	va_list args;
+	va_start(args, _Format);
+	::vswprintf_s(m_screen + offset, _BufferCount, _Format, args);
+	va_end(args);
+}
+
 bool PacMan::isKeyTapped(wchar_t key)
 {
 	return m_engine.isKeyTapped(key);

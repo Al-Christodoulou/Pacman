@@ -12,6 +12,7 @@ void GameWindow::render()
 	renderAllEntities();
 
 	gPacMan.swprintf_s(25, L"X: %.3f, Y: %.2f", m_player->getVirtualX(), m_player->getVirtualY());
+	gPacMan.swprintf_s(gScreenWidth, 30, L"DT: %f", Engine::getDeltaTime());
 }
 
 void GameWindow::runLogic()
@@ -22,11 +23,6 @@ void GameWindow::runLogic()
 		if (entPtr->getEntType() == EntityType::Character)
 			static_cast<Character&>(*entPtr).think();
 	}
-
-	/*swprintf_s(m_screen, 40, L"X: %f, Y: %f",
-		player->getVirtualX(), player->getVirtualY()
-	);
-	swprintf_s(m_screen + gScreenWidth, 30, L"DT: %f", m_engine.getDeltaTime());*/
 
 	// if the player presses escape, the GameWindow will terminate and we go back to the
 	// main menu

@@ -26,6 +26,7 @@ public:
 			sendDataf(data[i], Cols, row + i, column);
 	}
 	void swprintf_s(size_t, const wchar_t*, ...);
+	void swprintf_s(unsigned int, size_t, const wchar_t*, ...);
 
 	// wrappers for Engine::isKeyTapped & Engine::isKeyHeld
 	bool isKeyTapped(wchar_t);
