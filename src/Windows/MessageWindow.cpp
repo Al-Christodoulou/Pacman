@@ -78,7 +78,9 @@ void MessageWindow::renderText(unsigned int topLeftPosRow, unsigned int topLeftP
 			m_width - 1
 		};
 		const unsigned int textRow{ topLeftPosRow + textBorderDist * 2 + i };
-		const unsigned int textColumn{ calcOffset(topLeftPosColumn, topRightPosColumn, textSize) };
+		// it's topLeftPosColumn + 1 so it goes one block right from the border. i don't understand
+		// why this isn't an issue with topRightPosColumn, maybe it's textSize limiting it?
+		const unsigned int textColumn{ calcOffset(topLeftPosColumn + 1, topRightPosColumn, textSize) };
 
 		gPacMan.sendDataf(m_msg.data() + (m_width - 1) * i, textSize, textRow, textColumn);
 	}
