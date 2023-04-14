@@ -39,34 +39,38 @@ float Engine::getDeltaTime()
 	return sDeltaTime;
 }
 
-void Engine::updateKeyStates()
+void Engine::updateKeyState(int index)
 {
 	// TODO: if someone passes a lowercase letter to isKeyTapped
 	// or isKeyHeld, there may be a problem, since the virtual
 	// key codes for letters are all capitalized
-	for (int i{ 0 }; i < 255; i++)
+	if (GetKeyState(index) & 0x8000)
 	{
-		if (GetAsyncKeyState(i) & 0x8000)
-		{
-			if (m_keyStates.m_isHeld[i])
-				m_keyStates.m_isTapped[i] = false;
-			else
-				m_keyStates.m_isTapped[i] = true;
-			m_keyStates.m_isHeld[i] = true;
-		}
+		if (m_keyStates.m_isHeld[index])
+			m_keyStates.m_isTapped[index] = false;
 		else
-			m_keyStates.m_isHeld[i] = false;
+			m_keyStates.m_isTapped[index] = true;
+		m_keyStates.m_isHeld[index] = true;
+	}
+	else
+	{
+		m_keyStates.m_isTapped[index] = false;
+		m_keyStates.m_isHeld[index] = false;
 	}
 }
 
 bool Engine::isKeyTapped(wchar_t key)
 {
-	return m_keyStates.m_isTapped[static_cast<int>(key)];
+	int index{ static_cast<int>(key) };
+	updateKeyState(index);
+	return m_keyStates.m_isTapped[index];
 }
 
 bool Engine::isKeyHeld(wchar_t key)
 {
-	return m_keyStates.m_isHeld[static_cast<int>(key)];
+	int index{ static_cast<int>(key) };
+	updateKeyState(index);
+	return m_keyStates.m_isHeld[index];
 }
 
 void Engine::renderScreen(wchar_t* data)

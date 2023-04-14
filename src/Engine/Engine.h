@@ -25,7 +25,7 @@ private:
 public:
 	static void tick();
 	static float getDeltaTime();
-	void updateKeyStates();
+	void updateKeyState(int);
 	bool isKeyTapped(wchar_t);
 	bool isKeyHeld(wchar_t);
 	void renderScreen(wchar_t*);

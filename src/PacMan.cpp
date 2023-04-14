@@ -63,15 +63,12 @@ bool PacMan::isKeyHeld(wchar_t key)
 
 void PacMan::run()
 {
-	// start the game with the game window for now
-	//m_windowMgr.pushGameWindow();
 	m_windowMgr.pushAnyWindow<MainMenuWindow>();
 
 	while (true)
 	{
 		//Sleep(20);
 		Engine::tick();
-		m_engine.updateKeyStates();
 		m_windowMgr.update();
 		m_engine.renderScreen(m_screen);
 	}

@@ -60,9 +60,11 @@ bool MapMenuList::mapHasPlayerSpawn(const MapFile& map)
 
 void MapMenuList::handleInput()
 {
-	if (GetAsyncKeyState(L'W') & 0x1)
+	//if (GetAsyncKeyState(L'W') & 0x1)
+	if (gPacMan.isKeyTapped(L'W'))
 		goUp();
-	else if (GetAsyncKeyState(L'S') & 0x1)
+	//else if (GetAsyncKeyState(L'S') & 0x1)
+	else if (gPacMan.isKeyTapped(L'S'))
 		goDown();
 
 	//if (GetAsyncKeyState(VK_RETURN) & 0x8000 && m_mapFiles.size() > 0)
@@ -71,7 +73,7 @@ void MapMenuList::handleInput()
 		// used for the "sv" (string_view) conversions after the quotes in
 		// pushAnyWindow<MessageWindow> below
 		using namespace std::string_view_literals;
-
+		
 		if (mapHasPlayerSpawn(m_mapFiles[getIndex()]))
 			gPacMan.getWindowMgr().pushAnyWindow<GameWindow>(m_mapFiles[getIndex()]);
 		else
