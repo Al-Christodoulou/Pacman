@@ -79,9 +79,7 @@ void GameWindow::renderAllEntities()
 	{
 		const Entity* curEnt{ m_entMgr.getEntity(i) };
 		if (curEnt)
-			if (curEnt->getPos() <= gScreenTotalPxs)
-				//m_screen[curEnt->getPos()] = curEnt->getTex();
-				gPacMan.sendData(curEnt->getTex(), curEnt->getPos());
+			gPacMan.sendData(curEnt->getTex(), curEnt->getPos());
 	}
 }
 
