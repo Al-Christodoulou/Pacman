@@ -1,15 +1,16 @@
 #include <Windows.h>
+#include "PacMan.h"
 #include "Player.h"
 
 void Player::think()
 {
-	if (GetAsyncKeyState(L'W') & 0x8000)
+	if (gPacMan.isKeyHeld(L'W'))
 		moveUp();
-	if (GetAsyncKeyState(L'A') & 0x8000)
+	if (gPacMan.isKeyHeld(L'A'))
 		moveLeft();
-	if (GetAsyncKeyState(L'S') & 0x8000)
+	if (gPacMan.isKeyHeld(L'S'))
 		moveDown();
-	if (GetAsyncKeyState(L'D') & 0x8000)
+	if (gPacMan.isKeyHeld(L'D'))
 		moveRight();
 }
 
