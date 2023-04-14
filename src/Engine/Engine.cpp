@@ -46,11 +46,12 @@ void Engine::updateKeyState(int index)
 	// key codes for letters are all capitalized
 	if (GetKeyState(index) & 0x8000)
 	{
-		if (m_keyStates.m_isHeld[index])
-			m_keyStates.m_isTapped[index] = false;
-		else
+		m_keyStates.m_isTapped[index] = false;
+		if (!m_keyStates.m_isHeld[index])
+		{
+			m_keyStates.m_isHeld[index] = true;
 			m_keyStates.m_isTapped[index] = true;
-		m_keyStates.m_isHeld[index] = true;
+		}
 	}
 	else
 	{
