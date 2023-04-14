@@ -19,9 +19,8 @@ void GameWindow::runLogic()
 	// make all characters think
 	for (std::unique_ptr<Entity>& entPtr : m_entMgr.getEntities())
 	{
-		Entity* rawEntPtr{ entPtr.get() };
-		if (rawEntPtr->getEntType() == EntityType::Character)
-			static_cast<Character*>(rawEntPtr)->think();
+		if (entPtr->getEntType() == EntityType::Character)
+			static_cast<Character&>(*entPtr).think();
 	}
 
 	/*swprintf_s(m_screen, 40, L"X: %f, Y: %f",
