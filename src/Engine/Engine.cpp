@@ -42,8 +42,8 @@ float Engine::getDeltaTime()
 void Engine::updateKeyState(int index)
 {
 	// TODO: if someone passes a lowercase letter to isKeyTapped
-	// or isKeyHeld, there may be a problem, since the virtual
-	// key codes for letters are all capitalized
+	// or isKeyHeld, this won't work, since the virtual key codes
+	// for letters are all the capitalized ASCII letters
 	if (GetKeyState(index) & 0x8000)
 	{
 		m_keyStates.m_isTapped[index] = false;
