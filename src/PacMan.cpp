@@ -78,7 +78,8 @@ void PacMan::run()
 	{
 		//Sleep(20);
 		Engine::tick();
-		m_windowMgr.update();
+		if (!m_windowMgr.update())
+			break;
 		m_engine.renderScreen(m_screen);
 	}
 }

@@ -6,12 +6,16 @@
 // yet another forward declaration
 class MapFile;
 
-void WindowMgr::update()
+bool WindowMgr::update()
 {
 	// first make sure to pop any windows that are
 	// marked for termination
 	while (m_windowStack.back()->doTerminate())
+	{
 		m_windowStack.pop_back();
+		if (m_windowStack.empty())
+			return false;
+	}
 
 	// all the windows will get rendered, from bottom to top
 	for (size_t i{ 0 }; i < m_windowStack.size(); i++)
@@ -20,6 +24,7 @@ void WindowMgr::update()
 	}
 	// but only the last one will have its logic run
 	m_windowStack.back()->runLogic();
+	return true;
 }
 
 const EntityMgr* const WindowMgr::tryGetEntMgr() const

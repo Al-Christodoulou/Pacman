@@ -16,7 +16,8 @@ private:
 	WindowStack_t m_windowStack{};
 
 public:
-	void update();
+	// returns false if there's nothing to update (no windows)
+	bool update();
 
 	template <typename WinType, typename... Args>
 	void pushAnyWindow(Args... args)
