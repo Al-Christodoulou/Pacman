@@ -1,6 +1,7 @@
 #include "MapSelectorWindow.h"
 #include "GameWindow.h"
 #include "MessageWindow.h"
+#include "MainMenuWindow.h"
 #include "../MapFile.h"
 #include "../PacMan.h"
 
@@ -43,6 +44,11 @@ void MapSelectorWindow::runLogic()
 			gPacMan.getWindowMgr().pushAnyWindow<GameWindow>(m_mapFiles[m_menuIndex]);
 		else
 			gPacMan.getWindowMgr().pushAnyWindow<MessageWindow>(31, 10, L"Error"sv, L"No player spawn point in map file."sv);
+	}
+	else if (gPacMan.isKeyTapped(VK_ESCAPE))
+	{
+		m_state_terminate = true;
+		gPacMan.getWindowMgr().pushAnyWindow<MainMenuWindow>();
 	}
 }
 

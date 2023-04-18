@@ -72,9 +72,9 @@ void MainMenuWindow::runLogic()
 			gPacMan.getWindowMgr().pushAnyWindow<MapSelectorWindow>();
 			break;
 		case 1: // exit
-			m_state_terminate = true;
 			break;
 		}
+		m_state_terminate = true;
 	}
 }
 
