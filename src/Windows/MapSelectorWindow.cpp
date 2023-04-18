@@ -46,9 +46,8 @@ void MapSelectorWindow::runLogic()
 	}
 }
 
-std::wstring MapSelectorWindow::removeExtension(const wchar_t* inPath)
+std::wstring MapSelectorWindow::removeExtension(const std::wstring& path)
 {
-	std::wstring path{ inPath };
 	return path.substr(0, path.find_last_of(L'.'));
 }
 
@@ -83,7 +82,7 @@ void MapSelectorWindow::insertIfMapFile(const std::filesystem::path& mapPath)
 		return;
 
 	m_mapFiles.push_back(mapFile);
-	m_mapFileNames.push_back(removeExtension(mapPath.filename().c_str()));
+	m_mapFileNames.push_back(removeExtension(mapPath.filename().wstring()));
 	m_menuIndex.incUpperBound();
 }
 
