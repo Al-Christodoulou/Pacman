@@ -19,6 +19,7 @@ public:
 	CustomInt(int lowerBound, int upperBound, int startingValue)
 		: CustomInt(lowerBound, upperBound)
 	{
+		assert(startingValue >= m_lowerBound && startingValue <= m_upperBound);
 		m_index = startingValue;
 	}
 
@@ -28,6 +29,7 @@ public:
 			m_index = m_lowerBound;
 		else
 			++m_index;
+		assert(m_index >= m_lowerBound && m_index <= m_upperBound);
 		return *this;
 	}
 
@@ -44,6 +46,7 @@ public:
 			m_index = m_upperBound;
 		else
 			--m_index;
+		assert(m_index >= m_lowerBound && m_index <= m_upperBound);
 		return *this;
 	}
 
@@ -59,6 +62,14 @@ public:
 		return m_index;
 	}
 
-	void incUpperBound() { ++m_upperBound; }
-	void decUpperBound() { --m_upperBound; }
+	void incUpperBound()
+	{
+		assert(m_lowerBound <= m_upperBound + 1);
+		++m_upperBound;
+	}
+	void decUpperBound()
+	{
+		assert(m_lowerBound <= m_upperBound - 1);
+		--m_upperBound;
+	}
 };
