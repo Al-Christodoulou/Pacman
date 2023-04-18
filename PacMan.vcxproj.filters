@@ -110,9 +110,6 @@
     <ClInclude Include="src\Engine\Engine.h">
       <Filter>Header Files\Engine</Filter>
     </ClInclude>
-    <ClInclude Include="src\Engine\BaseMenuList.h">
-      <Filter>Header Files\Engine</Filter>
-    </ClInclude>
     <ClInclude Include="src\Engine\Random.h">
       <Filter>Header Files\Engine</Filter>
     </ClInclude>
