@@ -12,7 +12,7 @@ public:
 	CustomInt(int lowerBound, int upperBound)
 		: m_lowerBound{ lowerBound }, m_upperBound{ upperBound }
 	{
-		assert(lowerBound < upperBound);
+		assert(lowerBound <= upperBound);
 		m_index = m_lowerBound;
 	}
 
