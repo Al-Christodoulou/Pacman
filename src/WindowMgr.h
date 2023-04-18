@@ -2,11 +2,11 @@
 #include "Engine/Window.h"
 #include "Engine/UniquePtrUtils.h"
 #include "WindowTypes.h"
-#include <vector>
+#include <list>
 #include <memory>
 
 using PacmanWindow = Window<WindowType>;
-using WindowStack_t = std::vector<std::unique_ptr<PacmanWindow>>;
+using WindowStack_t = std::list<std::unique_ptr<PacmanWindow>>;
 class EntityMgr; // forward declare the class to avoid includes
 class MapFile;
 

@@ -8,22 +8,23 @@ class MapFile;
 
 bool WindowMgr::update()
 {
-	// first make sure to pop any windows that are
-	// marked for termination
-	while (m_windowStack.back()->doTerminate())
-	{
-		m_windowStack.pop_back();
-		if (m_windowStack.empty())
-			return false;
-	}
+	if (m_windowStack.empty())
+		return false;
 
-	// all the windows will get rendered, from bottom to top
-	for (size_t i{ 0 }; i < m_windowStack.size(); i++)
+	auto iter{ m_windowStack.begin() };
+	while (iter != m_windowStack.end())
 	{
-		m_windowStack[i]->render();
+		if ((*iter)->doTerminate())
+			iter = m_windowStack.erase(iter);
+		else // all the windows will get rendered, from bottom to top
+			(*iter)->render();
+
+		if (iter != m_windowStack.end())
+			++iter;
 	}
-	// but only the last one will have its logic run
-	m_windowStack.back()->runLogic();
+	if (m_windowStack.empty())
+		return false;
+	m_windowStack.back()->runLogic(); // but only the last one will have its logic run
 	return true;
 }
 
@@ -32,8 +33,7 @@ const EntityMgr* const WindowMgr::tryGetEntMgr() const
 	if (m_windowStack.empty())
 		return nullptr;
 
-	const PacmanWindow* topWindow{ m_windowStack.back().get() };
-	return topWindow->getWindowType() == WindowType::GameWindow ?
-		&static_cast<const GameWindow*>(topWindow)->getEntMgr() :
+	return m_windowStack.back()->getWindowType() == WindowType::GameWindow ?
+		&static_cast<const GameWindow*>(m_windowStack.back().get())->getEntMgr() :
 		nullptr;
 }
