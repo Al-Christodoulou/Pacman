@@ -25,12 +25,6 @@
     <Filter Include="Source Files\Engine">
       <UniqueIdentifier>{b599c442-f488-433a-bec2-0ba236daa261}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\MenuLists">
-      <UniqueIdentifier>{dccdba4d-7d96-42bc-b1c8-d3bad0554505}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\MenuLists">
-      <UniqueIdentifier>{9c587fc5-2030-482c-bed8-9349da324a65}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Main.cpp">
@@ -74,9 +68,6 @@
     </ClCompile>
     <ClCompile Include="src\MapFile.cpp">
       <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\MenuLists\MapMenuList.cpp">
-      <Filter>Source Files\MenuLists</Filter>
     </ClCompile>
     <ClCompile Include="src\Windows\MapSelectorWindow.cpp">
       <Filter>Source Files\Windows</Filter>
@@ -133,9 +124,6 @@
     </ClInclude>
     <ClInclude Include="src\MapFile.h">
       <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\MenuLists\MapMenuList.h">
-      <Filter>Header Files\MenuLists</Filter>
     </ClInclude>
     <ClInclude Include="src\Windows\MapSelectorWindow.h">
       <Filter>Header Files\Windows</Filter>
