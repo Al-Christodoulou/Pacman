@@ -20,7 +20,7 @@ public:
 	void render() override;
 	void runLogic() override;
 
-	std::wstring removeExtension(const wchar_t*);
+	std::wstring removeExtension(const std::wstring&);
 	void readMapFiles();
 	void insertIfMapFile(const std::filesystem::path&);
 	bool mapHasPlayerSpawn(const MapFile& map);
