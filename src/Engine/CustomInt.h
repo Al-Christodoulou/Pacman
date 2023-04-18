@@ -58,4 +58,7 @@ public:
 	{
 		return m_index;
 	}
+
+	void incUpperBound() { ++m_upperBound; }
+	void decUpperBound() { --m_upperBound; }
 };
