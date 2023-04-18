@@ -22,7 +22,6 @@
     <ClCompile Include="src\Windows\MessageWindow.cpp" />
     <ClCompile Include="src\MenuLists\MapMenuList.cpp" />
     <ClCompile Include="src\MapFile.cpp" />
-    <ClCompile Include="src\MenuLists\MainMenuList.cpp" />
     <ClCompile Include="src\Windows\MainMenuWindow.cpp" />
     <ClCompile Include="src\Windows\GameWindow.cpp" />
     <ClCompile Include="src\Ghost.cpp" />
@@ -44,7 +43,6 @@
     <ClInclude Include="src\Engine\UniquePtrUtils.h" />
     <ClInclude Include="src\MenuLists\MapMenuList.h" />
     <ClInclude Include="src\MapFile.h" />
-    <ClInclude Include="src\MenuLists\MainMenuList.h" />
     <ClInclude Include="src\Engine\BaseMenuList.h" />
     <ClInclude Include="src\Windows\MainMenuWindow.h" />
     <ClInclude Include="src\Windows\GameWindow.h" />
