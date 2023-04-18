@@ -1,16 +1,29 @@
 #pragma once
-#include "../Engine/Window.h"
+#include <string>
+#include <filesystem>
 #include "../WindowTypes.h"
-#include "../MenuLists/MapMenuList.h"
+#include "../Engine/Window.h"
+#include "../Engine/CustomInt.h"
+
+// forward declare the class to avoid more includes
+class MapFile;
 
 class MapSelectorWindow : public Window<WindowType>
 {
 private:
-	MapMenuList m_mapMenuList{};
+	std::vector<MapFile> m_mapFiles{};
+	// maybe temporary
+	std::vector<std::wstring> m_mapFileNames{};
 
+	CustomInt m_menuIndex{ 0, 0 };
 public:
 	void render() override;
 	void runLogic() override;
+
+	std::wstring removeExtension(const wchar_t*);
+	void readMapFiles();
+	void insertIfMapFile(const std::filesystem::path&);
+	bool mapHasPlayerSpawn(const MapFile& map);
 
 	MapSelectorWindow();
 };
