@@ -28,6 +28,7 @@ public:
 			m_index = m_lowerBound;
 		else
 			++m_index;
+		return *this;
 	}
 
 	CustomInt operator++(int)
@@ -43,6 +44,7 @@ public:
 			m_index = m_upperBound;
 		else
 			--m_index;
+		return *this;
 	}
 
 	CustomInt operator--(int)
