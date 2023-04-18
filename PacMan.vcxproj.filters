@@ -152,5 +152,8 @@
     <ClInclude Include="src\Windows\MessageWindow.h">
       <Filter>Header Files\Windows</Filter>
     </ClInclude>
+    <ClInclude Include="src\Engine\CustomInt.h">
+      <Filter>Header Files\Engine</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
