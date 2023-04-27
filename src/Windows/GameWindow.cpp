@@ -32,22 +32,6 @@ void GameWindow::runLogic()
 
 void GameWindow::initEntities(const MapFile& mapFile)
 {
-	/*m_player = m_entMgr.createPlayer(gScreenWidth / 2, gScreenHeight / 2, 0x555);
-
-	//for (int i{ 0 }; i < 50; i++)
-	//	m_entMgr.createEnt(Random::get(0, gScreenWidth), Random::get(0, gScreenHeight), L'#');
-	m_entMgr.createEnt((gScreenWidth / 2), (gScreenHeight / 2) - 4, L'#');
-	m_entMgr.createEnt((gScreenWidth / 2) - 1, (gScreenHeight / 2) - 4, L'#');
-	m_entMgr.createEnt((gScreenWidth / 2) + 1, (gScreenHeight / 2) - 4, L'#');
-
-	m_entMgr.createEnt((gScreenWidth / 2), (gScreenHeight / 2) - 3, L'#');
-	m_entMgr.createEnt((gScreenWidth / 2) - 1, (gScreenHeight / 2) - 3, L'#');
-	m_entMgr.createEnt((gScreenWidth / 2) + 1, (gScreenHeight / 2) - 3, L'#');
-
-	m_entMgr.createEntSpecification<WanderingLouse>
-		((gScreenWidth / 2) - 3, (gScreenHeight / 2) - 5);
-	m_entMgr.createEntSpecification<Ghost>
-		((gScreenWidth / 2) - 5, (gScreenHeight - 2));*/
 	const MapDataArray& mapDat{ mapFile.getData() };
 	// iterate through all the std::strings
 	for (size_t i{ 0 }; i < mapDat.size(); i++)
