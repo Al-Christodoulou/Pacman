@@ -37,6 +37,7 @@
     <ClCompile Include="src\Windows\MapSelectorWindow.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Constants.h" />
     <ClInclude Include="src\Engine\CustomInt.h" />
     <ClInclude Include="src\Windows\MessageWindow.h" />
     <ClInclude Include="src\Engine\UniquePtrUtils.h" />

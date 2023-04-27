@@ -48,7 +48,7 @@ bool Character::isXBorderColliding()
 bool Character::isYBorderColliding()
 {
 	return m_y < 0 ||
-		static_cast<unsigned int>(m_y) >= gScreenHeight;
+		static_cast<unsigned int>(m_y) >= gPlayableSpaceHeight;
 }
 
 float Character::getSpeed() { return m_speed; }

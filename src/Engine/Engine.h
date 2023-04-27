@@ -1,10 +1,7 @@
 #pragma once
 #include <chrono>
 #include <Windows.h>
-
-constexpr unsigned int gScreenWidth{ 120 };
-constexpr unsigned int gScreenHeight{ 40 };
-constexpr unsigned int gScreenTotalPxs{ gScreenWidth * gScreenHeight };
+#include "../Constants.h"
 
 using timep_t = std::chrono::system_clock::time_point;
 
