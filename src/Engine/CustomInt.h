@@ -67,9 +67,13 @@ public:
 		assert(m_lowerBound <= m_upperBound + 1);
 		++m_upperBound;
 	}
+
 	void decUpperBound()
 	{
 		assert(m_lowerBound <= m_upperBound - 1);
 		--m_upperBound;
 	}
+
+	int getLowerBound() const { return m_lowerBound; }
+	int getUpperBound() const { return m_upperBound; }
 };

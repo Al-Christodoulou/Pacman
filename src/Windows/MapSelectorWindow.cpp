@@ -29,6 +29,15 @@ void MapSelectorWindow::render()
 
 void MapSelectorWindow::runLogic()
 {
+	// if there's no maps available
+	if (m_mapFiles.size() == 0)
+	{
+		m_state_terminate = true;
+		gPacMan.getWindowMgr().pushAnyWindow<MainMenuWindow>();
+		gPacMan.getWindowMgr().pushAnyWindow<MessageWindow>(21, 10, L"Error", L"No maps available!");
+		return;
+	}
+
 	if (gPacMan.isKeyTapped(L'W'))
 		--m_menuIndex;
 	else if (gPacMan.isKeyTapped(L'S'))
@@ -73,8 +82,10 @@ void MapSelectorWindow::readMapFiles()
 		insertIfMapFile(entry.path());
 	// decrement the upper bound by 1 since the menu index has one more slot
 	// than the map list because it begins with 0, whereas the map list vector
-	// starts empty
-	m_menuIndex.decUpperBound();
+	// starts empty. if no map files were inserted by insertIfMapFile, then don't
+	// decrement anything.
+	if (m_menuIndex.getUpperBound() > 0)
+		m_menuIndex.decUpperBound();
 }
 
 void MapSelectorWindow::insertIfMapFile(const std::filesystem::path& mapPath)
