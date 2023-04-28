@@ -1,5 +1,6 @@
 #pragma once
 #include "PacMan.h"
+#include <string>
 #include <array>
 
 using MapDataArray = std::array<std::string, gScreenHeight>;
