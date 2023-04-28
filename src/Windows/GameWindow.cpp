@@ -11,17 +11,39 @@ void GameWindow::render()
 	gPacMan.fillscreen(L' ');
 	renderAllEntities();
 
-	gPacMan.swprintf_s(25, L"X: %.3f, Y: %.2f", m_player->getVirtualX(), m_player->getVirtualY());
-	gPacMan.swprintf_s(gScreenWidth, 30, L"DT: %f", Engine::getDeltaTime());
+	switch (m_gameState)
+	{
+	case GameState::FreezeTime:
+		gPacMan.swprintf_s(cSecondsTextOffset, 20, L"%.0f", cFreezeTime - m_gameTime);
+		break;
+	case GameState::Playing:
+		gPacMan.swprintf_s(cPlayerLivesTextOffset, 15, L"Lives: %d", 2);
+		gPacMan.swprintf_s(25, L"X: %.3f, Y: %.2f", m_player->getVirtualX(), m_player->getVirtualY());
+		gPacMan.swprintf_s(gScreenWidth, 30, L"DT: %f", Engine::getDeltaTime());
+		break;
+	}
 }
 
 void GameWindow::runLogic()
 {
-	// make all characters think
-	for (std::unique_ptr<Entity>& entPtr : m_entMgr.getEntities())
+	m_gameTime += Engine::getDeltaTime();
+
+	switch (m_gameState)
 	{
-		if (entPtr->getEntType() == EntityType::Character)
-			static_cast<Character&>(*entPtr).think();
+	case GameState::FreezeTime:
+		if (cFreezeTime - m_gameTime < 0)
+			m_gameState = GameState::Playing;
+		break;
+	case GameState::Playing:
+		// make all characters think
+		for (std::unique_ptr<Entity>& entPtr : m_entMgr.getEntities())
+		{
+			if (entPtr->getEntType() == EntityType::Character)
+				static_cast<Character&>(*entPtr).think();
+		}
+		break;
+	case GameState::PlayerDead:
+		break;
 	}
 
 	// if the player presses escape, the GameWindow will terminate and we go back to the
