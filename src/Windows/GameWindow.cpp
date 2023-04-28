@@ -54,9 +54,9 @@ void GameWindow::runLogic()
 		m_state_terminate = true;
 }
 
-void GameWindow::initEntities(const MapFile& mapFile)
+void GameWindow::initEntities(unsigned int plNumOfLives)
 {
-	const MapDataArray& mapDat{ mapFile.getData() };
+	const MapDataArray& mapDat{ m_mapFile.getData() };
 	// iterate through all the std::strings
 	for (size_t i{ 0 }; i < mapDat.size(); i++)
 	{
@@ -69,7 +69,7 @@ void GameWindow::initEntities(const MapFile& mapFile)
 				m_entMgr.createEnt(j, i, '#');
 				break;
 			case 'p': // player spawn point
-				m_player = m_entMgr.createCharacter<Player>(j, i, static_cast<wchar_t>(0x555));
+				m_player = m_entMgr.createCharacter<Player>(j, i, static_cast<wchar_t>(0x555), plNumOfLives);
 				break;
 			case 'e': // ghost enemy
 				m_entMgr.createCharacter<Ghost>(j, i);
@@ -97,9 +97,9 @@ const EntityMgr& GameWindow::getEntMgr() const
 }
 
 GameWindow::GameWindow(const MapFile& mapFile)
-	: Window(WindowType::GameWindow)
+	: Window(WindowType::GameWindow), m_mapFile{ mapFile }
 {
-	initEntities(mapFile);
+	initEntities();
 	// m_state_begin isn't used for the GameWindow specifically, but
 	// it should be updated anyway
 	m_state_begin = false;

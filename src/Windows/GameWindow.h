@@ -3,13 +3,12 @@
 #include "../EntityMgr.h"
 #include "../Player.h"
 #include "../WindowTypes.h"
-
-// forward declare to avoid includes
-class MapFile;
+#include "../MapFile.h"
 
 class GameWindow : public Window<WindowType>
 {
 private:
+	const MapFile m_mapFile;
 	enum class GameState
 	{
 		FreezeTime = 0,
@@ -39,7 +38,8 @@ public:
 	void render() override;
 	void runLogic() override;
 
-	void initEntities(const MapFile&);
+	// the num of lives parameter's used for new game rounds
+	void initEntities(unsigned int plNumOfLives = 3);
 	void renderAllEntities();
 
 	const EntityMgr& getEntMgr() const;
