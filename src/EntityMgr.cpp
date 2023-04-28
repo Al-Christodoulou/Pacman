@@ -32,16 +32,21 @@ unsigned int EntityMgr::getArraySize() const
 * Checks if two entities lie in the same position. if so, then we have a
 * violation and this returns true
 */
-bool EntityMgr::checkViolationFor(const Character& character) const
+bool EntityMgr::checkViolationFor(Character& character) const
 {
-	for (const auto& curEnt : m_entities)
+	for (auto& curEnt : m_entities)
 	{
+		Character* curChar{ static_cast<Character*>(curEnt.get()) };
 		// make sure we don't check against the same character
-		if (*static_cast<Character*>(curEnt.get()) != character)
+		if (*curChar != character)
 		{
 			// if we have a violation, return true
-			if (curEnt.get()->getPos() == character.getPos())
+			if (curChar->getPos() == character.getPos())
+			{
+				curChar->touch(character);
+				character.touch(*curChar);
 				return true;
+			}
 		}
 	}
 	return false;
