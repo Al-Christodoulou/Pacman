@@ -41,6 +41,8 @@ void GameWindow::runLogic()
 			if (entPtr->getEntType() == EntityType::Character)
 				static_cast<Character&>(*entPtr).think();
 		}
+		if (m_player->isDead())
+			m_gameState = GameState::PlayerDead;
 		break;
 	case GameState::PlayerDead:
 		break;

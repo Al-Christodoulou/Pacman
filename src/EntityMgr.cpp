@@ -36,17 +36,18 @@ bool EntityMgr::checkViolationFor(Character& character) const
 {
 	for (auto& curEnt : m_entities)
 	{
+		// a dangerous cast
 		Character* curChar{ static_cast<Character*>(curEnt.get()) };
 		// make sure we don't check against the same character
-		if (*curChar != character)
+		if (*curChar != character && curChar->getPos() == character.getPos())
 		{
-			// if we have a violation, return true
-			if (curChar->getPos() == character.getPos())
+			if (curChar->getEntType() == EntityType::Character)
 			{
 				curChar->touch(character);
 				character.touch(*curChar);
-				return true;
 			}
+			// if we have a violation, return true
+			return true;
 		}
 	}
 	return false;
