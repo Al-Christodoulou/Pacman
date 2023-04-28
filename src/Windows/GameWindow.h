@@ -23,6 +23,8 @@ private:
 	// the amount of time passed since this game started. this is used
 	// for all game events to avoid issues when pausing the game
 	float m_gameTime{ 0.0f };
+	// the timer used to reset a round or a game
+	float m_resetTimestamp{ 0.0f };
 
 	static constexpr float cFreezeTime{ 4.0f };
 	static constexpr unsigned int cSecondsTextOffset{
@@ -41,6 +43,7 @@ public:
 	// the num of lives parameter's used for new game rounds
 	void initEntities(unsigned int plNumOfLives = 3);
 	void renderAllEntities();
+	void restartRound();
 
 	const EntityMgr& getEntMgr() const;
 

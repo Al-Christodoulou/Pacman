@@ -1,4 +1,5 @@
 #include "GameWindow.h"
+#include "MessageWindow.h"
 #include "../PacMan.h"
 #include "../Engine/Random.h"
 #include "../WanderingLouse.h"
@@ -10,6 +11,7 @@ void GameWindow::render()
 {
 	gPacMan.fillscreen(L' ');
 	renderAllEntities();
+	gPacMan.swprintf_s(cPlayerLivesTextOffset, 20, L"Lives: %d", m_player->getLives());
 
 	switch (m_gameState)
 	{
@@ -17,9 +19,11 @@ void GameWindow::render()
 		gPacMan.swprintf_s(cSecondsTextOffset, 20, L"%.0f", cFreezeTime - m_gameTime);
 		break;
 	case GameState::Playing:
-		gPacMan.swprintf_s(cPlayerLivesTextOffset, 15, L"Lives: %d", 2);
 		gPacMan.swprintf_s(25, L"X: %.3f, Y: %.2f", m_player->getVirtualX(), m_player->getVirtualY());
 		gPacMan.swprintf_s(gScreenWidth, 30, L"DT: %f", Engine::getDeltaTime());
+		break;
+	case GameState::PlayerDead:
+		gPacMan.swprintf_s(cSecondsTextOffset, 16, L"YOU ARE DEAD!");
 		break;
 	}
 }
@@ -42,9 +46,24 @@ void GameWindow::runLogic()
 				static_cast<Character&>(*entPtr).think();
 		}
 		if (m_player->isDead())
+		{
+			m_resetTimestamp = m_gameTime + 2.0f;
 			m_gameState = GameState::PlayerDead;
+		}
 		break;
 	case GameState::PlayerDead:
+		if (m_gameTime > m_resetTimestamp)
+		{
+			m_player->decreaseLives();
+			// if the game's lost, popup a message and quit the map
+			if (m_player->getLives() == 0)
+			{
+				m_state_terminate = true;
+				gPacMan.getWindowMgr().pushAnyWindow<MessageWindow>(24, 7, L"You lost the game...", L"");
+				return;
+			}
+			restartRound();
+		}
 		break;
 	}
 
@@ -89,6 +108,17 @@ void GameWindow::renderAllEntities()
 		if (curEnt)
 			gPacMan.sendData(curEnt->getTex(), curEnt->getPos());
 	}
+}
+
+void GameWindow::restartRound()
+{
+	m_gameTime = 0.0f;
+	m_resetTimestamp = 0.0f;
+	// get the player lives before this entity gets deleted by clear()
+	unsigned int playerLives{ m_player->getLives() };
+	m_entMgr.getEntities().clear();
+	initEntities(playerLives);
+	m_gameState = GameState::FreezeTime;
 }
 
 const EntityMgr& GameWindow::getEntMgr() const
