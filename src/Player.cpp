@@ -14,6 +14,10 @@ void Player::think()
 		moveRight();
 }
 
+void Player::touch(Character& other)
+{
+}
+
 Player::Player(int x, int y, wchar_t texture)
 	: Character{ x, y, texture }
 {}

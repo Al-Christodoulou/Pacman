@@ -14,6 +14,7 @@ private:
 
 public:
 	void think() override;
+	void touch(Character&) override;
 
 	WanderingLouse(int, int);
 };

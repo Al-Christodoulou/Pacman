@@ -31,6 +31,8 @@ void Ghost::think()
 	}
 }
 
+void Ghost::touch(Character&) {}
+
 Ghost::Ghost(int x, int y)
 	: Character(x, y, L'&')
 {

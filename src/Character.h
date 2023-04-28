@@ -24,6 +24,7 @@ public:
 	float getSpeed();
 
 	virtual void think() = 0;
+	virtual void touch(Character&) = 0;
 
 	friend bool operator==(const Character& c1, const Character& c2)
 	{
