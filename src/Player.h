@@ -4,7 +4,7 @@
 class Player : public Character
 {
 private:
-	unsigned int m_numOfLives{ 3 };
+	unsigned int m_numOfLives;
 	bool m_isDead{ false };
 
 public:
@@ -14,6 +14,6 @@ public:
 	unsigned int getLives();
 	bool isDead();
 
-	Player(int, int, wchar_t);
-	Player(wchar_t);
+	Player(int, int, wchar_t, unsigned int = 3);
+	Player(wchar_t, unsigned int = 3);
 };

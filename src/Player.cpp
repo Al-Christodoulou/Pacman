@@ -14,7 +14,7 @@ void Player::think()
 		moveRight();
 }
 
-void Player::touch(Character& other)
+void Player::touch(Character&)
 {
 	m_isDead = true;
 }
@@ -34,10 +34,10 @@ bool Player::isDead()
 	return m_isDead;
 }
 
-Player::Player(int x, int y, wchar_t texture)
-	: Character{ x, y, texture }
+Player::Player(int x, int y, wchar_t texture, unsigned int numOfLives)
+	: Character{ x, y, texture }, m_numOfLives{ numOfLives }
 {}
 
-Player::Player(wchar_t texture)
-	: Character{ texture }
+Player::Player(wchar_t texture, unsigned int numOfLives)
+	: Character{ texture }, m_numOfLives{ numOfLives }
 {}
