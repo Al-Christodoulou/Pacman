@@ -16,6 +16,22 @@ void Player::think()
 
 void Player::touch(Character& other)
 {
+	m_isDead = true;
+}
+
+void Player::decreaseLives()
+{
+	--m_numOfLives;
+}
+
+unsigned int Player::getLives()
+{
+	return m_numOfLives;
+}
+
+bool Player::isDead()
+{
+	return m_isDead;
 }
 
 Player::Player(int x, int y, wchar_t texture)
