@@ -24,6 +24,16 @@ public:
 	wchar_t getTex() const;
 	EntityType getEntType() const;
 
+	friend bool operator==(const Entity& e1, const Entity& e2)
+	{
+		return &e1 == &e2;
+	}
+
+	friend bool operator!=(const Entity& e1, const Entity& e2)
+	{
+		return !(e1 == e2);
+	}
+
 	Entity(int, int, wchar_t, EntityType);
 	Entity(wchar_t, EntityType);
 	virtual ~Entity() {};
