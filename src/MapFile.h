@@ -3,7 +3,7 @@
 #include <string>
 #include <array>
 
-using MapDataArray = std::array<std::string, gScreenHeight>;
+using MapDataArray = std::array<std::string, gPlayableSpaceHeight>;
 
 class MapFile
 {
