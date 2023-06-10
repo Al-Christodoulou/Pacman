@@ -24,6 +24,11 @@ void Player::decreaseLives()
 	--m_numOfLives;
 }
 
+void Player::increaseScore(unsigned int amt)
+{
+	m_score += amt;
+}
+
 unsigned int Player::getLives()
 {
 	return m_numOfLives;
