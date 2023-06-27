@@ -14,6 +14,7 @@ private:
 		FreezeTime = 0,
 		Playing,
 		PlayerDead,
+		RoundWon,
 		max_game_states
 	} m_gameState{ GameState::FreezeTime };
 

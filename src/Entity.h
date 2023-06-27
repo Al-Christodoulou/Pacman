@@ -5,6 +5,8 @@ enum class EntityType
 {
 	Default,
 	Character,
+	Dot, // both Dot and Powerup are of type Entity
+	Powerup,
 	max_entity_types
 };
 
