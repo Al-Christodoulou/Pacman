@@ -4,7 +4,6 @@
 const Entity* const EntityMgr::getEntity(unsigned int index) const
 {
 	return index <= m_entities.size() - 1 ? m_entities[index].get() : nullptr;
-	//return m_entities[index].get();
 }
 
 // had to remove the const from this so GameWindow can change the entities
@@ -16,10 +15,6 @@ EntityArray& EntityMgr::getEntities()
 const Entity* const EntityMgr::searchEntity(bool (*criteria)(const std::unique_ptr<Entity>& ent)) const
 {
 	auto iterator{ std::find_if(m_entities.begin(), m_entities.end(), criteria) };
-	/*if (iterator != std::end(m_entities))
-		return (*iterator).get();
-	else
-		return nullptr;*/
 	return iterator != std::end(m_entities) ? (*iterator).get() : nullptr;
 }
 
