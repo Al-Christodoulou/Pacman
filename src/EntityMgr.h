@@ -47,9 +47,16 @@ public:
 									// use gScreenTotalPxs
 
 	template <typename... Args>
-	Entity* createEnt(Args... args)
+	Entity* createDefaultEnt(Args... args)
 	{
 		return createAnyEnt<Entity>(args..., EntityType::Default);
+	}
+
+	// create an Entity whose EntityType != default 
+	template <typename... Args>
+	Entity* createCustomBaseEnt(EntityType enttype, Args... args)
+	{
+		return createAnyEnt<Entity>(args..., enttype);
 	}
 
 	template <typename CharType, typename... Args>

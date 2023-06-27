@@ -85,13 +85,16 @@ void GameWindow::initEntities(unsigned int plNumOfLives)
 			switch (mapDat[i][j])
 			{
 			case '#':
-				m_entMgr.createEnt(j, i, '#');
+				m_entMgr.createDefaultEnt(j, i, '#');
 				break;
 			case 'p': // player spawn point
 				m_player = m_entMgr.createCharacter<Player>(j, i, static_cast<wchar_t>(0x555), plNumOfLives);
 				break;
 			case 'e': // ghost enemy
 				m_entMgr.createCharacter<Ghost>(j, i);
+				break;
+			case '.': // dot that pacman can eat
+				m_entMgr.createCustomBaseEnt(EntityType::Dot, j, i, static_cast<wchar_t>(L'\u25aa'));
 				break;
 			default:
 				break;
