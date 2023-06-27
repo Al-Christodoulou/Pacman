@@ -72,5 +72,5 @@ public:
 	EntityMgr() = default;
 
 	// maybe temporary
-	bool checkViolationFor(Character&) const;
+	bool checkViolationFor(Character&);
 };

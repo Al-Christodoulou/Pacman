@@ -124,7 +124,7 @@ void GameWindow::restartRound()
 	m_gameState = GameState::FreezeTime;
 }
 
-const EntityMgr& GameWindow::getEntMgr() const
+EntityMgr& GameWindow::getEntMgr()
 {
 	return m_entMgr;
 }

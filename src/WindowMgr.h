@@ -37,5 +37,5 @@ public:
 	// useful to have anyway, but you also need one for GameWindow
 	// by WindowMgr, which "pollutes" the class with more methods
 	// just for one unique behavior of a Window. it's okay for now
-	const EntityMgr* const tryGetEntMgr() const;
+	EntityMgr* const tryGetEntMgr();
 };

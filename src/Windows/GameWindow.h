@@ -46,7 +46,7 @@ public:
 	void renderAllEntities();
 	void restartRound();
 
-	const EntityMgr& getEntMgr() const;
+	EntityMgr& getEntMgr();
 
 	GameWindow(const MapFile&);
 };
