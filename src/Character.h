@@ -27,5 +27,6 @@ public:
 	virtual void touch(Character&) = 0;
 
 	Character(int, int, wchar_t);
+	Character(int, int, wchar_t, EntityType);
 	Character(wchar_t);
 };

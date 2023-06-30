@@ -40,9 +40,5 @@ bool Player::isDead()
 }
 
 Player::Player(int x, int y, wchar_t texture, unsigned int numOfLives)
-	: Character{ x, y, texture }, m_numOfLives{ numOfLives }
-{}
-
-Player::Player(wchar_t texture, unsigned int numOfLives)
-	: Character{ texture }, m_numOfLives{ numOfLives }
+	: Character{ x, y, texture, EntityType::Player }, m_numOfLives{ numOfLives }
 {}

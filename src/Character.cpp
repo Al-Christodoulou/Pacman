@@ -57,6 +57,10 @@ Character::Character(int x, int y, wchar_t texture)
 	: Entity{ x, y, texture, EntityType::Character }
 {}
 
+Character::Character(int x, int y, wchar_t texture, EntityType enttype)
+	: Entity{ x, y, texture, enttype}
+{}
+
 Character::Character(wchar_t texture)
 	: Entity{ texture, EntityType::Character }
 {}
