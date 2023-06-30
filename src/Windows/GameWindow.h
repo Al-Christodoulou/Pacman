@@ -36,6 +36,10 @@ private:
 		gScreenWidth * gPlayableSpaceHeight +
 		gScreenWidth + 6
 	};
+	static constexpr unsigned int cPlayerScoreTextOffset{
+		gScreenWidth * gPlayableSpaceHeight +
+		gScreenWidth * 2 + 6
+	};
 
 public:
 	void render() override;

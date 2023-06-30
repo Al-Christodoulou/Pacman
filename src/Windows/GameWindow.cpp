@@ -12,6 +12,7 @@ void GameWindow::render()
 	gPacMan.fillscreen(L' ');
 	renderAllEntities();
 	gPacMan.swprintf_s(cPlayerLivesTextOffset, 20, L"Lives: %d", m_player->getLives());
+	gPacMan.swprintf_s(cPlayerScoreTextOffset, 20, L"Score: %d", m_player->getScore());
 
 	switch (m_gameState)
 	{
