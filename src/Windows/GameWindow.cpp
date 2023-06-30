@@ -46,7 +46,8 @@ void GameWindow::runLogic()
 		while (i < entities.size())
 		{
 			size_t previousSize{ entities.size() };
-			if (entities[i]->getEntType() == EntityType::Character)
+			if (entities[i]->getEntType() == EntityType::Character ||
+				entities[i]->getEntType() == EntityType::Player)
 				static_cast<Character&>(*entities[i]).think();
 
 			// since m_entities can be modified through think() (due to it

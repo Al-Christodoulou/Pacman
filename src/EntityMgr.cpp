@@ -43,8 +43,9 @@ bool EntityMgr::checkViolationFor(Character& character)
 				character.touch(*curChar);
 			}
 			// if this is the player and he touched a dot
-			if (character.getTex() == static_cast<wchar_t>(0x555) && curEnt.getEntType() == EntityType::Dot)
+			if (character.getEntType() == EntityType::Player && curEnt.getEntType() == EntityType::Dot)
 			{
+				static_cast<Player&>(character).increaseScore(10);
 				m_entities.erase(m_entities.begin() + index);
 				--index;
 			}

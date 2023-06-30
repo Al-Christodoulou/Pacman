@@ -5,17 +5,9 @@
 void Ghost::think()
 {
 	auto is_player{ [](const std::unique_ptr<Entity>& ent) {
-		// just check his texture for now
-		return ent.get()->getTex() == 0x555;
+		return ent.get()->getEntType() == EntityType::Player;
 	} };
 
-	/*const EntityArray& entArray{gEntMgr.getEntities()};
-
-	auto iterator{ std::find_if(entArray.begin(), entArray.end(), is_player) };
-	if (iterator != std::end(entArray)) // we found him
-	{
-		if (m_x - (*iterator).get()->getVirtualX())
-	}*/
 	const Entity* const player{ gPacMan.getWindowMgr().tryGetEntMgr()->searchEntity(is_player) };
 	if (player) // if we found him
 	{
