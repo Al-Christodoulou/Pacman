@@ -39,11 +39,22 @@ void GameWindow::runLogic()
 			m_gameState = GameState::Playing;
 		break;
 	case GameState::Playing:
+	{
 		// make all characters think
-		for (std::unique_ptr<Entity>& entPtr : m_entMgr.getEntities())
+		EntityArray& entities{ m_entMgr.getEntities() };
+		size_t i{ 0 };
+		while (i < entities.size())
 		{
-			if (entPtr->getEntType() == EntityType::Character)
-				static_cast<Character&>(*entPtr).think();
+			size_t previousSize{ entities.size() };
+			if (entities[i]->getEntType() == EntityType::Character)
+				static_cast<Character&>(*entities[i]).think();
+
+			// since m_entities can be modified through think() (due to it
+			// calling a series of functions leading to checkViolationFor),
+			// if some entity was deleted, the one after took its place, so
+			// the index should not update in this iteration of the loop!
+			if (previousSize == entities.size())
+				i++;
 		}
 		if (m_player->isDead())
 		{
@@ -51,6 +62,7 @@ void GameWindow::runLogic()
 			m_gameState = GameState::PlayerDead;
 		}
 		break;
+	}
 	case GameState::PlayerDead:
 		if (m_gameTime > m_resetTimestamp)
 		{
