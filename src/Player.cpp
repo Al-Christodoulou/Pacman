@@ -29,12 +29,17 @@ void Player::increaseScore(unsigned int amt)
 	m_score += amt;
 }
 
-unsigned int Player::getLives()
+unsigned int Player::getScore() const
+{
+	return m_score;
+}
+
+unsigned int Player::getLives() const
 {
 	return m_numOfLives;
 }
 
-bool Player::isDead()
+bool Player::isDead() const
 {
 	return m_isDead;
 }

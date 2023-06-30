@@ -13,9 +13,9 @@ public:
 	void touch(Character&) override;
 	void decreaseLives();
 	void increaseScore(unsigned int);
-	unsigned int getLives();
-	bool isDead();
+	unsigned int getScore() const;
+	unsigned int getLives() const;
+	bool isDead() const;
 
 	Player(int, int, wchar_t, unsigned int = 3);
-	Player(wchar_t, unsigned int = 3);
 };
