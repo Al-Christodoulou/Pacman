@@ -32,27 +32,27 @@ bool EntityMgr::checkViolationFor(Character& character)
 	size_t index{ 0 };
 	while (index < m_entities.size())
 	{
+		// touch functions might (for the case of Player touching a pickup) remove an
+		// entity from m_entities, therefore this loop should not increment the index
+		const size_t previousTotalEntities{ m_entities.size() };
+		
 		Entity& curEnt{ *m_entities[index] };
 		// make sure we don't check against the same character
 		if (curEnt != static_cast<Entity&>(character) && curEnt.getPos() == character.getPos())
 		{
+			character.touch(curEnt);
 			if (curEnt.getEntType() == EntityType::Character)
 			{
-				Character* curChar{ static_cast<Character*>(&curEnt) };
+				Character* const curChar{ static_cast<Character* const>(&curEnt) };
 				curChar->touch(character);
-				character.touch(*curChar);
 			}
-			// if this is the player and he touched a dot
-			if (character.getEntType() == EntityType::Player && curEnt.getEntType() == EntityType::Dot)
-			{
-				static_cast<Player&>(character).increaseScore(10);
-				m_entities.erase(m_entities.begin() + index);
-				--index;
-			}
-			// if we have a violation, return true
+			// we have a violation, return true
 			return true;
 		}
-		++index;
+
+		// if the total amount of entities hasn't changed, then increment the index
+		if (m_entities.size() == previousTotalEntities)
+			++index;
 	}
 	return false;
 }
