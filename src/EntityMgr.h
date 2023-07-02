@@ -34,6 +34,7 @@ private:
 	template <typename T = Entity, typename... Args>
 	T* createAnyEnt(Args... args)
 	{
+		static_assert(std::is_base_of_v<Entity, T>, "Not part of the Entity hierarchy!");
 		return pushAnyEnt(std::move(std::make_unique<T>(args...)));
 	}
 
@@ -64,6 +65,12 @@ public:
 	{
 		static_assert(std::is_base_of_v<Character, CharType>, "Not a character!");
 		return createAnyEnt<CharType>(args...);
+	}
+
+	void deleteEntity(size_t index)
+	{
+		if (index < m_entities.size())
+			m_entities.erase(m_entities.begin() + index);
 	}
 
 	// no copying or moving of EntityMgr is allowed
