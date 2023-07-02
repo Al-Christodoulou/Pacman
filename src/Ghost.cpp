@@ -23,7 +23,7 @@ void Ghost::think()
 	}
 }
 
-void Ghost::touch(Character&) {}
+void Ghost::touch(Entity&) {}
 
 Ghost::Ghost(int x, int y)
 	: Character(x, y, L'&')

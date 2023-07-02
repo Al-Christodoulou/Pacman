@@ -5,6 +5,6 @@ class Ghost : public Character
 {
 public:
 	void think() override;
-	void touch(Character&) override;
+	void touch(Entity&) override;
 	Ghost(int, int);
 };

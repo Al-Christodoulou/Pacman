@@ -14,7 +14,7 @@ void Player::think()
 		moveRight();
 }
 
-void Player::touch(Character&)
+void Player::touch(Entity& ent)
 {
 	m_isDead = true;
 }
