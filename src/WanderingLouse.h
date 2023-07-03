@@ -14,7 +14,7 @@ private:
 
 public:
 	void think() override;
-	void touch(Entity&) override;
+	void touch(const ConstEntityArrayIterator&) override;
 
 	WanderingLouse(int, int);
 };

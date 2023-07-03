@@ -23,7 +23,7 @@ void Ghost::think()
 	}
 }
 
-void Ghost::touch(Entity&) {}
+void Ghost::touch(const ConstEntityArrayIterator&) {}
 
 Ghost::Ghost(int x, int y)
 	: Character(x, y, L'&')

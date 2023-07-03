@@ -10,7 +10,7 @@ private:
 
 public:
 	void think() override;
-	void touch(Entity&) override;
+	void touch(const ConstEntityArrayIterator&) override;
 	void decreaseLives();
 	void increaseScore(unsigned int);
 	unsigned int getScore() const;

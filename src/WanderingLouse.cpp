@@ -23,7 +23,7 @@ void WanderingLouse::think()
 	}
 }
 
-void WanderingLouse::touch(Entity&) {}
+void WanderingLouse::touch(const ConstEntityArrayIterator&) {}
 
 WanderingLouse::WanderingLouse(int x, int y)
 	: Character{ x, y, L'@' }

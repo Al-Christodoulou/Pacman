@@ -29,30 +29,33 @@ unsigned int EntityMgr::getArraySize() const
 */
 bool EntityMgr::checkViolationFor(Character& character)
 {
-	size_t index{ 0 };
-	while (index < m_entities.size())
+	ConstEntityArrayIterator iter{ m_entities.begin() };
+	while (iter != m_entities.end())
 	{
 		// touch functions might (for the case of Player touching a pickup) remove an
 		// entity from m_entities, therefore this loop should not increment the index
 		const size_t previousTotalEntities{ m_entities.size() };
 		
-		Entity& curEnt{ *m_entities[index] };
 		// make sure we don't check against the same character
-		if (curEnt != static_cast<Entity&>(character) && curEnt.getPos() == character.getPos())
+		if (**iter != static_cast<Entity&>(character) && (**iter).getPos() == character.getPos())
 		{
-			character.touch(curEnt);
-			if (curEnt.getEntType() == EntityType::Character)
+			ConstEntityArrayIterator prevIter{ iter };
+			character.touch(iter); // this might delete the entity pointed to by iter
+			iter = prevIter;
+
+			if ((**iter).getEntType() == EntityType::Character)
 			{
-				Character* const curChar{ static_cast<Character* const>(&curEnt) };
-				curChar->touch(character);
+				Character* const curChar{ static_cast<Character* const>(&**iter) };
+				curChar->touch(iter);
+
+				// we have a violation (and the entity wasn't deleted), return true
+				return true;
 			}
-			// we have a violation, return true
-			return true;
 		}
 
 		// if the total amount of entities hasn't changed, then increment the index
 		if (m_entities.size() == previousTotalEntities)
-			++index;
+			++iter;
 	}
 	return false;
 }

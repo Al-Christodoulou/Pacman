@@ -1,5 +1,6 @@
 #pragma once
-#include "Entity.h"
+#include <vector>
+#include "EntityMgrTypedefs.h"
 
 // an abstract class that defines a movable entity with thinking logic
 class Character : public Entity
@@ -24,7 +25,7 @@ public:
 	float getSpeed();
 
 	virtual void think() = 0;
-	virtual void touch(Entity&) = 0;
+	virtual void touch(const ConstEntityArrayIterator&) = 0;
 
 	Character(int, int, wchar_t);
 	Character(int, int, wchar_t, EntityType);

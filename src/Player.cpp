@@ -15,21 +15,16 @@ void Player::think()
 		moveRight();
 }
 
-void Player::touch(Entity& ent)
+void Player::touch(const ConstEntityArrayIterator& entIter)
 {
-	if (ent.getEntType() == EntityType::Dot)
+	if ((**entIter).getEntType() == EntityType::Dot)
 	{
 		increaseScore(10);
 		EntityMgr* entmgr{ gPacMan.getWindowMgr().tryGetEntMgr() };
 
-		// UGLY HACK: calculate the index of the to-be-deleted dot
-		// with pointer arithmetic
-		// UPDATE TODO: this doesn't work because the entities have
-		// been allocated on the heap and are not in contiguous memory
-		ptrdiff_t calculatedIndex{ &ent - entmgr->getEntity(0) };
-		entmgr->deleteEntity(calculatedIndex);
+		entmgr->deleteEntity(entIter);
 	}
-	else if (ent.getEntType() == EntityType::Character)
+	else if ((**entIter).getEntType() == EntityType::Character)
 		m_isDead = true;
 }
 
