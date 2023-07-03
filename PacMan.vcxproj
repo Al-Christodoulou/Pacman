@@ -39,6 +39,7 @@
   <ItemGroup>
     <ClInclude Include="src\Constants.h" />
     <ClInclude Include="src\Engine\CustomInt.h" />
+    <ClInclude Include="src\EntityMgrTypedefs.h" />
     <ClInclude Include="src\Windows\MessageWindow.h" />
     <ClInclude Include="src\Engine\UniquePtrUtils.h" />
     <ClInclude Include="src\MapFile.h" />

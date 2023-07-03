@@ -1,14 +1,10 @@
 #pragma once
 #include <array>
-#include <vector>
-#include <memory>
 #include "Engine/Engine.h"
 #include "Engine/UniquePtrUtils.h"
-#include "Entity.h"
 #include "Character.h"
 #include "Player.h"
-
-using EntityArray = std::vector<std::unique_ptr<Entity>>;
+#include "EntityMgrTypedefs.h"
 
 class EntityMgr
 {
