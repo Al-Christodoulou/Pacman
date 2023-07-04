@@ -33,24 +33,33 @@ bool EntityMgr::checkViolationFor(Character& character)
 	while (iter != m_entities.end())
 	{
 		// touch functions might (for the case of Player touching a pickup) remove an
-		// entity from m_entities, therefore this loop should not increment the index
-		const size_t previousTotalEntities{ m_entities.size() };
+		// entity from m_entities, therefore:
+		// 1) this loop should not increment neither the index nor the iterator
+		// 2) the iterator becomes invalidated and needs to be recreated using index
+		size_t previousTotalEntities{ m_entities.size() };
 		
-		// make sure we don't check against the same character
+		// make sure we don't check against the same character, and that they have the
+		// same position
 		if (**iter != static_cast<Entity&>(character) && (**iter).getPos() == character.getPos())
 		{
-			ConstEntityArrayIterator prevIter{ iter };
 			character.touch(iter); // this might delete the entity pointed to by iter
-			iter = prevIter;
+			// if there was indeed a deletion, refresh iter
+			if (m_entities.size() != previousTotalEntities)
+				return false;
+
+			// this check needs to happen again in the character touch() inside the following if
+			// statement
+			previousTotalEntities = m_entities.size();
 
 			if ((**iter).getEntType() == EntityType::Character)
 			{
 				Character* const curChar{ static_cast<Character* const>(&**iter) };
 				curChar->touch(iter);
-
-				// we have a violation (and the entity wasn't deleted), return true
-				return true;
+				if (m_entities.size() != previousTotalEntities)
+					return false;
 			}
+			// we have a violation, return true
+			return true;
 		}
 
 		// if the total amount of entities hasn't changed, then increment the index
