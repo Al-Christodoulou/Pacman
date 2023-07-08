@@ -37,33 +37,37 @@ bool EntityMgr::checkViolationFor(Character& character)
 		// if we're not checking against the same entity, and the positions differ, we have a
 		// collision
 		if (**iter != static_cast<Entity&>(character) && (**iter).getPos() == character.getPos())
-		{
-			// touch functions might (for the case of Player touching pickups) remove an
-			// entity from m_entities, therefore, this loop should not increment the iterator.
-			// this variable is later used to check if a deletion indeed took place
-			size_t previousTotalEntities{ m_entities.size() };
-			character.touch(iter); // this might delete the entity pointed to by iter
+			return performCollisionTouch(character, iter);
 
-			// if there was indeed a deletion, return false (because the other entity
-			// got deleted, so there's no need to revert the position)
-			if (m_entities.size() != previousTotalEntities)
-				return false;
-
-			// the check above needs to happen again after the next touch() call inside the
-			// following if statement
-			previousTotalEntities = m_entities.size();
-
-			if ((**iter).getEntType() == EntityType::Character)
-			{
-				Character* const curChar{ static_cast<Character* const>(&**iter) };
-				curChar->touch(iter);
-				if (m_entities.size() != previousTotalEntities)
-					return false;
-			}
-			// we have a collision and no deletion took place, return true
-			return true;
-		}
 		++iter;
 	}
 	return false;
+}
+
+bool EntityMgr::performCollisionTouch(Character& character, const ConstEntityArrayIterator& iter)
+{
+	// touch functions might (for the case of Player touching pickups) remove an
+	// entity from m_entities, therefore, this loop should not increment the iterator.
+	// this variable is later used to check if a deletion indeed took place
+	size_t previousTotalEntities{ m_entities.size() };
+	character.touch(iter); // this might delete the entity pointed to by iter
+
+	// if there was indeed a deletion, return false (because the other entity
+	// got deleted, so there's no need to revert the position)
+	if (m_entities.size() != previousTotalEntities)
+		return false;
+
+	// the check above needs to happen again after the next touch() call inside the
+	// following if statement
+	previousTotalEntities = m_entities.size();
+
+	if ((**iter).getEntType() == EntityType::Character)
+	{
+		Character* const curChar{ static_cast<Character* const>(&**iter) };
+		curChar->touch(iter);
+		if (m_entities.size() != previousTotalEntities)
+			return false;
+	}
+	// we have a collision and no deletion took place, return true
+	return true;
 }

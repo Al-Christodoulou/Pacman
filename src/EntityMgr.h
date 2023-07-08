@@ -73,6 +73,6 @@ public:
 	EntityMgr(EntityMgr&&) = delete;
 	EntityMgr() = default;
 
-	// maybe temporary
 	bool checkViolationFor(Character&);
+	bool performCollisionTouch(Character&, const ConstEntityArrayIterator&);
 };
