@@ -20,6 +20,8 @@ private:
 
 	EntityMgr m_entMgr{};
 	Player* m_player{ nullptr };
+	// the total amount of dots that the map has
+	unsigned int m_totalDotCount{};
 
 	// the amount of time passed since this game started. this is used
 	// for all game events to avoid issues when pausing the game

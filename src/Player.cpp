@@ -19,7 +19,8 @@ void Player::touch(const ConstEntityArrayIterator& entIter)
 {
 	if ((**entIter).getEntType() == EntityType::Dot)
 	{
-		increaseScore(10);
+		m_score += 10;
+		m_numDotsEaten++;
 		EntityMgr* entmgr{ gPacMan.getWindowMgr().tryGetEntMgr() };
 
 		entmgr->deleteEntity(entIter);
@@ -33,11 +34,6 @@ void Player::decreaseLives()
 	--m_numOfLives;
 }
 
-void Player::increaseScore(unsigned int amt)
-{
-	m_score += amt;
-}
-
 unsigned int Player::getScore() const
 {
 	return m_score;
@@ -46,6 +42,11 @@ unsigned int Player::getScore() const
 unsigned int Player::getLives() const
 {
 	return m_numOfLives;
+}
+
+unsigned int Player::getDotsEatenCount() const
+{
+	return m_numDotsEaten;
 }
 
 bool Player::isDead() const

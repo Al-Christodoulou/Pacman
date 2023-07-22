@@ -109,6 +109,7 @@ void GameWindow::initEntities(unsigned int plNumOfLives)
 				break;
 			case '.': // dot that pacman can eat
 				m_entMgr.createCustomBaseEnt(EntityType::Dot, j, i, static_cast<wchar_t>(L'\u25aa'));
+				m_totalDotCount++;
 				break;
 			default:
 				break;
