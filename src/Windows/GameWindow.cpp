@@ -26,6 +26,9 @@ void GameWindow::render()
 	case GameState::PlayerDead:
 		gPacMan.swprintf_s(cInfoTextOffset, 16, L"YOU ARE DEAD!");
 		break;
+	case GameState::RoundWon:
+		gPacMan.swprintf_s(cInfoTextOffset, 25, L"You won the round!");
+		break;
 	}
 }
 
@@ -63,6 +66,12 @@ void GameWindow::runLogic()
 			m_resetTimestamp = m_gameTime + 2.0f;
 			m_gameState = GameState::PlayerDead;
 		}
+		// if the player ate all the dots, he won the round
+		if (m_player->getDotsEatenCount() == m_totalDotCount)
+		{
+			m_resetTimestamp = m_gameTime + 2.0f;
+			m_gameState = GameState::RoundWon;
+		}
 		break;
 	}
 	case GameState::PlayerDead:
@@ -77,6 +86,14 @@ void GameWindow::runLogic()
 				return;
 			}
 			restartRound();
+		}
+		break;
+	case GameState::RoundWon:
+		if (m_gameTime > m_resetTimestamp)
+		{
+			// temporary
+			m_state_terminate = true;
+			gPacMan.getWindowMgr().pushAnyWindow<MessageWindow>(23, 7, L"You won the round!", L"");
 		}
 		break;
 	}
