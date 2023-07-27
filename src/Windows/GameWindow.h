@@ -30,7 +30,7 @@ private:
 	float m_resetTimestamp{ 0.0f };
 
 	static constexpr float cFreezeTime{ 4.0f };
-	static constexpr unsigned int cSecondsTextOffset{
+	static constexpr unsigned int cInfoTextOffset{
 		gScreenWidth * gPlayableSpaceHeight +
 		gScreenWidth + gScreenWidth / 4
 	};

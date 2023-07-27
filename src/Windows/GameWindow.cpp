@@ -17,14 +17,14 @@ void GameWindow::render()
 	switch (m_gameState)
 	{
 	case GameState::FreezeTime:
-		gPacMan.swprintf_s(cSecondsTextOffset, 20, L"%.0f", cFreezeTime - m_gameTime);
+		gPacMan.swprintf_s(cInfoTextOffset, 20, L"%.0f", cFreezeTime - m_gameTime);
 		break;
 	case GameState::Playing:
 		gPacMan.swprintf_s(25, L"X: %.3f, Y: %.2f", m_player->getVirtualX(), m_player->getVirtualY());
 		gPacMan.swprintf_s(gScreenWidth, 30, L"DT: %f", Engine::getDeltaTime());
 		break;
 	case GameState::PlayerDead:
-		gPacMan.swprintf_s(cSecondsTextOffset, 16, L"YOU ARE DEAD!");
+		gPacMan.swprintf_s(cInfoTextOffset, 16, L"YOU ARE DEAD!");
 		break;
 	}
 }
