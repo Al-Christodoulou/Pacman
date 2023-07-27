@@ -10,6 +10,8 @@ private:
 	bool m_isDead{ false };
 
 public:
+	static constexpr unsigned int Lives{ 3 };
+
 	void think() override;
 	void touch(const ConstEntityArrayIterator&) override;
 	void decreaseLives();
@@ -18,5 +20,5 @@ public:
 	unsigned int getDotsEatenCount() const;
 	bool isDead() const;
 
-	Player(int, int, wchar_t, unsigned int = 3);
+	Player(int, int, wchar_t, unsigned int = Lives);
 };

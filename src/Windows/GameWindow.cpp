@@ -22,6 +22,7 @@ void GameWindow::render()
 	case GameState::Playing:
 		gPacMan.swprintf_s(25, L"X: %.3f, Y: %.2f", m_player->getVirtualX(), m_player->getVirtualY());
 		gPacMan.swprintf_s(gScreenWidth, 30, L"DT: %f", Engine::getDeltaTime());
+		gPacMan.swprintf_s(cInfoTextOffset, 25, L"Round: %d", m_currentRound);
 		break;
 	case GameState::PlayerDead:
 		gPacMan.swprintf_s(cInfoTextOffset, 16, L"YOU ARE DEAD!");
@@ -85,15 +86,13 @@ void GameWindow::runLogic()
 				gPacMan.getWindowMgr().pushAnyWindow<MessageWindow>(24, 7, L"You lost the game...", L"");
 				return;
 			}
-			restartRound();
+			restartGame();
 		}
 		break;
 	case GameState::RoundWon:
 		if (m_gameTime > m_resetTimestamp)
 		{
-			// temporary
-			m_state_terminate = true;
-			gPacMan.getWindowMgr().pushAnyWindow<MessageWindow>(23, 7, L"You won the round!", L"");
+			restartRound();
 		}
 		break;
 	}
@@ -104,8 +103,9 @@ void GameWindow::runLogic()
 		m_state_terminate = true;
 }
 
-void GameWindow::initEntities(unsigned int plNumOfLives)
+void GameWindow::initRound(unsigned int plNumOfLives)
 {
+	m_totalDotCount = 0;
 	const MapDataArray& mapDat{ m_mapFile.getData() };
 	// iterate through all the std::strings
 	for (size_t i{ 0 }; i < mapDat.size(); i++)
@@ -122,7 +122,7 @@ void GameWindow::initEntities(unsigned int plNumOfLives)
 				m_player = m_entMgr.createCharacter<Player>(j, i, static_cast<wchar_t>(0x555), plNumOfLives);
 				break;
 			case 'e': // ghost enemy
-				m_entMgr.createCharacter<Ghost>(j, i);
+				m_entMgr.createCharacter<Ghost>(j, i, cRoundGhostSpeedBoost * m_currentRound - 1);
 				break;
 			case '.': // dot that pacman can eat
 				m_entMgr.createCustomBaseEnt(EntityType::Dot, j, i, static_cast<wchar_t>(L'\u25aa'));
@@ -145,14 +145,28 @@ void GameWindow::renderAllEntities()
 	}
 }
 
+void GameWindow::restartGame()
+{
+	innerRestart(false);
+}
+
 void GameWindow::restartRound()
+{
+	innerRestart(true);
+}
+
+// if restartRound == false, then we restart the game instead
+void GameWindow::innerRestart(bool restartRound)
 {
 	m_gameTime = 0.0f;
 	m_resetTimestamp = 0.0f;
-	// get the player lives before this entity gets deleted by clear()
-	unsigned int playerLives{ m_player->getLives() };
+	const unsigned int newPlayerLivesValue{
+		restartRound ? Player::Lives : m_player->getLives()
+	};
 	m_entMgr.getEntities().clear();
-	initEntities(playerLives);
+
+	restartRound ? m_currentRound++ : m_currentRound = 1;
+	initRound(newPlayerLivesValue);
 	m_gameState = GameState::FreezeTime;
 }
 
@@ -164,7 +178,7 @@ EntityMgr& GameWindow::getEntMgr()
 GameWindow::GameWindow(const MapFile& mapFile)
 	: Window(WindowType::GameWindow), m_mapFile{ mapFile }
 {
-	initEntities();
+	initRound();
 	// m_state_begin isn't used for the GameWindow specifically, but
 	// it should be updated anyway
 	m_state_begin = false;

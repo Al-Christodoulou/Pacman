@@ -25,8 +25,8 @@ void Ghost::think()
 
 void Ghost::touch(const ConstEntityArrayIterator&) {}
 
-Ghost::Ghost(int x, int y)
+Ghost::Ghost(int x, int y, float extraSpeed)
 	: Character(x, y, L'&')
 {
-	setSpeed(10.0f);
+	setSpeed(10.0f + extraSpeed);
 }
