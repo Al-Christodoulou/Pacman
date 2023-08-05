@@ -49,11 +49,6 @@ unsigned int Player::getDotsEatenCount() const
 	return m_numDotsEaten;
 }
 
-bool Player::isDead() const
-{
-	return m_isDead;
-}
-
 Player::Player(int x, int y, wchar_t texture, unsigned int numOfLives)
 	: Character{ x, y, texture, EntityType::Player }, m_numOfLives{ numOfLives }
 {}

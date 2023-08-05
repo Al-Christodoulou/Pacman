@@ -53,6 +53,11 @@ bool Character::isYBorderColliding()
 
 float Character::getSpeed() { return m_speed; }
 
+bool Character::isDead() const
+{
+	return m_isDead;
+}
+
 Character::Character(int x, int y, wchar_t texture)
 	: Entity{ x, y, texture, EntityType::Character }
 {}

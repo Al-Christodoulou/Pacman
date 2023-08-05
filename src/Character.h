@@ -10,6 +10,7 @@ private:
 
 protected:
 	void setSpeed(float);
+	bool m_isDead{ false };
 
 public:
 	void moveUp();
@@ -23,6 +24,7 @@ public:
 	bool isYBorderColliding();
 
 	float getSpeed();
+	bool isDead() const;
 
 	virtual void think() = 0;
 	virtual void touch(const ConstEntityArrayIterator&) = 0;
