@@ -30,6 +30,8 @@ public:
 		);
 	}
 
+	const PacmanWindow* getTopWindow() const;
+
 	// quite ugly. in order for a Character to search the entity
 	// array, the sequence of access is:
 	// gPacMan->WindowMgr->GameWindow->EntityMgr

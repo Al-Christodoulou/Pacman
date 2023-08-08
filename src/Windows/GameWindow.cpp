@@ -175,6 +175,11 @@ EntityMgr& GameWindow::getEntMgr()
 	return m_entMgr;
 }
 
+float GameWindow::getGameTime() const
+{
+	return m_gameTime;
+}
+
 GameWindow::GameWindow(const MapFile& mapFile)
 	: Window(WindowType::GameWindow), m_mapFile{ mapFile }
 {

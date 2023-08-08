@@ -37,3 +37,8 @@ EntityMgr* const WindowMgr::tryGetEntMgr()
 		&static_cast<GameWindow*>(m_windowStack.back().get())->getEntMgr() :
 		nullptr;
 }
+
+const PacmanWindow* WindowMgr::getTopWindow() const
+{
+	return m_windowStack.back().get();
+}

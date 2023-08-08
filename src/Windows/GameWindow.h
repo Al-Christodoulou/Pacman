@@ -58,6 +58,7 @@ public:
 	void innerRestart(bool);
 
 	EntityMgr& getEntMgr();
+	float getGameTime() const;
 
 	GameWindow(const MapFile&);
 };
