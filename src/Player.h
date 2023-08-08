@@ -7,6 +7,8 @@ private:
 	unsigned int m_numOfLives;
 	unsigned int m_score{ 0 };
 	unsigned int m_numDotsEaten{ 0 };
+	bool m_canEatEnemies{ false };
+	float m_canEatEnemiesReset{};
 
 public:
 	static constexpr unsigned int Lives{ 3 };
@@ -18,6 +20,7 @@ public:
 	unsigned int getScore() const;
 	unsigned int getLives() const;
 	unsigned int getDotsEatenCount() const;
+	bool canEatEnemies() const;
 
 	Player(int, int, wchar_t, unsigned int = Lives);
 };

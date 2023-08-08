@@ -115,7 +115,7 @@ void GameWindow::initRound(unsigned int plNumOfLives)
 		{
 			switch (mapDat[i][j])
 			{
-			case '#':
+			case '#': // wall
 				m_entMgr.createDefaultEnt(j, i, '#');
 				break;
 			case 'p': // player spawn point
@@ -127,6 +127,9 @@ void GameWindow::initRound(unsigned int plNumOfLives)
 			case '.': // dot that pacman can eat
 				m_entMgr.createCustomBaseEnt(EntityType::Dot, j, i, static_cast<wchar_t>(L'\u25aa'));
 				m_totalDotCount++;
+				break;
+			case '@': // powerup
+				m_entMgr.createCustomBaseEnt(EntityType::Powerup, j, i, static_cast<wchar_t>(L'\u2663'));
 				break;
 			default:
 				break;
