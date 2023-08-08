@@ -13,6 +13,7 @@ public:
 
 	void think() override;
 	void touch(const ConstEntityArrayIterator&) override;
+	void init() override;
 	void decreaseLives();
 	unsigned int getScore() const;
 	unsigned int getLives() const;

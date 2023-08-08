@@ -29,6 +29,8 @@ void Player::touch(const ConstEntityArrayIterator& entIter)
 		m_isDead = true;
 }
 
+void Player::init() {}
+
 void Player::decreaseLives()
 {
 	--m_numOfLives;

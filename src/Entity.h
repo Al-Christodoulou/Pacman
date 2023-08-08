@@ -6,6 +6,7 @@ enum class EntityType
 	Default,
 	Character,
 	Player,
+	Ghost,
 	Dot, // both Dot and Powerup are of type Entity
 	Powerup,
 	max_entity_types
@@ -36,6 +37,9 @@ public:
 	{
 		return !(e1 == e2);
 	}
+
+	// called after all the entities have been created
+	virtual void init() = 0;
 
 	Entity(int, int, wchar_t, EntityType);
 	Entity(wchar_t, EntityType);
