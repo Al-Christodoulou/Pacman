@@ -14,6 +14,23 @@ void Player::think()
 		moveDown();
 	if (gPacMan.isKeyHeld(L'D'))
 		moveRight();
+
+	const PacmanWindow* topWin{ gPacMan.getWindowMgr().getTopWindow() };
+	if (topWin->getWindowType() == WindowType::GameWindow)
+	{
+		const GameWindow* gameWin{ static_cast<const GameWindow*>(topWin) };
+		if (gameWin->getGameTime() > m_canEatEnemiesResetTimestamp)
+			m_canEatEnemies = false;
+
+		if (m_canEatEnemies)
+		{
+			float timeDelta{ gameWin->getGameTime() - m_canEatEnemiesResetTimestamp };
+			if (static_cast<int>(timeDelta) % 2 == 0)
+				setTex(static_cast<wchar_t>(0x555));
+			else
+				setTex(L'%');
+		}
+	}
 }
 
 void Player::touch(const ConstEntityArrayIterator& entIter)
@@ -21,16 +38,20 @@ void Player::touch(const ConstEntityArrayIterator& entIter)
 	switch ((**entIter).getEntType())
 	{
 	case EntityType::Dot:
+	{
 		m_score += 10;
 		m_numDotsEaten++;
 		EntityMgr* entmgr{ gPacMan.getWindowMgr().tryGetEntMgr() };
 
 		entmgr->deleteEntity(entIter);
 		break;
-	case EntityType::Character:
-		m_isDead = true;
+	}
+	case EntityType::Ghost:
+		if (!m_canEatEnemies)
+			m_isDead = true;
 		break;
 	case EntityType::Powerup:
+	{
 		m_canEatEnemies = true;
 		const PacmanWindow* topWin{ gPacMan.getWindowMgr().getTopWindow() };
 		if (topWin->getWindowType() == WindowType::GameWindow)
@@ -39,6 +60,7 @@ void Player::touch(const ConstEntityArrayIterator& entIter)
 			m_canEatEnemiesResetTimestamp = gameWin->getGameTime() + 10.0f;
 		}
 		break;
+	}
 	}
 }
 
