@@ -136,6 +136,17 @@ void GameWindow::initRound(unsigned int plNumOfLives)
 			}
 		}
 	}
+
+	// call init() on all characters
+	for (auto& ent : m_entMgr.getEntities())
+	{
+		if (ent->getEntType() == EntityType::Character ||
+			ent->getEntType() == EntityType::Ghost ||
+			ent->getEntType() == EntityType::Player)
+		{
+			static_cast<Character&>(*ent).init();
+		}
+	}
 }
 
 void GameWindow::renderAllEntities()
@@ -186,6 +197,10 @@ float GameWindow::getGameTime() const
 GameWindow::GameWindow(const MapFile& mapFile)
 	: Window(WindowType::GameWindow), m_mapFile{ mapFile }
 {
+	// BUG: this calls some functions that rely on this window
+	// existing in the window stack, but the moment this
+	// constructor's invoked it isn't moved there yet, causing
+	// a crash
 	initRound();
 	// m_state_begin isn't used for the GameWindow specifically, but
 	// it should be updated anyway
