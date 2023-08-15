@@ -28,6 +28,8 @@ public:
 	wchar_t getTex() const;
 	EntityType getEntType() const;
 
+	void setTex(const wchar_t);
+
 	friend bool operator==(const Entity& e1, const Entity& e2)
 	{
 		return &e1 == &e2;
