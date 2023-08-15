@@ -1,5 +1,6 @@
 #pragma once
 #include "Character.h"
+#include "Player.h"
 
 class Ghost : public Character
 {
