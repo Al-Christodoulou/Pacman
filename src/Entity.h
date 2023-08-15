@@ -38,9 +38,6 @@ public:
 		return !(e1 == e2);
 	}
 
-	// called after all the entities have been created
-	virtual void init() = 0;
-
 	Entity(int, int, wchar_t, EntityType);
 	Entity(wchar_t, EntityType);
 	virtual ~Entity() {};

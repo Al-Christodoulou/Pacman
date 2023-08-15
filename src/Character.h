@@ -28,6 +28,8 @@ public:
 
 	virtual void think() = 0;
 	virtual void touch(const ConstEntityArrayIterator&) = 0;
+	// called after all the entities have been created
+	virtual void init() = 0;
 
 	Character(int, int, wchar_t);
 	Character(int, int, wchar_t, EntityType);
