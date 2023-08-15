@@ -35,8 +35,8 @@ void Player::touch(const ConstEntityArrayIterator& entIter)
 		const PacmanWindow* topWin{ gPacMan.getWindowMgr().getTopWindow() };
 		if (topWin->getWindowType() == WindowType::GameWindow)
 		{
-			const GameWindow* topWin{ static_cast<const GameWindow*>(topWin) };
-			m_canEatEnemiesReset = topWin->getGameTime() + 10.0f;
+			const GameWindow* gameWin{ static_cast<const GameWindow*>(topWin) };
+			m_canEatEnemiesResetTimestamp = gameWin->getGameTime() + 10.0f;
 		}
 		break;
 	}

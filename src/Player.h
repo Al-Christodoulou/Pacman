@@ -8,7 +8,7 @@ private:
 	unsigned int m_score{ 0 };
 	unsigned int m_numDotsEaten{ 0 };
 	bool m_canEatEnemies{ false };
-	float m_canEatEnemiesReset{};
+	float m_canEatEnemiesResetTimestamp{};
 
 public:
 	static constexpr unsigned int Lives{ 3 };
