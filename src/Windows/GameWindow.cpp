@@ -103,6 +103,11 @@ void GameWindow::runLogic()
 		m_state_terminate = true;
 }
 
+void GameWindow::postMoveInit()
+{
+	initRound();
+}
+
 void GameWindow::initRound(unsigned int plNumOfLives)
 {
 	m_totalDotCount = 0;
@@ -197,11 +202,6 @@ float GameWindow::getGameTime() const
 GameWindow::GameWindow(const MapFile& mapFile)
 	: Window(WindowType::GameWindow), m_mapFile{ mapFile }
 {
-	// BUG: this calls some functions that rely on this window
-	// existing in the window stack, but the moment this
-	// constructor's invoked it isn't moved there yet, causing
-	// a crash
-	initRound();
 	// m_state_begin isn't used for the GameWindow specifically, but
 	// it should be updated anyway
 	m_state_begin = false;

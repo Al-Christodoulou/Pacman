@@ -49,6 +49,7 @@ private:
 public:
 	void render() override;
 	void runLogic() override;
+	void postMoveInit() override;
 
 	// the num of lives parameter's used for new game rounds
 	void initRound(unsigned int plNumOfLives = 3);

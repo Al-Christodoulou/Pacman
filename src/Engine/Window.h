@@ -18,6 +18,7 @@ public:
 	//virtual void onBegin() = 0;
 	virtual void render() = 0;
 	virtual void runLogic() = 0;
+	virtual void postMoveInit() {};
 	//virtual void onEnd() = 0;
 
 	Window(WindowTypes winType)

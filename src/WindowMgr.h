@@ -28,6 +28,9 @@ public:
 				util::upcast<PacmanWindow, WinType>(std::move(uniquePtr))
 			)
 		);
+		// call post move init now that the new window has been moved inside
+		// m_windowStack
+		m_windowStack.back()->postMoveInit();
 	}
 
 	const PacmanWindow* getTopWindow() const;
