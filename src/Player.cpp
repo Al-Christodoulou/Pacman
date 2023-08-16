@@ -20,9 +20,11 @@ void Player::think()
 	{
 		const GameWindow* gameWin{ static_cast<const GameWindow*>(topWin) };
 		if (gameWin->getGameTime() > m_canEatEnemiesResetTimestamp)
+		{
 			m_canEatEnemies = false;
-
-		if (m_canEatEnemies)
+			setTex(static_cast<wchar_t>(0x555));
+		}
+		else // the player can eat the enemies
 		{
 			float curTime{ gameWin->getGameTime() };
 			if (static_cast<int>(curTime * 10) % 2 == 0)
@@ -47,7 +49,12 @@ void Player::touch(const ConstEntityArrayIterator& entIter)
 		break;
 	}
 	case EntityType::Ghost:
-		if (!m_canEatEnemies)
+		if (m_canEatEnemies)
+		{
+			EntityMgr* entmgr{ gPacMan.getWindowMgr().tryGetEntMgr() };
+			entmgr->deleteEntity(entIter);
+		}
+		else
 			m_isDead = true;
 		break;
 	case EntityType::Powerup:
