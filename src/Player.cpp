@@ -24,8 +24,8 @@ void Player::think()
 
 		if (m_canEatEnemies)
 		{
-			float timeDelta{ gameWin->getGameTime() - m_canEatEnemiesResetTimestamp };
-			if (static_cast<int>(timeDelta) % 2 == 0)
+			float curTime{ gameWin->getGameTime() };
+			if (static_cast<int>(curTime * 10) % 2 == 0)
 				setTex(static_cast<wchar_t>(0x555));
 			else
 				setTex(L'%');
