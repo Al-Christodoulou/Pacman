@@ -64,8 +64,15 @@ bool EntityMgr::performCollisionTouch(Character& character, const ConstEntityArr
 	if ((**iter).getEntType() == EntityType::Ghost ||
 		(**iter).getEntType() == EntityType::Player)
 	{
-		Character* const curChar{ static_cast<Character* const>(&**iter) };
-		curChar->touch(iter);
+		//Character* const curChar{ static_cast<Character* const>(&**iter) };
+		//curChar->touch(iter);
+
+		// BAD BAD BAD: find a way to make this better!
+		ConstEntityArrayIterator oppositeIter{ m_entities.begin() };
+		while (**oppositeIter != character && oppositeIter != m_entities.end())
+			++oppositeIter;
+		static_cast<Character&>(**iter).touch(oppositeIter);
+
 		if (m_entities.size() != previousTotalEntities)
 			return false;
 	}
