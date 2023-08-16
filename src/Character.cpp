@@ -58,14 +58,10 @@ bool Character::isDead() const
 	return m_isDead;
 }
 
-Character::Character(int x, int y, wchar_t texture)
-	: Entity{ x, y, texture, EntityType::Character }
-{}
-
 Character::Character(int x, int y, wchar_t texture, EntityType enttype)
 	: Entity{ x, y, texture, enttype}
 {}
 
-Character::Character(wchar_t texture)
-	: Entity{ texture, EntityType::Character }
+Character::Character(wchar_t texture, EntityType enttype)
+	: Entity{ texture, enttype }
 {}

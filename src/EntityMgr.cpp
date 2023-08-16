@@ -61,7 +61,8 @@ bool EntityMgr::performCollisionTouch(Character& character, const ConstEntityArr
 	// following if statement
 	previousTotalEntities = m_entities.size();
 
-	if ((**iter).getEntType() == EntityType::Character)
+	if ((**iter).getEntType() == EntityType::Ghost ||
+		(**iter).getEntType() == EntityType::Player)
 	{
 		Character* const curChar{ static_cast<Character* const>(&**iter) };
 		curChar->touch(iter);

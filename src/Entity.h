@@ -4,7 +4,6 @@
 enum class EntityType
 {
 	Default,
-	Character,
 	Player,
 	Ghost,
 	Dot, // both Dot and Powerup are of type Entity

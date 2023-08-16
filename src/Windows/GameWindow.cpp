@@ -51,7 +51,7 @@ void GameWindow::runLogic()
 		while (i < entities.size())
 		{
 			size_t previousSize{ entities.size() };
-			if (entities[i]->getEntType() == EntityType::Character ||
+			if (entities[i]->getEntType() == EntityType::Ghost ||
 				entities[i]->getEntType() == EntityType::Player)
 				static_cast<Character&>(*entities[i]).think();
 
@@ -145,8 +145,7 @@ void GameWindow::initRound(unsigned int plNumOfLives)
 	// call init() on all characters
 	for (auto& ent : m_entMgr.getEntities())
 	{
-		if (ent->getEntType() == EntityType::Character ||
-			ent->getEntType() == EntityType::Ghost ||
+		if (ent->getEntType() == EntityType::Ghost ||
 			ent->getEntType() == EntityType::Player)
 		{
 			static_cast<Character&>(*ent).init();

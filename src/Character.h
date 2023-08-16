@@ -31,7 +31,6 @@ public:
 	// called after all the entities have been created
 	virtual void init() = 0;
 
-	Character(int, int, wchar_t);
 	Character(int, int, wchar_t, EntityType);
-	Character(wchar_t);
+	Character(wchar_t, EntityType);
 };
