@@ -60,6 +60,9 @@ void Player::touch(const ConstEntityArrayIterator& entIter)
 	case EntityType::Powerup:
 	{
 		m_canEatEnemies = true;
+		EntityMgr* entmgr{ gPacMan.getWindowMgr().tryGetEntMgr() };
+		entmgr->deleteEntity(entIter);
+
 		const PacmanWindow* topWin{ gPacMan.getWindowMgr().getTopWindow() };
 		if (topWin->getWindowType() == WindowType::GameWindow)
 		{
