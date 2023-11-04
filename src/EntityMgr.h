@@ -63,10 +63,7 @@ public:
 		return createAnyEnt<CharType>(args...);
 	}
 
-	void deleteEntity(const ConstEntityArrayIterator iter)
-	{
-		m_entities.erase(iter);
-	}
+	void deleteEntity(const ConstEntityArrayIterator);
 
 	// no copying or moving of EntityMgr is allowed
 	EntityMgr(const EntityMgr&) = delete;

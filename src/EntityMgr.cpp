@@ -23,6 +23,11 @@ unsigned int EntityMgr::getArraySize() const
 	return m_entities.size();
 }
 
+void EntityMgr::deleteEntity(const ConstEntityArrayIterator iter)
+{
+	m_entities.erase(iter);
+}
+
 /*
 * Checks if two entities lie in the same position. if so, then we have a
 * violation and this returns true (unless one of the two entities gets
