@@ -198,6 +198,11 @@ float GameWindow::getGameTime() const
 	return m_gameTime;
 }
 
+unsigned int GameWindow::getRound() const
+{
+	return m_currentRound;
+}
+
 GameWindow::GameWindow(const MapFile& mapFile)
 	: Window(WindowType::GameWindow), m_mapFile{ mapFile }
 {

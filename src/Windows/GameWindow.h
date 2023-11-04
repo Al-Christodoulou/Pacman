@@ -52,7 +52,7 @@ public:
 	void postMoveInit() override;
 
 	// the num of lives parameter's used for new game rounds
-	void initRound(unsigned int plNumOfLives = 3);
+	void initRound(unsigned int plNumOfLives = Player::Lives);
 	void renderAllEntities();
 	void restartGame();
 	void restartRound();
@@ -60,6 +60,7 @@ public:
 
 	EntityMgr& getEntMgr();
 	float getGameTime() const;
+	unsigned int getRound() const;
 
 	GameWindow(const MapFile&);
 };
