@@ -58,6 +58,11 @@ bool Character::isDead() const
 	return m_isDead;
 }
 
+void Character::setDead(bool state)
+{
+	m_isDead = state;
+}
+
 Character::Character(int x, int y, wchar_t texture, EntityType enttype)
 	: Entity{ x, y, texture, enttype}
 {}

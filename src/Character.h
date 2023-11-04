@@ -25,6 +25,7 @@ public:
 
 	float getSpeed();
 	bool isDead() const;
+	void setDead(bool);
 
 	virtual void think() = 0;
 	virtual void touch(const ConstEntityArrayIterator&) = 0;
