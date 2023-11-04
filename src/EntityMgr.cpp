@@ -39,7 +39,7 @@ bool EntityMgr::checkViolationFor(Character& character)
 	ConstEntityArrayIterator iter{ m_entities.begin() };
 	while (iter != m_entities.end())
 	{
-		// if we're not checking against the same entity, and the positions differ, we have a
+		// if we're not checking against the same entity, and the positions are equal, we have a
 		// collision
 		if (**iter != static_cast<Entity&>(character) && (**iter).getPos() == character.getPos())
 			return performCollisionTouch(character, iter);
