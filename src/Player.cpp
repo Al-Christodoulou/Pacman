@@ -1,6 +1,7 @@
 #include <Windows.h>
 #include "PacMan.h"
 #include "Player.h"
+#include "Ghost.h"
 #include "EntityMgr.h"
 #include "Windows/GameWindow.h"
 
@@ -51,8 +52,14 @@ void Player::touch(const ConstEntityArrayIterator& entIter)
 	case EntityType::Ghost:
 		if (m_canEatEnemies)
 		{
-			EntityMgr* entmgr{ gPacMan.getWindowMgr().tryGetEntMgr() };
-			entmgr->deleteEntity(entIter);
+			// calling entmgr->deleteEntity(entIter) would cause a crash here,
+			// because entIter will basically delete itself due to the call
+			// chain of:
+			// Ghost::think() => move() => checkViolationFor() =>
+			// => Player::touch(** Ghost iter **)
+			// so instead we just put the ghost in its dead state
+			// and then GameWindow::runLogic() will later perform the deletion
+			static_cast<Ghost&>(**entIter).setDead(true);
 		}
 		else
 			m_isDead = true;

@@ -52,18 +52,21 @@ void GameWindow::runLogic()
 		size_t i{ 0 };
 		while (i < entities.size())
 		{
-			size_t previousSize{ entities.size() };
 			Engine::Log << "Entity #" << i << "'s (" << (int)(&*entities[i]) << ") thinking...\n";
 
 			if (entities[i]->getEntType() == EntityType::Ghost ||
 				entities[i]->getEntType() == EntityType::Player)
 				static_cast<Character&>(*entities[i]).think();
 
-			// since m_entities can be modified through think() (due to it
-			// calling a series of functions leading to checkViolationFor),
-			// if some entity was deleted, the one after took its place, so
-			// the index should not update in this iteration of the loop!
-			if (previousSize == entities.size())
+			if (entities[i]->getEntType() == EntityType::Ghost &&
+				static_cast<Character&>(*entities[i]).isDead())
+			{
+				ConstEntityArrayIterator iter{ m_entMgr.getEntities().begin() };
+				while (**iter != *entities[i] && iter != m_entMgr.getEntities().end())
+					++iter;
+				m_entMgr.deleteEntity(iter);
+			}
+			else
 				i++;
 		}
 		if (m_player->isDead())
