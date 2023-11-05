@@ -20,8 +20,10 @@ void GameWindow::render()
 		gPacMan.swprintf_s(cInfoTextOffset, 20, L"%.0f", cFreezeTime - m_gameTime);
 		break;
 	case GameState::Playing:
+#ifdef _DEBUG
 		gPacMan.swprintf_s(25, L"X: %.3f, Y: %.2f", m_player->getVirtualX(), m_player->getVirtualY());
 		gPacMan.swprintf_s(gScreenWidth, 30, L"DT: %f", Engine::getDeltaTime());
+#endif
 		gPacMan.swprintf_s(cInfoTextOffset, 25, L"Round: %d", m_currentRound);
 		break;
 	case GameState::PlayerDead:
