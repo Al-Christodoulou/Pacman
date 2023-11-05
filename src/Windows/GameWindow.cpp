@@ -51,6 +51,8 @@ void GameWindow::runLogic()
 		while (i < entities.size())
 		{
 			size_t previousSize{ entities.size() };
+			Engine::Log << "Entity #" << i << "'s (" << (int)(&*entities[i]) << ") thinking...\n";
+
 			if (entities[i]->getEntType() == EntityType::Ghost ||
 				entities[i]->getEntType() == EntityType::Player)
 				static_cast<Character&>(*entities[i]).think();
@@ -176,6 +178,9 @@ void GameWindow::restartRound()
 // if restartRound == false, then we restart the game instead
 void GameWindow::innerRestart(bool restartRound)
 {
+	Engine::Log << "*** Restart ***";
+	Engine::Log.flush();
+
 	m_gameTime = 0.0f;
 	m_resetTimestamp = 0.0f;
 	const unsigned int newPlayerLivesValue{

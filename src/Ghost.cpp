@@ -2,6 +2,10 @@
 #include "EntityMgr.h"
 #include "PacMan.h"
 
+#ifdef LOG_ENABLED
+#include <string>
+#endif
+
 void Ghost::think()
 {
 	if (m_targetPlayer) // if we found him
@@ -44,6 +48,9 @@ void Ghost::init()
 
 	const auto ent{ gPacMan.getWindowMgr().tryGetEntMgr()->searchEntity(is_player) };
 	m_targetPlayer = static_cast<const Player*>(ent);
+
+	Engine::Log << "m_targetPlayer is: " << std::to_string((int)m_targetPlayer) << "\n";
+	Engine::Log.flush();
 }
 
 Ghost::Ghost(int x, int y, float extraSpeed)

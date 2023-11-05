@@ -1,6 +1,11 @@
 #include <utility>
 #include "EntityMgr.h"
 
+#ifdef LOG_ENABLED
+#include "PacMan.h"
+#include "Windows/GameWindow.h"
+#endif
+
 const Entity* const EntityMgr::getEntity(unsigned int index) const
 {
 	return index <= m_entities.size() - 1 ? m_entities[index].get() : nullptr;
@@ -25,7 +30,33 @@ unsigned int EntityMgr::getArraySize() const
 
 void EntityMgr::deleteEntity(const ConstEntityArrayIterator iter)
 {
+#ifdef LOG_ENABLED
+	const GameWindow* const gamewin{
+		reinterpret_cast<const GameWindow*>(gPacMan.getWindowMgr().getTopWindow())
+	};
+	std::string line{ std::to_string(gamewin->getGameTime()) };
+	line.reserve(80);
+	line.append(" | Round ");
+	line.append(std::to_string(gamewin->getRound()));
+	line.append(" | Deleting entity at ");
+	line.append(std::to_string(reinterpret_cast<int>(&**iter)));
+	line.append("\n");
+	line.append("=> Player's memory loc is at ");
+	for (const auto& ent : m_entities)
+		if (ent->getEntType() == EntityType::Player)
+			line.append(std::to_string((int)&*ent));
+	line.append("\n");
+	Engine::Log << line;
+	Engine::Log.flush();
+	int address{ (int)(&**iter) };
+#endif
+
 	m_entities.erase(iter);
+
+#ifdef LOG_ENABLED
+	Engine::Log << "Entity at " << address << " deleted!\n";
+	Engine::Log.flush();
+#endif
 }
 
 /*
