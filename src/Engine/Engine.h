@@ -2,6 +2,7 @@
 #include <chrono>
 #include <Windows.h>
 #include "../Constants.h"
+#include "Log.h"
 
 using timep_t = std::chrono::system_clock::time_point;
 
@@ -20,6 +21,8 @@ private:
 	void setupFont();
 	void setupWindowInfo();
 public:
+	static Log Log;
+
 	static void tick();
 	static float getDeltaTime();
 	void updateKeyState(int);

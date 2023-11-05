@@ -3,6 +3,7 @@
 
 timep_t Engine::sTimeNow{ std::chrono::system_clock::now() };
 float Engine::sDeltaTime{ 0.0f };
+Log Engine::Log = Log;
 
 void Engine::setupFont()
 {
