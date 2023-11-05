@@ -17,12 +17,12 @@ void Ghost::think()
 			!m_targetPlayer->canEatEnemies() ? 1.0f : -1.0f
 		};
 
-		if (m_x - m_targetPlayer->getVirtualX() * getAwayMultiplier > 0)
+		if ((m_x - m_targetPlayer->getVirtualX()) * getAwayMultiplier > 0)
 			moveLeft();
 		else
 			moveRight();
 
-		if (m_y - m_targetPlayer->getVirtualY() * getAwayMultiplier > 0)
+		if ((m_y - m_targetPlayer->getVirtualY()) * getAwayMultiplier > 0)
 			moveUp();
 		else
 			moveDown();
