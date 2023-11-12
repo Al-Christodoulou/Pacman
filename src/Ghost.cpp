@@ -49,8 +49,10 @@ void Ghost::init()
 	const auto ent{ gPacMan.getWindowMgr().tryGetEntMgr()->searchEntity(is_player) };
 	m_targetPlayer = static_cast<const Player*>(ent);
 
+#ifdef LOG_ENABLED
 	Engine::Log << "m_targetPlayer is: " << std::to_string((int)m_targetPlayer) << "\n";
 	Engine::Log.flush();
+#endif
 }
 
 Ghost::Ghost(int x, int y, float extraSpeed)

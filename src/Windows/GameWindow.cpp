@@ -58,9 +58,11 @@ void GameWindow::runLogic()
 				entities[i]->getEntType() == EntityType::Player)
 				static_cast<Character&>(*entities[i]).think();
 
+			// delete this Ghost if the Player has eaten it
 			if (entities[i]->getEntType() == EntityType::Ghost &&
 				static_cast<Character&>(*entities[i]).isDead())
 			{
+				// quite a slow way of doing things
 				ConstEntityArrayIterator iter{ m_entMgr.getEntities().begin() };
 				while (**iter != *entities[i] && iter != m_entMgr.getEntities().end())
 					++iter;

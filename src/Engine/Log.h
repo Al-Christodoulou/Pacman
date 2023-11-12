@@ -1,6 +1,7 @@
 #pragma once
 #include <fstream>
 
+// default behavior
 #ifdef _DEBUG
 #define LOG_ENABLED
 #endif
