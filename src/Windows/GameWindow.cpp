@@ -139,9 +139,17 @@ void GameWindow::initRound(unsigned int plNumOfLives)
 				m_entMgr.createCharacter<Ghost>(j, i, cRoundGhostSpeedBoost * m_currentRound - 1);
 				break;
 			case '.': // dot that pacman can eat
-				m_entMgr.createCustomBaseEnt(EntityType::Dot, j, i, static_cast<wchar_t>(L'\u25aa'));
-				m_totalDotCount++;
+			{
+				const auto setIter{ m_blacklistedDotPositions.find(j + i * gScreenWidth) };
+				if (setIter == m_blacklistedDotPositions.end())
+				{
+					m_entMgr.createCustomBaseEnt(EntityType::Dot, j, i, static_cast<wchar_t>(L'\u25aa'));
+					m_totalDotCount++;
+				}
+				else
+					malloc(10);
 				break;
+			}
 			case '@': // powerup
 				m_entMgr.createCustomBaseEnt(EntityType::Powerup, j, i, static_cast<wchar_t>(L'\u2663'));
 				break;
@@ -190,12 +198,18 @@ void GameWindow::innerRestart(bool restartRound)
 
 	m_gameTime = 0.0f;
 	m_resetTimestamp = 0.0f;
-	const unsigned int newPlayerLivesValue{
-		restartRound ? Player::Lives : m_player->getLives()
-	};
+	const unsigned int newPlayerLivesValue{ m_player->getLives() };
 	m_entMgr.getEntities().clear();
 
-	restartRound ? m_currentRound++ : m_currentRound = 1;
+	if (restartRound)
+	{
+		m_currentRound++;
+		// if all dots were eaten, reset
+		if (m_blacklistedDotPositions.size() == m_totalDotCount)
+			m_blacklistedDotPositions.clear();
+	}
+	else
+		m_blacklistedDotPositions.clear();
 	initRound(newPlayerLivesValue);
 	m_gameState = GameState::FreezeTime;
 }

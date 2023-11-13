@@ -44,7 +44,14 @@ void Player::touch(const ConstEntityArrayIterator& entIter)
 	{
 		m_score += 10;
 		m_numDotsEaten++;
-		EntityMgr* entmgr{ gPacMan.getWindowMgr().tryGetEntMgr() };
+
+		WindowMgr& winmgr{ gPacMan.getWindowMgr() };
+		EntityMgr* entmgr{ winmgr.tryGetEntMgr() };
+		if (winmgr.getTopWindow()->getWindowType() == WindowType::GameWindow)
+		{
+			reinterpret_cast<GameWindow*>(winmgr.getTopWindow())
+				->addBlacklistedDotPos(**entIter);
+		}
 
 		entmgr->deleteEntity(entIter);
 		break;
