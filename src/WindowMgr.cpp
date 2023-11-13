@@ -38,7 +38,7 @@ EntityMgr* const WindowMgr::tryGetEntMgr()
 		nullptr;
 }
 
-const PacmanWindow* WindowMgr::getTopWindow() const
+PacmanWindow* WindowMgr::getTopWindow()
 {
 	return m_windowStack.back().get();
 }

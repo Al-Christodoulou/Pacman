@@ -33,7 +33,7 @@ public:
 		m_windowStack.back()->postMoveInit();
 	}
 
-	const PacmanWindow* getTopWindow() const;
+	PacmanWindow* getTopWindow();
 
 	// quite ugly. in order for a Character to search the entity
 	// array, the sequence of access is:
