@@ -146,8 +146,6 @@ void GameWindow::initRound(unsigned int plNumOfLives)
 					m_entMgr.createCustomBaseEnt(EntityType::Dot, j, i, static_cast<wchar_t>(L'\u25aa'));
 					m_totalDotCount++;
 				}
-				else
-					malloc(10);
 				break;
 			}
 			case '@': // powerup
