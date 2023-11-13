@@ -1,4 +1,5 @@
 #pragma once
+#include <set>
 #include "../Engine/Window.h"
 #include "../EntityMgr.h"
 #include "../Player.h"
@@ -20,6 +21,9 @@ private:
 
 	EntityMgr m_entMgr{};
 	Player* m_player{ nullptr };
+	// an array of dots that won't respawn for the current game
+	// (since the player's already eaten them in previous rounds)
+	std::set<unsigned int> m_blacklistedDotPositions{};
 	// the total amount of dots that the map has
 	unsigned int m_totalDotCount{};
 	unsigned int m_currentRound{ 1 };
@@ -57,6 +61,7 @@ public:
 	void restartGame();
 	void restartRound();
 	void innerRestart(bool);
+	void addBlacklistedDotPos(const Entity&);
 
 	EntityMgr& getEntMgr();
 	float getGameTime() const;

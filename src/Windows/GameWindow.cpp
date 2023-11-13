@@ -200,6 +200,11 @@ void GameWindow::innerRestart(bool restartRound)
 	m_gameState = GameState::FreezeTime;
 }
 
+void GameWindow::addBlacklistedDotPos(const Entity& ent)
+{
+	m_blacklistedDotPositions.insert(ent.getPos());
+}
+
 EntityMgr& GameWindow::getEntMgr()
 {
 	return m_entMgr;
