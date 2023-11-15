@@ -58,9 +58,7 @@ public:
 	// the num of lives parameter's used for new game rounds
 	void initRound(unsigned int plNumOfLives = Player::Lives);
 	void renderAllEntities();
-	void restartGame();
-	void restartRound();
-	void innerRestart(bool);
+	void restartRound(bool);
 	void addBlacklistedDotPos(const Entity&);
 
 	EntityMgr& getEntMgr();

@@ -95,13 +95,13 @@ void GameWindow::runLogic()
 				gPacMan.getWindowMgr().pushAnyWindow<MessageWindow>(24, 7, L"You lost the game...", L"");
 				return;
 			}
-			restartGame();
+			restartRound(false);
 		}
 		break;
 	case GameState::RoundWon:
 		if (m_gameTime > m_resetTimestamp)
 		{
-			restartRound();
+			restartRound(true);
 		}
 		break;
 	}
@@ -178,37 +178,25 @@ void GameWindow::renderAllEntities()
 	}
 }
 
-void GameWindow::restartGame()
-{
-	innerRestart(false);
-}
-
-void GameWindow::restartRound()
-{
-	innerRestart(true);
-}
-
 // if restartRound == false, then we restart the game instead
-void GameWindow::innerRestart(bool restartRound)
+void GameWindow::restartRound(bool roundWon)
 {
 	Engine::Log << "*** Restart ***";
 	Engine::Log.flush();
 
 	m_gameTime = 0.0f;
 	m_resetTimestamp = 0.0f;
-	const unsigned int newPlayerLivesValue{ m_player->getLives() };
+	const unsigned int playerLivesValue{ m_player->getLives() };
 	m_entMgr.getEntities().clear();
 
-	if (restartRound)
+	if (roundWon)
 	{
 		m_currentRound++;
 		// if all dots were eaten, reset
 		if (m_blacklistedDotPositions.size() == m_totalDotCount)
 			m_blacklistedDotPositions.clear();
 	}
-	else
-		m_blacklistedDotPositions.clear();
-	initRound(newPlayerLivesValue);
+	initRound(playerLivesValue);
 	m_gameState = GameState::FreezeTime;
 }
 
