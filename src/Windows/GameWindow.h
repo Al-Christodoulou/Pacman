@@ -20,7 +20,7 @@ private:
 	} m_gameState{ GameState::FreezeTime };
 
 	EntityMgr m_entMgr{};
-	Player* m_player{ nullptr };
+	SharedEntityPtr m_player{};
 	// an array of dots that won't respawn for the current game
 	// (since the player's already eaten them in previous rounds)
 	std::set<unsigned int> m_blacklistedDotPositions{};
@@ -49,6 +49,8 @@ private:
 		gScreenWidth * gPlayableSpaceHeight +
 		gScreenWidth * 2 + 6
 	};
+
+	Player* const getPlayer() const;
 
 public:
 	void render() override;

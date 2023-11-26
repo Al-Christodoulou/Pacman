@@ -7,12 +7,18 @@
 #include "../Ghost.h"
 #include "../MapFile.h"
 
+Player* const GameWindow::getPlayer() const
+{
+	return static_cast<Player* const>(m_player.get());
+}
+
 void GameWindow::render()
 {
 	gPacMan.fillscreen(L' ');
 	renderAllEntities();
-	gPacMan.swprintf_s(cPlayerLivesTextOffset, 20, L"Lives: %d", m_player->getLives());
-	gPacMan.swprintf_s(cPlayerScoreTextOffset, 20, L"Score: %d", m_player->getScore());
+
+	gPacMan.swprintf_s(cPlayerLivesTextOffset, 20, L"Lives: %d", getPlayer()->getLives());
+	gPacMan.swprintf_s(cPlayerScoreTextOffset, 20, L"Score: %d", getPlayer()->getScore());
 
 	switch (m_gameState)
 	{
@@ -21,7 +27,10 @@ void GameWindow::render()
 		break;
 	case GameState::Playing:
 #ifdef _DEBUG
-		gPacMan.swprintf_s(25, L"X: %.3f, Y: %.2f", m_player->getVirtualX(), m_player->getVirtualY());
+		gPacMan.swprintf_s(25, L"X: %.3f, Y: %.2f",
+			getPlayer()->getVirtualX(),
+			getPlayer()->getVirtualY()
+		);
 		gPacMan.swprintf_s(gScreenWidth, 30, L"DT: %f", Engine::getDeltaTime());
 #endif
 		gPacMan.swprintf_s(cInfoTextOffset, 25, L"Round: %d", m_currentRound);
@@ -71,13 +80,13 @@ void GameWindow::runLogic()
 			else
 				i++;
 		}
-		if (m_player->isDead())
+		if (getPlayer()->isDead())
 		{
 			m_resetTimestamp = m_gameTime + 2.0f;
 			m_gameState = GameState::PlayerDead;
 		}
 		// if the player ate all the dots, he won the round
-		if (m_player->getDotsEatenCount() == m_totalDotCount)
+		if (getPlayer()->getDotsEatenCount() == m_totalDotCount)
 		{
 			m_resetTimestamp = m_gameTime + 2.0f;
 			m_gameState = GameState::RoundWon;
@@ -87,9 +96,9 @@ void GameWindow::runLogic()
 	case GameState::PlayerDead:
 		if (m_gameTime > m_resetTimestamp)
 		{
-			m_player->decreaseLives();
+			getPlayer()->decreaseLives();
 			// if the game's lost, popup a message and quit the map
-			if (m_player->getLives() == 0)
+			if (getPlayer()->getLives() == 0)
 			{
 				m_state_terminate = true;
 				gPacMan.getWindowMgr().pushAnyWindow<MessageWindow>(24, 7, L"You lost the game...", L"");
@@ -121,6 +130,7 @@ void GameWindow::initRound(unsigned int plNumOfLives)
 {
 	m_totalDotCount = 0;
 	const MapDataArray& mapDat{ m_mapFile.getData() };
+
 	// iterate through all the std::strings
 	for (size_t i{ 0 }; i < mapDat.size(); i++)
 	{
@@ -133,7 +143,17 @@ void GameWindow::initRound(unsigned int plNumOfLives)
 				m_entMgr.createDefaultEnt(j, i, '#');
 				break;
 			case 'p': // player spawn point
-				m_player = m_entMgr.createCharacter<Player>(j, i, static_cast<wchar_t>(0x555), plNumOfLives);
+				if (!m_player)
+				{
+					m_player = std::shared_ptr{
+						m_entMgr.createCharacter<Player>(j, i, static_cast<wchar_t>(0x555), plNumOfLives)
+					};
+				}
+				else
+				{
+					getPlayer()->roundReset(j, i);
+					m_entMgr.moveEnt(m_player);
+				}
 				break;
 			case 'e': // ghost enemy
 				m_entMgr.createCharacter<Ghost>(j, i, cRoundGhostSpeedBoost * m_currentRound - 1);
@@ -178,7 +198,6 @@ void GameWindow::renderAllEntities()
 	}
 }
 
-// if restartRound == false, then we restart the game instead
 void GameWindow::restartRound(bool roundWon)
 {
 	Engine::Log << "*** Restart ***";
@@ -186,7 +205,7 @@ void GameWindow::restartRound(bool roundWon)
 
 	m_gameTime = 0.0f;
 	m_resetTimestamp = 0.0f;
-	const unsigned int playerLivesValue{ m_player->getLives() };
+	const unsigned int playerLivesValue{ getPlayer()->getLives() };
 	m_entMgr.getEntities().clear();
 
 	if (roundWon)

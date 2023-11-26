@@ -17,7 +17,7 @@ EntityArray& EntityMgr::getEntities()
 	return m_entities;
 }
 
-const Entity* const EntityMgr::searchEntity(bool (*criteria)(const std::unique_ptr<Entity>& ent)) const
+const Entity* const EntityMgr::searchEntity(bool (*criteria)(const SharedEntityPtr& ent)) const
 {
 	auto iterator{ std::find_if(m_entities.begin(), m_entities.end(), criteria) };
 	return iterator != std::end(m_entities) ? (*iterator).get() : nullptr;
@@ -26,6 +26,23 @@ const Entity* const EntityMgr::searchEntity(bool (*criteria)(const std::unique_p
 unsigned int EntityMgr::getArraySize() const
 {
 	return m_entities.size();
+}
+
+void EntityMgr::moveEnt(SharedEntityPtr& ent)
+{
+	// if for some reason this entity already exists inside
+	// m_entities, don't accidently push it back twice
+	for (const auto& curEnt : m_entities)
+		if (*curEnt == *ent)
+		{
+#ifdef LOG_ENABLED
+			Engine::Log << "Attempted to push back a "
+				"duplicated shared pointer, ignoring.\n";
+			Engine::Log.flush();
+#endif
+			return;
+		}
+	m_entities.emplace_back(ent);
 }
 
 void EntityMgr::deleteEntity(const ConstEntityArrayIterator iter)

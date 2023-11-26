@@ -42,7 +42,7 @@ void Ghost::touch(const ConstEntityArrayIterator& iter)
 
 void Ghost::init()
 {
-	auto is_player{ [](const std::unique_ptr<Entity>& ent) {
+	auto is_player{ [](const SharedEntityPtr& ent) {
 		return ent.get()->getEntType() == EntityType::Player;
 	} };
 
