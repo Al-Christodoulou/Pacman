@@ -50,21 +50,21 @@ void MessageWindow::renderVertCont(unsigned int topLeftPosRow, unsigned int topL
 	}
 }
 
-void MessageWindow::renderText(unsigned int topLeftPosRow, unsigned int topLeftPosColumn, unsigned int topRightPosColumn, unsigned int bottomLeftPosRow)
+// calculate the middle point between 2 columns, then adjust it for the text length
+// (...-txtSize/2), so you get the right offset for the 1st character of the string
+// you want to show on the window, so in the end it's oriented in the middle
+unsigned int MessageWindow::calcOffsetCenteredText(unsigned int col1, unsigned int col2, unsigned int txtSize)
 {
-	// a lambda for wrapping up offset calculations. calculate the middle point between
-	// 2 columns, then adjust it for the text length (...-txtSize/2) so you get the
-	// right offset for the 1st character of the string you want to show on the window,
-	// so in the end it's oriented in the middle
-	auto calcOffset{ [](unsigned int col1, unsigned int col2, unsigned int txtSize) {
-		return (col1 + col2) / 2 - txtSize / 2;
-	} };
+	return (col1 + col2) / 2 - txtSize / 2;
+}
 
-	// the distance (+1) of the title and the OK button from the top & bottom borders
-	constexpr unsigned int textBorderDist{ 2 };
-
+void MessageWindow::renderText(unsigned int topLeftPosRow, unsigned int topLeftPosColumn,
+							unsigned int topRightPosColumn, unsigned int bottomLeftPosRow)
+{
 	// the title, rendered 3 (textBorderDist) rows after the top border
-	gPacMan.sendDataf(m_title.data(), m_title.size(), topLeftPosRow + textBorderDist, calcOffset(topLeftPosColumn, topRightPosColumn, m_title.size()));
+	gPacMan.sendDataf(m_title.data(), m_title.size(), topLeftPosRow + m_textBorderDist,
+					calcOffsetCenteredText(topLeftPosColumn, topRightPosColumn, m_title.size())
+	);
 
 	unsigned int linesNeeded{ static_cast<unsigned int>(
 		std::ceil(static_cast<float>(m_msg.size()) / m_width)
@@ -77,16 +77,21 @@ void MessageWindow::renderText(unsigned int topLeftPosRow, unsigned int topLeftP
 			m_msg.size() - (linesNeeded - 1) * (m_width - 1):
 			m_width - 1
 		};
-		const unsigned int textRow{ topLeftPosRow + textBorderDist * 2 + i };
+		const unsigned int textRow{ topLeftPosRow + m_textBorderDist * 2 + i };
 		// it's topLeftPosColumn + 1 so it goes one block right from the border. i don't understand
 		// why this isn't an issue with topRightPosColumn, maybe it's textSize limiting it?
-		const unsigned int textColumn{ calcOffset(topLeftPosColumn + 1, topRightPosColumn, textSize) };
+		const unsigned int textColumn{ calcOffsetCenteredText(topLeftPosColumn + 1, topRightPosColumn, textSize) };
 
 		gPacMan.sendDataf(m_msg.data() + (m_width - 1) * i, textSize, textRow, textColumn);
 	}
 
-	// the "OK" text, rendered 3 (textBorderDist) rows before the bottom border
-	gPacMan.sendDataf(L"> OK <", 6, bottomLeftPosRow - textBorderDist, calcOffset(topLeftPosColumn, topRightPosColumn, 6));
+	if (m_hasOKButton)
+	{
+		// the "OK" text, rendered 3 (textBorderDist) rows before the bottom border
+		gPacMan.sendDataf(L"> OK <", 6, bottomLeftPosRow - m_textBorderDist,
+						calcOffsetCenteredText(topLeftPosColumn, topRightPosColumn, 6)
+		);
+	}
 }
 
 void MessageWindow::runLogic()
