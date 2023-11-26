@@ -95,6 +95,10 @@ void MessageWindow::runLogic()
 		m_state_terminate = true;
 }
 
-MessageWindow::MessageWindow(unsigned int width, unsigned int height, std::wstring_view title, std::wstring_view msg)
-	: m_width{ width }, m_height{ height }, m_title{ title }, m_msg{ msg }, Window{ WindowType::Other }
+MessageWindow::MessageWindow(unsigned int width, unsigned int height,
+							std::wstring_view title, std::wstring_view msg,
+							unsigned int textBorderDist, bool hasOKButton)
+	: m_width{ width }, m_height{ height }, m_title{ title },
+	m_msg{ msg }, Window{ WindowType::Other }, m_textBorderDist{ textBorderDist },
+	m_hasOKButton{ hasOKButton }
 {}

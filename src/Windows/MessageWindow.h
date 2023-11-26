@@ -8,8 +8,11 @@
 class MessageWindow : public Window<WindowType>
 {
 private:
-	unsigned int m_width, m_height;
-	std::wstring_view m_title, m_msg;
+	// m_textBorderDist is the distance (+1) of the title
+	// and the OK button from the top & bottom borders
+	const unsigned int m_width, m_height, m_textBorderDist;
+	const std::wstring_view m_title, m_msg;
+	const bool m_hasOKButton;
 
 public:
 	void render() override;
@@ -20,6 +23,7 @@ public:
 	void renderText(unsigned int, unsigned int, unsigned int, unsigned int);
 	void runLogic() override;
 
-	// width, height, title, message text
-	MessageWindow(unsigned int, unsigned int, std::wstring_view, std::wstring_view);
+	// width, height, title, message text, text border distance, has OK button
+	MessageWindow(unsigned int, unsigned int, std::wstring_view, std::wstring_view,
+				unsigned int = 2, bool = true);
 };
