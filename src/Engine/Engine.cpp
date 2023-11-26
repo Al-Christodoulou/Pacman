@@ -3,14 +3,15 @@
 
 timep_t Engine::sTimeNow{ std::chrono::system_clock::now() };
 float Engine::sDeltaTime{ 0.0f };
+Log Engine::Log = Log;
 
 void Engine::setupFont()
 {
 	CONSOLE_FONT_INFOEX fontInfo{};
 	fontInfo.cbSize = sizeof(fontInfo);
 	fontInfo.nFont = 0;
-	fontInfo.dwFontSize.X = 12;
-	fontInfo.dwFontSize.Y = 16;
+	fontInfo.dwFontSize.X = 14;
+	fontInfo.dwFontSize.Y = 18;
 	fontInfo.FontFamily = FF_DONTCARE;
 	fontInfo.FontWeight = FF_DONTCARE;
 	wcscpy_s(fontInfo.FaceName, L"Consolas");

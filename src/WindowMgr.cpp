@@ -28,12 +28,17 @@ bool WindowMgr::update()
 	return true;
 }
 
-const EntityMgr* const WindowMgr::tryGetEntMgr() const
+EntityMgr* const WindowMgr::tryGetEntMgr()
 {
 	if (m_windowStack.empty())
 		return nullptr;
 
 	return m_windowStack.back()->getWindowType() == WindowType::GameWindow ?
-		&static_cast<const GameWindow*>(m_windowStack.back().get())->getEntMgr() :
+		&static_cast<GameWindow*>(m_windowStack.back().get())->getEntMgr() :
 		nullptr;
+}
+
+PacmanWindow* WindowMgr::getTopWindow()
+{
+	return m_windowStack.back().get();
 }

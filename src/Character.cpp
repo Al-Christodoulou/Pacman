@@ -48,15 +48,25 @@ bool Character::isXBorderColliding()
 bool Character::isYBorderColliding()
 {
 	return m_y < 0 ||
-		static_cast<unsigned int>(m_y) >= gScreenHeight;
+		static_cast<unsigned int>(m_y) >= gPlayableSpaceHeight;
 }
 
 float Character::getSpeed() { return m_speed; }
 
-Character::Character(int x, int y, wchar_t texture)
-	: Entity{ x, y, texture, EntityType::Character }
+bool Character::isDead() const
+{
+	return m_isDead;
+}
+
+void Character::setDead(bool state)
+{
+	m_isDead = state;
+}
+
+Character::Character(int x, int y, wchar_t texture, EntityType enttype)
+	: Entity{ x, y, texture, enttype}
 {}
 
-Character::Character(wchar_t texture)
-	: Entity{ texture, EntityType::Character }
+Character::Character(wchar_t texture, EntityType enttype)
+	: Entity{ texture, enttype }
 {}

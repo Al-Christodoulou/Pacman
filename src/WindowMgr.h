@@ -28,7 +28,12 @@ public:
 				util::upcast<PacmanWindow, WinType>(std::move(uniquePtr))
 			)
 		);
+		// call post move init now that the new window has been moved inside
+		// m_windowStack
+		m_windowStack.back()->postMoveInit();
 	}
+
+	PacmanWindow* getTopWindow();
 
 	// quite ugly. in order for a Character to search the entity
 	// array, the sequence of access is:
@@ -37,5 +42,5 @@ public:
 	// useful to have anyway, but you also need one for GameWindow
 	// by WindowMgr, which "pollutes" the class with more methods
 	// just for one unique behavior of a Window. it's okay for now
-	const EntityMgr* const tryGetEntMgr() const;
+	EntityMgr* const tryGetEntMgr();
 };

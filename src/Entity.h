@@ -4,7 +4,10 @@
 enum class EntityType
 {
 	Default,
-	Character,
+	Player,
+	Ghost,
+	Dot, // both Dot and Powerup are of type Entity
+	Powerup,
 	max_entity_types
 };
 
@@ -23,6 +26,19 @@ public:
 	float getVirtualY() const;
 	wchar_t getTex() const;
 	EntityType getEntType() const;
+
+	void setTex(const wchar_t);
+	void teleportTo(unsigned int, unsigned int);
+
+	friend bool operator==(const Entity& e1, const Entity& e2)
+	{
+		return &e1 == &e2;
+	}
+
+	friend bool operator!=(const Entity& e1, const Entity& e2)
+	{
+		return !(e1 == e2);
+	}
 
 	Entity(int, int, wchar_t, EntityType);
 	Entity(wchar_t, EntityType);

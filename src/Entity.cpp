@@ -23,6 +23,12 @@ float Entity::getVirtualY() const
 
 wchar_t Entity::getTex() const { return m_texture; }
 EntityType Entity::getEntType() const { return m_entitytype; }
+void Entity::setTex(const wchar_t newTex) { m_texture = newTex; }
+void Entity::teleportTo(unsigned int x, unsigned int y)
+{
+	m_x = static_cast<float>(x);
+	m_y = static_cast<float>(y);
+}
 
 Entity::Entity(int x, int y, wchar_t texture, EntityType enttype)
 {

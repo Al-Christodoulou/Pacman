@@ -1,10 +1,8 @@
 #pragma once
 #include <chrono>
 #include <Windows.h>
-
-constexpr unsigned int gScreenWidth{ 120 };
-constexpr unsigned int gScreenHeight{ 40 };
-constexpr unsigned int gScreenTotalPxs{ gScreenWidth * gScreenHeight };
+#include "../Constants.h"
+#include "Log.h"
 
 using timep_t = std::chrono::system_clock::time_point;
 
@@ -23,6 +21,8 @@ private:
 	void setupFont();
 	void setupWindowInfo();
 public:
+	static Log Log;
+
 	static void tick();
 	static float getDeltaTime();
 	void updateKeyState(int);

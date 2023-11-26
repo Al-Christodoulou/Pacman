@@ -75,6 +75,9 @@
     <ClCompile Include="src\Windows\MessageWindow.cpp">
       <Filter>Source Files\Windows</Filter>
     </ClCompile>
+    <ClCompile Include="src\Engine\Log.cpp">
+      <Filter>Source Files\Engine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\PacMan.h">
@@ -132,6 +135,15 @@
       <Filter>Header Files\Windows</Filter>
     </ClInclude>
     <ClInclude Include="src\Engine\CustomInt.h">
+      <Filter>Header Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Constants.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\EntityMgrTypedefs.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\Log.h">
       <Filter>Header Files\Engine</Filter>
     </ClInclude>
   </ItemGroup>

@@ -1,9 +1,17 @@
 #pragma once
 #include "Character.h"
+#include "Player.h"
 
 class Ghost : public Character
 {
+private:
+	bool m_isVulnerable{ false };
+	const Player* m_targetPlayer{};
+
 public:
 	void think() override;
-	Ghost(int, int);
+	void touch(const ConstEntityArrayIterator&) override;
+	void init() override;
+
+	Ghost(int, int, float);
 };

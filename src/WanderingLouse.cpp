@@ -23,6 +23,9 @@ void WanderingLouse::think()
 	}
 }
 
+void WanderingLouse::touch(const ConstEntityArrayIterator&) {}
+void WanderingLouse::init() {}
+
 WanderingLouse::WanderingLouse(int x, int y)
-	: Character{ x, y, L'@' }
+	: Character{ x, y, L'@', EntityType::Default }
 {}

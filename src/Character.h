@@ -1,5 +1,6 @@
 #pragma once
-#include "Entity.h"
+#include <vector>
+#include "EntityMgrTypedefs.h"
 
 // an abstract class that defines a movable entity with thinking logic
 class Character : public Entity
@@ -9,6 +10,7 @@ private:
 
 protected:
 	void setSpeed(float);
+	bool m_isDead{ false };
 
 public:
 	void moveUp();
@@ -22,19 +24,14 @@ public:
 	bool isYBorderColliding();
 
 	float getSpeed();
+	bool isDead() const;
+	void setDead(bool);
 
 	virtual void think() = 0;
+	virtual void touch(const ConstEntityArrayIterator&) = 0;
+	// called after all the entities have been created
+	virtual void init() = 0;
 
-	friend bool operator==(const Character& c1, const Character& c2)
-	{
-		return &c1 == &c2;
-	}
-
-	friend bool operator!=(const Character& c1, const Character& c2)
-	{
-		return !(c1 == c2);
-	}
-
-	Character(int, int, wchar_t);
-	Character(wchar_t);
+	Character(int, int, wchar_t, EntityType);
+	Character(wchar_t, EntityType);
 };
