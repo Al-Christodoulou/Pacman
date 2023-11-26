@@ -23,6 +23,9 @@ public:
 	void renderText(unsigned int, unsigned int, unsigned int, unsigned int);
 	void runLogic() override;
 
+	void setTitle(const std::wstring&);
+	void setMessage(const std::wstring&);
+
 	static unsigned int calcOffsetCenteredText(unsigned int, unsigned int, unsigned int);
 
 	// width, height, title, message text, text border distance, has OK button

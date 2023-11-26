@@ -77,7 +77,7 @@ void MessageWindow::renderText(unsigned int topLeftPosRow, unsigned int topLeftP
 			m_msg.size() - (linesNeeded - 1) * (m_width - 1):
 			m_width - 1
 		};
-		const unsigned int textRow{ topLeftPosRow + m_textBorderDist * 2 + i };
+		const unsigned int textRow{ topLeftPosRow + m_textBorderDist + i };
 		// it's topLeftPosColumn + 1 so it goes one block right from the border. i don't understand
 		// why this isn't an issue with topRightPosColumn, maybe it's textSize limiting it?
 		const unsigned int textColumn{ calcOffsetCenteredText(topLeftPosColumn + 1, topRightPosColumn, textSize) };
@@ -98,6 +98,16 @@ void MessageWindow::runLogic()
 {
 	if (gPacMan.isKeyTapped(VK_RETURN))
 		m_state_terminate = true;
+}
+
+void MessageWindow::setTitle(const std::wstring& title)
+{
+	m_title = title;
+}
+
+void MessageWindow::setMessage(const std::wstring& msg)
+{
+	m_msg = msg;
 }
 
 MessageWindow::MessageWindow(unsigned int width, unsigned int height,
