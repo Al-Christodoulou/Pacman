@@ -126,7 +126,7 @@ void GameWindow::postMoveInit()
 	initRound();
 }
 
-void GameWindow::initRound(unsigned int plNumOfLives)
+void GameWindow::initRound()
 {
 	m_totalDotCount = 0;
 	const MapDataArray& mapDat{ m_mapFile.getData() };
@@ -146,7 +146,7 @@ void GameWindow::initRound(unsigned int plNumOfLives)
 				if (!m_player)
 				{
 					m_player = std::shared_ptr{
-						m_entMgr.createCharacter<Player>(j, i, static_cast<wchar_t>(0x555), plNumOfLives)
+						m_entMgr.createCharacter<Player>(j, i, static_cast<wchar_t>(0x555))
 					};
 				}
 				else
@@ -215,7 +215,7 @@ void GameWindow::restartRound(bool roundWon)
 		if (m_blacklistedDotPositions.size() == m_totalDotCount)
 			m_blacklistedDotPositions.clear();
 	}
-	initRound(playerLivesValue);
+	initRound();
 	m_gameState = GameState::FreezeTime;
 }
 

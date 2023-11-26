@@ -58,7 +58,7 @@ public:
 	void postMoveInit() override;
 
 	// the num of lives parameter's used for new game rounds
-	void initRound(unsigned int plNumOfLives = Player::Lives);
+	void initRound();
 	void renderAllEntities();
 	void restartRound(bool);
 	void addBlacklistedDotPos(const Entity&);
