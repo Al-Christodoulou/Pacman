@@ -3,7 +3,7 @@
 #include "../Engine/Window.h"
 #include "../WindowTypes.h"
 
-// a simple Message Window with an "OK" button. it renders
+// a simple Message Window with an optional "OK" button. it renders
 // on the middle of the screen
 class MessageWindow : public Window<WindowType>
 {

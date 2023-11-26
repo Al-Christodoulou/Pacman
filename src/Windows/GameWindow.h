@@ -21,7 +21,7 @@ private:
 
 	EntityMgr m_entMgr{};
 	SharedEntityPtr m_player{};
-	// an array of dots that won't respawn for the current game
+	// a set of dots that won't respawn for the current round
 	// (since the player's already eaten them in previous rounds)
 	std::set<unsigned int> m_blacklistedDotPositions{};
 	// the total amount of dots that the map has
