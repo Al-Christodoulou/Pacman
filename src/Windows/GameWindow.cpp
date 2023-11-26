@@ -23,8 +23,17 @@ void GameWindow::render()
 	switch (m_gameState)
 	{
 	case GameState::FreezeTime:
-		gPacMan.swprintf_s(cInfoTextOffset, 20, L"%.0f", cFreezeTime - m_gameTime);
+	{
+		int intTimeMult10{ static_cast<int>((cFreezeTime - m_gameTime) * 10) };
+		// small optimization hack so std::to_wstring isn't called every frame
+		// but only when the integer part of cFreezeTime - m_gameTime changes
+		if (intTimeMult10 % 10 == 0)
+			m_infoWindow.setMessage(std::to_wstring(static_cast<int>
+				(cFreezeTime - m_gameTime))
+			);
+		m_infoWindow.render();
 		break;
+	}
 	case GameState::Playing:
 #ifdef _DEBUG
 		gPacMan.swprintf_s(25, L"X: %.3f, Y: %.2f",

@@ -1,6 +1,7 @@
 #pragma once
 #include <set>
 #include "../Engine/Window.h"
+#include "MessageWindow.h"
 #include "../EntityMgr.h"
 #include "../Player.h"
 #include "../WindowTypes.h"
@@ -24,6 +25,7 @@ private:
 	// a set of dots that won't respawn for the current round
 	// (since the player's already eaten them in previous rounds)
 	std::set<unsigned int> m_blacklistedDotPositions{};
+	MessageWindow m_infoWindow{ 8, 2, L"", L"", 1, false };
 	// the total amount of dots that the map has
 	unsigned int m_totalDotCount{};
 	unsigned int m_currentRound{ 1 };
