@@ -52,7 +52,7 @@ void MapSelectorWindow::runLogic()
 		if (mapHasPlayerSpawn(m_mapFiles[m_menuIndex]))
 			gPacMan.getWindowMgr().pushAnyWindow<GameWindow>(m_mapFiles[m_menuIndex]);
 		else
-			gPacMan.getWindowMgr().pushAnyWindow<MessageWindow>(31, 10, L"Error"sv, L"No player spawn point in map file."sv);
+			gPacMan.getWindowMgr().pushAnyWindow<MessageWindow>(31, 10, L"Error", L"No player spawn point in map file.");
 	}
 	else if (gPacMan.isKeyTapped(VK_ESCAPE))
 	{
