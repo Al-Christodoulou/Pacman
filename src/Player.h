@@ -16,6 +16,7 @@ public:
 	void think() override;
 	void touch(const ConstEntityArrayIterator&) override;
 	void init() override;
+	void roundReset(unsigned int, unsigned int);
 	void decreaseLives();
 	unsigned int getScore() const;
 	unsigned int getLives() const;

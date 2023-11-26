@@ -28,6 +28,7 @@ public:
 	EntityType getEntType() const;
 
 	void setTex(const wchar_t);
+	void teleportTo(unsigned int, unsigned int);
 
 	friend bool operator==(const Entity& e1, const Entity& e2)
 	{

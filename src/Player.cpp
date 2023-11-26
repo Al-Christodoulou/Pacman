@@ -89,6 +89,14 @@ void Player::touch(const ConstEntityArrayIterator& entIter)
 }
 
 void Player::init() {}
+void Player::roundReset(unsigned int posX, unsigned int posY)
+{
+	m_numDotsEaten = 0;
+	m_canEatEnemies = false;
+	m_canEatEnemiesResetTimestamp = 0.0f;
+	m_isDead = false;
+	teleportTo(posX, posY);
+}
 
 void Player::decreaseLives()
 {
