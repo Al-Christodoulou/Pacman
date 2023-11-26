@@ -11,14 +11,6 @@ class EntityMgr
 private:
 	EntityArray m_entities{};
 
-	// takes a Player, Ghost, ... pointer and upcasts it to an Entity
-	// pointer in order to be able to move it inside m_entities
-	template <typename T>
-	std::unique_ptr<Entity> upcastToEnt(std::unique_ptr<T> e)
-	{
-		return util::upcast<Entity, T>(std::move(e));
-	}
-
 	template <typename T>
 	std::weak_ptr<Entity> pushAnyEnt(std::unique_ptr<T> anyEnt)
 	{
