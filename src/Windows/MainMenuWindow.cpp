@@ -54,7 +54,9 @@ void MainMenuWindow::renderListCursor(unsigned int baseLine, unsigned int lineBu
 	constexpr unsigned int cursorAndMenuDistance{ 4 };
 
 	gPacMan.sendMultiData<textHeight, textHeight>
-		(cursor, lineIndex, halfWidth - selectedMenuWidth / 2 - cursorAndMenuDistance);
+		(leftCursor, lineIndex, halfWidth - selectedMenuWidth / 2 - cursorAndMenuDistance);
+	gPacMan.sendMultiData<textHeight, textHeight>
+		(rightCursor, lineIndex, halfWidth + selectedMenuWidth / 2 + 1);
 }
 
 void MainMenuWindow::runLogic()

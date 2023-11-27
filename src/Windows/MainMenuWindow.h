@@ -25,10 +25,16 @@ private:
 
 	// this can't be marked constexpr for some reason,
 	// "expression did not evaluate to a constant"
-	static const inline wchar_t cursor[textHeight][textHeight]{
+	static const inline wchar_t leftCursor[textHeight][textHeight]{
 		L"\\",
 		L" >",
 		L"/"
+	};
+
+	static const inline wchar_t rightCursor[textHeight][textHeight]{
+		L" /",
+		L"< ",
+		L" \\"
 	};
 
 	CustomInt m_menuIndex{ 0, 1 };
