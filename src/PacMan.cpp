@@ -70,6 +70,11 @@ bool PacMan::isKeyHeld(wchar_t key)
 	return m_engine.isKeyHeld(key);
 }
 
+void PacMan::setFontSize(FontSize fs)
+{
+	m_engine.setFontSize(fs);
+}
+
 void PacMan::run()
 {
 	m_windowMgr.pushAnyWindow<MainMenuWindow>();

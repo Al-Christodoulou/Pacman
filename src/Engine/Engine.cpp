@@ -7,15 +7,14 @@ Log Engine::Log = Log;
 
 void Engine::setupFont()
 {
-	CONSOLE_FONT_INFOEX fontInfo{};
-	fontInfo.cbSize = sizeof(fontInfo);
-	fontInfo.nFont = 0;
-	fontInfo.dwFontSize.X = 14;
-	fontInfo.dwFontSize.Y = 18;
-	fontInfo.FontFamily = FF_DONTCARE;
-	fontInfo.FontWeight = FF_DONTCARE;
-	wcscpy_s(fontInfo.FaceName, L"Consolas");
-	SetCurrentConsoleFontEx(m_hConsole, false, &fontInfo);
+	m_fontInfo.cbSize = sizeof(m_fontInfo);
+	m_fontInfo.nFont = 0;
+	m_fontInfo.dwFontSize.X = 14;
+	m_fontInfo.dwFontSize.Y = 18;
+	m_fontInfo.FontFamily = FF_DONTCARE;
+	m_fontInfo.FontWeight = FF_DONTCARE;
+	wcscpy_s(m_fontInfo.FaceName, L"Consolas");
+	SetCurrentConsoleFontEx(m_hConsole, false, &m_fontInfo);
 }
 
 void Engine::setupWindowInfo()
@@ -59,6 +58,34 @@ void Engine::updateKeyState(int index)
 		m_keyStates.m_isTapped[index] = false;
 		m_keyStates.m_isHeld[index] = false;
 	}
+}
+
+void Engine::setFontSize(FontSize fontsize)
+{
+	switch (fontsize)
+	{
+	case FontSize::Small:
+		m_fontInfo.dwFontSize.X = 10;
+		m_fontInfo.dwFontSize.Y = 14;
+		break;
+	case FontSize::Medium:
+		m_fontInfo.dwFontSize.X = 12;
+		m_fontInfo.dwFontSize.Y = 16;
+		break;
+	case FontSize::Large:
+		m_fontInfo.dwFontSize.X = 14;
+		m_fontInfo.dwFontSize.Y = 18;
+		break;
+	case FontSize::Extra_Large:
+		m_fontInfo.dwFontSize.X = 16;
+		m_fontInfo.dwFontSize.Y = 20;
+		break;
+	default: // shouldn't happen
+		m_fontInfo.dwFontSize.X = 12;
+		m_fontInfo.dwFontSize.Y = 16;
+		break;
+	}
+	SetCurrentConsoleFontEx(m_hConsole, false, &m_fontInfo);
 }
 
 bool Engine::isKeyTapped(wchar_t key)

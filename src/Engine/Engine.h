@@ -6,6 +6,15 @@
 
 using timep_t = std::chrono::system_clock::time_point;
 
+enum class FontSize
+{
+	Small,
+	Medium,
+	Large,
+	Extra_Large,
+	max_number_font_sizes
+};
+
 class Engine
 {
 private:
@@ -17,6 +26,7 @@ private:
 		bool m_isTapped[255]{};
 		bool m_isHeld[255]{};
 	} m_keyStates;
+	CONSOLE_FONT_INFOEX m_fontInfo{};
 
 	void setupFont();
 	void setupWindowInfo();
@@ -26,6 +36,7 @@ public:
 	static void tick();
 	static float getDeltaTime();
 	void updateKeyState(int);
+	void setFontSize(FontSize);
 	bool isKeyTapped(wchar_t);
 	bool isKeyHeld(wchar_t);
 	void renderScreen(wchar_t*);

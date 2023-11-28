@@ -32,6 +32,8 @@ public:
 	bool isKeyTapped(wchar_t);
 	bool isKeyHeld(wchar_t);
 
+	void setFontSize(FontSize);
+
 	void run();
 	WindowMgr& getWindowMgr();
 
