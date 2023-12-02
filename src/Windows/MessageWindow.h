@@ -15,13 +15,13 @@ private:
 	std::wstring m_title, m_msg;
 	const bool m_hasOKButton;
 
-public:
-	void render() override;
 	// render the horizontal content of the window (the horizontal
 	// bars and the empty space inside it)
 	void renderHorizontalCont(unsigned int, unsigned int, unsigned int);
 	void renderVertCont(unsigned int, unsigned int, unsigned int);
 	void renderText(unsigned int, unsigned int, unsigned int, unsigned int);
+public:
+	void render() override;
 	void runLogic() override;
 
 	void setTitle(const std::wstring&);
