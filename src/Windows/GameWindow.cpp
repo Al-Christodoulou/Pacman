@@ -28,7 +28,7 @@ void GameWindow::render()
 		// small optimization hack so std::to_wstring isn't called every frame
 		// but only when the integer part of cFreezeTime - m_gameTime changes
 		if (intTimeMult10 % 10 == 0)
-			m_infoWindow.setMessage(std::to_wstring(static_cast<int>
+			m_infoWindow.setMessage(L"Starting in " + std::to_wstring(static_cast<int>
 				(cFreezeTime - m_gameTime))
 			);
 		m_infoWindow.render();
@@ -45,7 +45,8 @@ void GameWindow::render()
 		gPacMan.swprintf_s(cInfoTextOffset, 25, L"Round: %d", m_currentRound);
 		break;
 	case GameState::PlayerDead:
-		gPacMan.swprintf_s(cInfoTextOffset, 16, L"YOU ARE DEAD!");
+		m_infoWindow.setMessage(L"You are dead!");
+		m_infoWindow.render();
 		break;
 	case GameState::RoundWon:
 		gPacMan.swprintf_s(cInfoTextOffset, 25, L"You won the round!");
