@@ -76,6 +76,11 @@ void GameWindow::runLogic()
 				entities[i]->getEntType() == EntityType::Player)
 				static_cast<Character&>(*entities[i]).think();
 
+			// if we're about to go out of bounds (because think() deleted an entity),
+			// stop here
+			if (i == entities.size())
+				break;
+
 			// delete this Ghost if the Player has eaten it
 			if (entities[i]->getEntType() == EntityType::Ghost &&
 				static_cast<Character&>(*entities[i]).isDead())
@@ -221,7 +226,7 @@ void GameWindow::restartRound(bool roundWon)
 	{
 		m_currentRound++;
 		// if all dots were eaten, reset
-		if (m_blacklistedDotPositions.size() == m_totalDotCount)
+		if (m_blacklistedDotPositions.size() >= m_totalDotCount)
 			m_blacklistedDotPositions.clear();
 	}
 	initRound();
