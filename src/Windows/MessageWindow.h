@@ -25,6 +25,8 @@ public:
 
 	void setTitle(const std::wstring&);
 	void setMessage(const std::wstring&);
+	const std::wstring& getTitle();
+	const std::wstring& getMessage();
 
 	static unsigned int calcOffsetCenteredText(unsigned int, unsigned int, unsigned int);
 

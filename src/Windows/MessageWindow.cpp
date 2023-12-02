@@ -110,6 +110,16 @@ void MessageWindow::setMessage(const std::wstring& msg)
 	m_msg = msg;
 }
 
+const std::wstring& MessageWindow::getTitle()
+{
+	return m_title;
+}
+
+const std::wstring& MessageWindow::getMessage()
+{
+	return m_msg;
+}
+
 MessageWindow::MessageWindow(unsigned int width, unsigned int height,
 							const std::wstring& title, const std::wstring& msg,
 							unsigned int textBorderDist, bool hasOKButton)
