@@ -25,7 +25,7 @@ private:
 	// a set of dots that won't respawn for the current round
 	// (since the player's already eaten them in previous rounds)
 	std::set<unsigned int> m_blacklistedDotPositions{};
-	MessageWindow m_infoWindow{ 8, 2, L"", L"", 1, false };
+	MessageWindow m_infoWindow{ 16, 2, L"", L"", 1, 0, -3, false };
 	// the total amount of dots that the map has
 	unsigned int m_totalDotCount{};
 	unsigned int m_currentRound{ 1 };

@@ -11,6 +11,7 @@ private:
 	// m_textBorderDist is the distance (+1) of the title
 	// and the OK button from the top & bottom borders
 	const unsigned int m_width, m_height, m_textBorderDist;
+	const int m_offsetX, m_offsetY;
 	std::wstring m_title, m_msg;
 	const bool m_hasOKButton;
 
@@ -32,5 +33,5 @@ public:
 
 	// width, height, title, message text, text border distance, has OK button
 	MessageWindow(unsigned int, unsigned int, const std::wstring&, const std::wstring&,
-				unsigned int = 2, bool = true);
+				unsigned int = 2, int offsetX = 0, int offsetY = 0, bool = true);
 };

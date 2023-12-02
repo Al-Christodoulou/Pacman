@@ -6,8 +6,8 @@
 void MessageWindow::render()
 {
 	// render in the middle of the screen
-	const unsigned int topLeftPosRow{ gScreenHeight / 2 - m_height / 2 };
-	const unsigned int topLeftPosColumn{ gScreenWidth / 2 - m_width / 2 };
+	const unsigned int topLeftPosRow{ gScreenHeight / 2 - m_height / 2 + m_offsetY };
+	const unsigned int topLeftPosColumn{ gScreenWidth / 2 - m_width / 2 + m_offsetX };
 
 	const unsigned int topRightPosColumn{ topLeftPosColumn + m_width };
 	const unsigned int bottomLeftPosRow{ topLeftPosRow + m_height };
@@ -122,8 +122,9 @@ const std::wstring& MessageWindow::getMessage()
 
 MessageWindow::MessageWindow(unsigned int width, unsigned int height,
 							const std::wstring& title, const std::wstring& msg,
-							unsigned int textBorderDist, bool hasOKButton)
+							unsigned int textBorderDist, int offsetX, int offsetY,
+							bool hasOKButton)
 	: m_width{ width }, m_height{ height }, m_title{ title },
 	m_msg{ msg }, Window{ WindowType::Other }, m_textBorderDist{ textBorderDist },
-	m_hasOKButton{ hasOKButton }
+	m_offsetX{ offsetX }, m_offsetY{ offsetY }, m_hasOKButton{ hasOKButton }
 {}
