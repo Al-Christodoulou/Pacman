@@ -34,7 +34,7 @@ void MapSelectorWindow::runLogic()
 	{
 		m_state_terminate = true;
 		gPacMan.getWindowMgr().pushAnyWindow<MainMenuWindow>();
-		gPacMan.getWindowMgr().pushAnyWindow<MessageWindow>(21, 10, L"Error", L"No maps available!");
+		gPacMan.getWindowMgr().pushAnyWindow<MessageWindow>(21, 10, 0, 0, L"Error", L"No maps available!");
 		return;
 	}
 
@@ -45,14 +45,10 @@ void MapSelectorWindow::runLogic()
 
 	if (gPacMan.isKeyTapped(VK_RETURN) && m_mapFiles.size() > 0)
 	{
-		// used for the "sv" (string_view) conversions after the quotes in
-		// pushAnyWindow<MessageWindow> below
-		using namespace std::string_view_literals;
-
 		if (mapHasPlayerSpawn(m_mapFiles[m_menuIndex]))
 			gPacMan.getWindowMgr().pushAnyWindow<GameWindow>(m_mapFiles[m_menuIndex]);
 		else
-			gPacMan.getWindowMgr().pushAnyWindow<MessageWindow>(31, 10, L"Error", L"No player spawn point in map file.");
+			gPacMan.getWindowMgr().pushAnyWindow<MessageWindow>(31, 10, 0, 0, L"Error", L"No player spawn point in map file.");
 	}
 	else if (gPacMan.isKeyTapped(VK_ESCAPE))
 	{

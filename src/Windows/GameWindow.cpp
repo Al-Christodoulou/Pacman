@@ -116,7 +116,7 @@ void GameWindow::runLogic()
 			if (getPlayer()->getLives() == 0)
 			{
 				m_state_terminate = true;
-				gPacMan.getWindowMgr().pushAnyWindow<MessageWindow>(24, 7, L"You lost the game...", L"");
+				gPacMan.getWindowMgr().pushAnyWindow<MessageWindow>(24, 7, 0, 0, L"You lost the game...", L"");
 				return;
 			}
 			restartRound(false);
