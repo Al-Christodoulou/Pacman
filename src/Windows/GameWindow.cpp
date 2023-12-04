@@ -36,7 +36,7 @@ void GameWindow::render()
 		break;
 	}
 	case GameState::Playing:
-#ifdef _DEBUG
+#if 0
 		gPacMan.swprintf_s(25, L"X: %.3f, Y: %.2f",
 			getPlayer()->getVirtualX(),
 			getPlayer()->getVirtualY()
