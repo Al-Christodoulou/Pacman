@@ -32,6 +32,7 @@ void GameWindow::render()
 				(cFreezeTime - m_gameTime))
 			);
 		m_infoWindow.render();
+		gPacMan.swprintf_s(cInfoTextOffset, 25, L"Round: %d", m_currentRound);
 		break;
 	}
 	case GameState::Playing:
@@ -49,7 +50,8 @@ void GameWindow::render()
 		m_infoWindow.render();
 		break;
 	case GameState::RoundWon:
-		gPacMan.swprintf_s(cInfoTextOffset, 25, L"You won the round!");
+		m_infoWindow.setMessage(L"You won the round!");
+		m_infoWindow.render();
 		break;
 	}
 }
