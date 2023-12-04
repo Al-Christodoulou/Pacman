@@ -23,9 +23,21 @@ void BorderedWindow::renderVertBars()
 	}
 }
 
-void BorderedWindow::renderText(unsigned int offsetX, unsigned int offsetY, const std::wstring& str)
+// startFromBottom means that offsetY will start from the bottom border of the
+// window instead of the top border
+void BorderedWindow::renderText(unsigned int offsetX, unsigned int offsetY,
+								const std::wstring& str, bool startFromBottom)
 {
-	gPacMan.sendDataf(str.data(), str.size(), m_topLeftPosRow + 1 + offsetY, m_topLeftPosColumn + 1 + offsetX);
+	const unsigned int startRow{ startFromBottom ? m_bottomLeftPosRow - 1 : m_topLeftPosRow + 1 };
+	gPacMan.sendDataf(str.data(), str.size(), startRow + offsetY, m_topLeftPosColumn + 1 + offsetX);
+}
+
+void BorderedWindow::renderTextCentered(unsigned int offsetY, const std::wstring& str,
+										bool startFromBottom)
+{
+	const unsigned int startRow{ startFromBottom ? m_bottomLeftPosRow - 1 : m_topLeftPosRow + 1 };
+	gPacMan.sendDataf(str.data(), str.size(), startRow + offsetY,
+		calcOffsetCenteredText(m_topLeftPosColumn + 1, m_topRightPosColumn, str.size()));
 }
 
 void BorderedWindow::render()

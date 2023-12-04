@@ -29,7 +29,10 @@ private:
 	// bars and the empty space inside it)
 	void renderHorizontalBars();
 	void renderVertBars();
-	void renderText(unsigned int offsetX, unsigned int offsetY, const std::wstring& str);
+
+protected:
+	void renderText(unsigned int offsetX, unsigned int offsetY, const std::wstring& str, bool = false);
+	void renderTextCentered(unsigned int offsetY, const std::wstring& str, bool = false);
 public:
 	void render() override;
 
