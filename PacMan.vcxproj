@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Engine\Log.cpp" />
+    <ClCompile Include="src\Windows\BorderedWindow.cpp" />
     <ClCompile Include="src\Windows\MessageWindow.cpp" />
     <ClCompile Include="src\MapFile.cpp" />
     <ClCompile Include="src\Windows\MainMenuWindow.cpp" />
@@ -42,6 +43,7 @@
     <ClInclude Include="src\Engine\CustomInt.h" />
     <ClInclude Include="src\Engine\Log.h" />
     <ClInclude Include="src\EntityMgrTypedefs.h" />
+    <ClInclude Include="src\Windows\BorderedWindow.h" />
     <ClInclude Include="src\Windows\MessageWindow.h" />
     <ClInclude Include="src\Engine\UniquePtrUtils.h" />
     <ClInclude Include="src\MapFile.h" />
