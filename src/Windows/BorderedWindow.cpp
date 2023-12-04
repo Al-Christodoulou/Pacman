@@ -43,6 +43,27 @@ void BorderedWindow::render()
 	renderVertBars();
 }
 
+unsigned int BorderedWindow::getWidth()
+{
+	return m_width;
+}
+
+unsigned int BorderedWindow::getHeight()
+{
+	return m_height;
+}
+
+int BorderedWindow::getOffsetX()
+{
+	return m_offsetX;
+}
+
+int BorderedWindow::getOffsetY()
+{
+	return m_offsetY;
+}
+
+
 // calculate the middle point between 2 columns, then adjust it for the text length
 // (...-txtSize/2), so you get the right offset for the 1st character of the string
 // you want to show on the window, so in the end it's oriented in the middle

@@ -33,6 +33,11 @@ private:
 public:
 	void render() override;
 
+	unsigned int getWidth();
+	unsigned int getHeight();
+	int getOffsetX();
+	int getOffsetY();
+
 	static unsigned int calcOffsetCenteredText(unsigned int, unsigned int, unsigned int);
 
 	BorderedWindow(unsigned int width, unsigned int height, int offsetX, int offsetY);
