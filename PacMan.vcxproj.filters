@@ -78,6 +78,9 @@
     <ClCompile Include="src\Engine\Log.cpp">
       <Filter>Source Files\Engine</Filter>
     </ClCompile>
+    <ClCompile Include="src\Windows\BorderedWindow.cpp">
+      <Filter>Source Files\Windows</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\PacMan.h">
@@ -145,6 +148,9 @@
     </ClInclude>
     <ClInclude Include="src\Engine\Log.h">
       <Filter>Header Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Windows\BorderedWindow.h">
+      <Filter>Header Files\Windows</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
