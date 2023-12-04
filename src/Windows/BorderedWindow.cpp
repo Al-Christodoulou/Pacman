@@ -53,6 +53,8 @@ void BorderedWindow::render()
 	renderHorizontalBars();
 	// the vertical bars
 	renderVertBars();
+
+	// text rendering will happen in any derived class via renderText & renderTextCentered
 }
 
 unsigned int BorderedWindow::getWidth()
