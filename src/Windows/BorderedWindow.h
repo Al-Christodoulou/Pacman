@@ -31,8 +31,10 @@ private:
 	void renderVertBars();
 
 protected:
-	void renderText(unsigned int offsetX, unsigned int offsetY, const std::wstring& str, bool = false);
-	void renderTextCentered(unsigned int offsetY, const std::wstring& str, bool = false);
+	void renderText(int offsetX, int offsetY, const wchar_t* str, unsigned int str_len, bool = false);
+	void renderText(int offsetX, int offsetY, const std::wstring& str, bool = false);
+	unsigned int renderTextCentered(int offsetY, const wchar_t* str, unsigned int str_len, bool = false);
+	unsigned int renderTextCentered(int offsetY, const std::wstring& str, bool = false);
 public:
 	void render() override;
 
@@ -43,5 +45,5 @@ public:
 
 	static unsigned int calcOffsetCenteredText(unsigned int, unsigned int, unsigned int);
 
-	BorderedWindow(unsigned int width, unsigned int height, int offsetX, int offsetY);
+	BorderedWindow(unsigned int width, unsigned int height, int offsetX = 0, int offsetY = 0);
 };

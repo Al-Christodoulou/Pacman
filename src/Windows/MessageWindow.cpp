@@ -27,7 +27,7 @@ void MessageWindow::render()
 	if (m_hasOKButton)
 	{
 		// the "OK" text, rendered 3 (textBorderDist) rows before the bottom border
-		renderTextCentered(-static_cast<int>(m_textBorderDist), L"> OK <", true);
+		renderTextCentered(-static_cast<int>(m_textBorderDist), L"> OK <", 7, true);
 	}
 }
 

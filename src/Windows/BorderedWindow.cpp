@@ -25,19 +25,35 @@ void BorderedWindow::renderVertBars()
 
 // startFromBottom means that offsetY will start from the bottom border of the
 // window instead of the top border
-void BorderedWindow::renderText(unsigned int offsetX, unsigned int offsetY,
-								const std::wstring& str, bool startFromBottom)
+void BorderedWindow::renderText(int offsetX, int offsetY,
+								const wchar_t* str, unsigned int str_len, bool startFromBottom)
 {
 	const unsigned int startRow{ startFromBottom ? m_bottomLeftPosRow - 1 : m_topLeftPosRow + 1 };
-	gPacMan.sendDataf(str.data(), str.size(), startRow + offsetY, m_topLeftPosColumn + 1 + offsetX);
+	gPacMan.sendDataf(str, str_len, startRow + offsetY, m_topLeftPosColumn + 1 + offsetX);
 }
 
-void BorderedWindow::renderTextCentered(unsigned int offsetY, const std::wstring& str,
-										bool startFromBottom)
+void BorderedWindow::renderText(int offsetX, int offsetY,
+								const std::wstring& str, bool startFromBottom)
+{
+	renderText(offsetX, offsetY, str.c_str(), str.size(), startFromBottom);
+}
+
+// both renderTextCentered return the offsetX that was calculated by this method
+unsigned int BorderedWindow::renderTextCentered(int offsetY, const wchar_t* str,
+												unsigned int str_len, bool startFromBottom)
 {
 	const unsigned int startRow{ startFromBottom ? m_bottomLeftPosRow - 1 : m_topLeftPosRow + 1 };
-	gPacMan.sendDataf(str.data(), str.size(), startRow + offsetY,
-		calcOffsetCenteredText(m_topLeftPosColumn + 1, m_topRightPosColumn, str.size()));
+	unsigned int column{ calcOffsetCenteredText(m_topLeftPosColumn + 1, m_topRightPosColumn, str_len) };
+	gPacMan.sendDataf(str, str_len, startRow + offsetY, column);
+
+	// make the column index an offset relative to the window
+	return column - m_topLeftPosColumn - 1;
+}
+
+unsigned int BorderedWindow::renderTextCentered(int offsetY, const std::wstring& str,
+												bool startFromBottom)
+{
+	return renderTextCentered(offsetY, str.c_str(), str.size(), startFromBottom);
 }
 
 void BorderedWindow::render()
@@ -83,7 +99,7 @@ int BorderedWindow::getOffsetY()
 // you want to show on the window, so in the end it's oriented in the middle
 unsigned int BorderedWindow::calcOffsetCenteredText(unsigned int col1, unsigned int col2, unsigned int txtSize)
 {
-	return (col1 + col2) / 2 - txtSize / 2;
+	return (col1 + col2 - txtSize) / 2;
 }
 
 BorderedWindow::BorderedWindow(unsigned int width, unsigned int height, int offsetX, int offsetY)
