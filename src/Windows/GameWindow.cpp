@@ -1,5 +1,6 @@
 #include "GameWindow.h"
 #include "MessageWindow.h"
+#include "PauseMenuWindow.h"
 #include "../PacMan.h"
 #include "../Engine/Random.h"
 #include "../WanderingLouse.h"
@@ -135,7 +136,7 @@ void GameWindow::runLogic()
 	// if the player presses escape, the GameWindow will terminate and we go back to the
 	// main menu
 	if (gPacMan.isKeyTapped(VK_ESCAPE))
-		m_state_terminate = true;
+		gPacMan.getWindowMgr().pushAnyWindow<PauseMenuWindow>();
 }
 
 void GameWindow::postMoveInit()

@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Windows\PauseMenuWindow.cpp" />
     <ClCompile Include="src\Engine\Log.cpp" />
     <ClCompile Include="src\Windows\BorderedWindow.cpp" />
     <ClCompile Include="src\Windows\MessageWindow.cpp" />
@@ -39,6 +40,7 @@
     <ClCompile Include="src\Windows\MapSelectorWindow.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Windows\PauseMenuWindow.h" />
     <ClInclude Include="src\Constants.h" />
     <ClInclude Include="src\Engine\CustomInt.h" />
     <ClInclude Include="src\Engine\Log.h" />

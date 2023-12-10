@@ -81,6 +81,9 @@
     <ClCompile Include="src\Windows\BorderedWindow.cpp">
       <Filter>Source Files\Windows</Filter>
     </ClCompile>
+    <ClCompile Include="src\Windows\PauseMenuWindow.cpp">
+      <Filter>Source Files\Windows</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\PacMan.h">
@@ -150,6 +153,9 @@
       <Filter>Header Files\Engine</Filter>
     </ClInclude>
     <ClInclude Include="src\Windows\BorderedWindow.h">
+      <Filter>Header Files\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Windows\PauseMenuWindow.h">
       <Filter>Header Files\Windows</Filter>
     </ClInclude>
   </ItemGroup>
