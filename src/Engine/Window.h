@@ -1,8 +1,12 @@
 #pragma once
 
+class WindowMgr;
+
 template <typename WindowTypes>
 class Window
 {
+	friend class WindowMgr;
+
 protected:
 	// with m_state_begin, the window can setup everything it needs to
 	// or play an animation before running its main routines

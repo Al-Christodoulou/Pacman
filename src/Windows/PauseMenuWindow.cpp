@@ -42,9 +42,8 @@ void PauseMenuWindow::runLogic()
 			//gPacMan.getWindowMgr().pushAnyWindow<OptionsWindow>();
 			break;
 		case MenuOptions::Exit:
-			// TODO: figure out a way to make both this window and GameWindow
-			// terminate when in this point of execution
 			m_state_terminate = true;
+			gPacMan.getWindowMgr().terminateTopNonTermWindow();
 			break;
 		}
 	}

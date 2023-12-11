@@ -34,6 +34,7 @@ public:
 	}
 
 	PacmanWindow* getTopWindow();
+	void terminateTopNonTermWindow();
 
 	// quite ugly. in order for a Character to search the entity
 	// array, the sequence of access is:
