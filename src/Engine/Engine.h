@@ -3,17 +3,9 @@
 #include <Windows.h>
 #include "../Constants.h"
 #include "Log.h"
+#include "EngineStructs.h"
 
 using timep_t = std::chrono::system_clock::time_point;
-
-enum class FontSize
-{
-	Small,
-	Medium,
-	Large,
-	Extra_Large,
-	max_number_font_sizes
-};
 
 class Engine
 {
