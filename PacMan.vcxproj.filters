@@ -158,5 +158,8 @@
     <ClInclude Include="src\Windows\PauseMenuWindow.h">
       <Filter>Header Files\Windows</Filter>
     </ClInclude>
+    <ClInclude Include="src\Engine\EngineStructs.h">
+      <Filter>Header Files\Engine</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
