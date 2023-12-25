@@ -40,6 +40,7 @@
     <ClCompile Include="src\Windows\MapSelectorWindow.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Engine\EngineStructs.h" />
     <ClInclude Include="src\Windows\PauseMenuWindow.h" />
     <ClInclude Include="src\Constants.h" />
     <ClInclude Include="src\Engine\CustomInt.h" />
