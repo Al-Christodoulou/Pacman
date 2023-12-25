@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\SaveFile.cpp" />
     <ClCompile Include="src\Windows\PauseMenuWindow.cpp" />
     <ClCompile Include="src\Engine\Log.cpp" />
     <ClCompile Include="src\Windows\BorderedWindow.cpp" />
@@ -41,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Engine\EngineStructs.h" />
+    <ClInclude Include="src\SaveFile.h" />
     <ClInclude Include="src\Windows\PauseMenuWindow.h" />
     <ClInclude Include="src\Constants.h" />
     <ClInclude Include="src\Engine\CustomInt.h" />
