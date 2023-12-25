@@ -88,8 +88,8 @@ void Engine::setFontSize(FontSize fontsize)
 		m_fontInfo.dwFontSize.Y = 20;
 		break;
 	default: // shouldn't happen unless a save file's corrupted
-		m_fontInfo.dwFontSize.X = 12;
-		m_fontInfo.dwFontSize.Y = 16;
+		m_fontInfo.dwFontSize.X = 14;
+		m_fontInfo.dwFontSize.Y = 18;
 		break;
 	}
 	SetCurrentConsoleFontEx(m_hConsole, false, &m_fontInfo);
