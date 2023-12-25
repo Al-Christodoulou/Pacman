@@ -1,5 +1,6 @@
 #include <Windows.h>
-#include "../Engine/Engine.h"
+#include "Engine.h"
+#include "../SaveFile.h"
 
 timep_t Engine::sTimeNow{ std::chrono::system_clock::now() };
 float Engine::sDeltaTime{ 0.0f };
@@ -9,8 +10,14 @@ void Engine::setupFont()
 {
 	m_fontInfo.cbSize = sizeof(m_fontInfo);
 	m_fontInfo.nFont = 0;
-	m_fontInfo.dwFontSize.X = 14;
-	m_fontInfo.dwFontSize.Y = 18;
+
+	SaveFile sf{};
+	sf.open(SaveFileOpenMode::Read);
+	if (sf.canRead())
+		setFontSize(sf.readFontSize());
+	else
+		setFontSize(FontSize::Large);
+
 	m_fontInfo.FontFamily = FF_DONTCARE;
 	m_fontInfo.FontWeight = FF_DONTCARE;
 	wcscpy_s(m_fontInfo.FaceName, L"Consolas");
@@ -80,7 +87,7 @@ void Engine::setFontSize(FontSize fontsize)
 		m_fontInfo.dwFontSize.X = 16;
 		m_fontInfo.dwFontSize.Y = 20;
 		break;
-	default: // shouldn't happen
+	default: // shouldn't happen unless a save file's corrupted
 		m_fontInfo.dwFontSize.X = 12;
 		m_fontInfo.dwFontSize.Y = 16;
 		break;
