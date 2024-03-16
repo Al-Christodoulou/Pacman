@@ -17,7 +17,7 @@ void OptionsWindow::runLogic()
 void OptionsWindow::render()
 {
 	BorderedWindow::render();
-	
+
 	// render title
 	renderTextCentered(-1, L"Options");
 
