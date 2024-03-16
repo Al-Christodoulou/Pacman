@@ -1,6 +1,7 @@
 #include "../PacMan.h"
 #include "../WindowTypes.h"
 #include "PauseMenuWindow.h"
+#include "OptionsWindow.h"
 
 void PauseMenuWindow::render()
 {
@@ -39,7 +40,7 @@ void PauseMenuWindow::runLogic()
 			m_state_terminate = true;
 			break;
 		case MenuOptions::Options:
-			//gPacMan.getWindowMgr().pushAnyWindow<OptionsWindow>();
+			gPacMan.getWindowMgr().pushAnyWindow<OptionsWindow>();
 			break;
 		case MenuOptions::Exit:
 			m_state_terminate = true;
