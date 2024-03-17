@@ -9,12 +9,19 @@ private:
 	// a keyword train
 	static constexpr inline unsigned int textHeight{ 3 };
 	static constexpr inline unsigned int startBtnWidth{ 23 };
+	static constexpr inline unsigned int optionsButtonWidth{ 27 };
 	static constexpr inline unsigned int exitBtnWidth{ 17 };
 
 	static constexpr inline wchar_t startButton[textHeight][startBtnWidth]{
 		L"/-- ---   ^   /--/ ---",
 		L"\\-\\  |   /-\\  |-/   | ",
 		L"--/  |  /   \\ |  \\  | "
+	};
+
+	static constexpr inline wchar_t optionsButton[textHeight][optionsButtonWidth]{
+		L"/-\\ /-\\ --- | /-\\ |\\ | /--",
+		L"| | |-/  |  | | | | \\| \\-|",
+		L"\\-/ |    |  | \\-/ |  | --/",
 	};
 
 	static constexpr inline wchar_t exitButton[textHeight][exitBtnWidth]{
@@ -37,7 +44,7 @@ private:
 		L" \\"
 	};
 
-	CustomInt m_menuIndex{ 0, 1 };
+	CustomInt m_menuIndex{ 0, 2 };
 public:
 	void render() override;
 	void renderList();
