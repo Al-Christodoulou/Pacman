@@ -74,25 +74,35 @@ void Engine::setFontSize(FontSize fontsize)
 	case FontSize::Small:
 		m_fontInfo.dwFontSize.X = 10;
 		m_fontInfo.dwFontSize.Y = 14;
+		m_fontSize = FontSize::Small;
 		break;
 	case FontSize::Medium:
 		m_fontInfo.dwFontSize.X = 12;
 		m_fontInfo.dwFontSize.Y = 16;
+		m_fontSize = FontSize::Medium;
 		break;
 	case FontSize::Large:
 		m_fontInfo.dwFontSize.X = 14;
 		m_fontInfo.dwFontSize.Y = 18;
+		m_fontSize = FontSize::Large;
 		break;
 	case FontSize::Extra_Large:
 		m_fontInfo.dwFontSize.X = 16;
 		m_fontInfo.dwFontSize.Y = 20;
+		m_fontSize = FontSize::Extra_Large;
 		break;
 	default: // shouldn't happen unless a save file's corrupted
 		m_fontInfo.dwFontSize.X = 14;
 		m_fontInfo.dwFontSize.Y = 18;
+		m_fontSize = FontSize::Large;
 		break;
 	}
 	SetCurrentConsoleFontEx(m_hConsole, false, &m_fontInfo);
+}
+
+FontSize Engine::getFontSize() const
+{
+	return m_fontSize;
 }
 
 bool Engine::isKeyTapped(wchar_t key)

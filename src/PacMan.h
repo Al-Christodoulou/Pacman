@@ -36,6 +36,7 @@ public:
 
 	void run();
 	WindowMgr& getWindowMgr();
+	FontSize getFontSize() const;
 
 	// no copying or moving is allowed
 	PacMan(const PacMan&) = delete;

@@ -19,6 +19,7 @@ private:
 		bool m_isHeld[255]{};
 	} m_keyStates;
 	CONSOLE_FONT_INFOEX m_fontInfo{};
+	FontSize m_fontSize{ FontSize::Large };
 
 	void setupFont();
 	void setupWindowInfo();
@@ -29,6 +30,7 @@ public:
 	static float getDeltaTime();
 	void updateKeyState(int);
 	void setFontSize(FontSize);
+	FontSize getFontSize() const;
 	bool isKeyTapped(wchar_t);
 	bool isKeyHeld(wchar_t);
 	void renderScreen(wchar_t*);

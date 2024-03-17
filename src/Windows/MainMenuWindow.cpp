@@ -2,6 +2,7 @@
 #include "../PacMan.h"
 #include "../Engine/Random.h"
 #include "../Windows/MapSelectorWindow.h"
+#include "../Windows/OptionsWindow.h"
 
 void MainMenuWindow::render()
 {
@@ -23,7 +24,7 @@ void MainMenuWindow::render()
 void MainMenuWindow::renderList()
 {
 	// the row from where the menu list starts being drawn from
-	constexpr unsigned int baseLine{ 16 };
+	constexpr unsigned int baseLine{ 12 };
 	// the number of rows distance between the two menu buttons
 	constexpr unsigned int lineButtonDelta{ 5 };
 	constexpr unsigned int halfWidth{ gScreenWidth / 2 };
@@ -33,11 +34,13 @@ void MainMenuWindow::renderList()
 		return halfWidth - txtWidth / 2;
 	} };
 
-	// render the two buttons
+	// render the three buttons
 	gPacMan.sendMultiData<textHeight, startBtnWidth>
 		(startButton, baseLine, calcOffset(startBtnWidth));
+	gPacMan.sendMultiData<textHeight, optionsButtonWidth>
+		(optionsButton, baseLine + lineButtonDelta, calcOffset(optionsButtonWidth));
 	gPacMan.sendMultiData<textHeight, exitBtnWidth>
-		(exitButton, baseLine + lineButtonDelta, calcOffset(exitBtnWidth));
+		(exitButton, baseLine + lineButtonDelta * 2, calcOffset(exitBtnWidth));
 
 	renderListCursor(baseLine, lineButtonDelta);
 }
@@ -48,7 +51,11 @@ void MainMenuWindow::renderListCursor(unsigned int baseLine, unsigned int lineBu
 
 	const unsigned int lineIndex{ baseLine + m_menuIndex * lineButtonDelta };
 	// the width of the currently selected menu
-	const unsigned int selectedMenuWidth{ m_menuIndex == 0 ? startBtnWidth : exitBtnWidth };
+	const unsigned int selectedMenuWidth{
+		m_menuIndex == 0 ?
+		startBtnWidth : m_menuIndex == 1 ?
+		optionsButtonWidth : exitBtnWidth
+	};
 
 	// this is used to place the cursor just some chars before the menu text
 	constexpr unsigned int cursorAndMenuDistance{ 4 };
@@ -62,9 +69,9 @@ void MainMenuWindow::renderListCursor(unsigned int baseLine, unsigned int lineBu
 void MainMenuWindow::runLogic()
 {
 	if (gPacMan.isKeyTapped(L'W'))
-		++m_menuIndex;
-	else if (gPacMan.isKeyTapped(L'S'))
 		--m_menuIndex;
+	else if (gPacMan.isKeyTapped(L'S'))
+		++m_menuIndex;
 
 	if (gPacMan.isKeyTapped(VK_RETURN))
 	{
@@ -72,11 +79,15 @@ void MainMenuWindow::runLogic()
 		{
 		case 0: // start
 			gPacMan.getWindowMgr().pushAnyWindow<MapSelectorWindow>();
+			m_state_terminate = true;
 			break;
-		case 1: // exit
+		case 1: // options
+			gPacMan.getWindowMgr().pushAnyWindow<OptionsWindow>();
+			break;
+		case 2: // exit
+			m_state_terminate = true;
 			break;
 		}
-		m_state_terminate = true;
 	}
 }
 

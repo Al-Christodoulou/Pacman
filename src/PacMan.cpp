@@ -90,3 +90,4 @@ void PacMan::run()
 }
 
 WindowMgr& PacMan::getWindowMgr() { return m_windowMgr; }
+FontSize PacMan::getFontSize() const { return m_engine.getFontSize(); };
