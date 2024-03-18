@@ -45,7 +45,7 @@ void MapSelectorWindow::runLogic()
 	if (gPacMan.isKeyTapped(L'W'))
 	{
 		--m_menuIndex;
-		if (m_menuIndex == m_mapFileNames.size() - 1) // if an underflow occured
+		if (static_cast<size_t>(m_menuIndex) == m_mapFileNames.size() - 1) // if an underflow occured
 			m_firstShownMapIndex = m_mapFileNames.size() - MaxShownMaps;
 		else if (m_menuIndex - m_firstShownMapIndex < MaxShownMaps / 2 && m_firstShownMapIndex > 0)
 			--m_firstShownMapIndex;
