@@ -1,3 +1,7 @@
+// fixes collision with the "min" macro of Windows.h
+#define NOMINMAX
+
+#include <cstdlib>
 #include "MapSelectorWindow.h"
 #include "GameWindow.h"
 #include "MessageWindow.h"
@@ -5,15 +9,16 @@
 #include "../MapFile.h"
 #include "../PacMan.h"
 
-void MapSelectorWindow::render() 
+void MapSelectorWindow::render()
 {
 	gPacMan.fillscreen(L' ');
-	constexpr unsigned int baseLine{ 5 };
 
-	unsigned int i{ 0 };
-	for (const std::wstring& mapName : m_mapFileNames)
+	const size_t maxShownMaps{ std::min(m_mapFileNames.size(), MaxShownMaps) };
+	const size_t iGuard{ std::min(m_mapFileNames.size(), m_firstShownMapIndex + maxShownMaps) };
+	for (size_t i = m_firstShownMapIndex; i < iGuard; i++)
 	{
-		const unsigned int row{ baseLine + i * 2 };
+		const std::wstring& mapName{ m_mapFileNames[i] };
+		const unsigned int row{ BaseLine + (i - m_firstShownMapIndex) * 2 };
 		const unsigned int column{ gScreenWidth / 2 - mapName.size() / 2 };
 		gPacMan.sendDataf(mapName.c_str(), mapName.size(), row, column);
 
@@ -23,7 +28,6 @@ void MapSelectorWindow::render()
 			gPacMan.sendDataf(L'>', row, column - 3);
 			gPacMan.sendDataf(L'<', row, column + mapName.size() + 3 - 1);
 		}
-		i++;
 	}
 }
 
@@ -39,9 +43,24 @@ void MapSelectorWindow::runLogic()
 	}
 
 	if (gPacMan.isKeyTapped(L'W'))
+	{
 		--m_menuIndex;
+		if (m_menuIndex == m_mapFileNames.size() - 1) // if an underflow occured
+			m_firstShownMapIndex = m_mapFileNames.size() - MaxShownMaps;
+		else if (m_menuIndex - m_firstShownMapIndex < MaxShownMaps / 2 && m_firstShownMapIndex > 0)
+			--m_firstShownMapIndex;
+	}
 	else if (gPacMan.isKeyTapped(L'S'))
+	{
 		++m_menuIndex;
+		if (m_menuIndex == 0) // if an overflow occured
+			m_firstShownMapIndex = 0;
+		else if (m_menuIndex - m_firstShownMapIndex > MaxShownMaps / 2 &&
+			!((m_mapFileNames.size() - m_menuIndex) < MaxShownMaps / 2))
+		{
+			++m_firstShownMapIndex;
+		}
+	}
 
 	if (gPacMan.isKeyTapped(VK_RETURN) && m_mapFiles.size() > 0)
 	{
