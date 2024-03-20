@@ -32,6 +32,9 @@ public:
 	void render() override;
 	void runLogic() override;
 
+	void renderMapList() const;
+	void renderScrollBar() const;
+
 	std::wstring removeExtension(const std::wstring&);
 	void readMapFiles();
 	void insertIfMapFile(const std::filesystem::path&);

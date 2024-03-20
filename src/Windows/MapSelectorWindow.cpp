@@ -12,7 +12,12 @@
 void MapSelectorWindow::render()
 {
 	gPacMan.fillscreen(L' ');
+	renderMapList();
+	renderScrollBar();
+}
 
+void MapSelectorWindow::renderMapList() const
+{
 	const size_t maxShownMaps{ std::min(m_mapFileNames.size(), MaxShownMaps) };
 	const size_t iGuard{ std::min(m_mapFileNames.size(), m_firstShownMapIndex + maxShownMaps) };
 	for (size_t i = m_firstShownMapIndex; i < iGuard; i++)
@@ -28,6 +33,33 @@ void MapSelectorWindow::render()
 			gPacMan.sendDataf(L'>', row, column - 3);
 			gPacMan.sendDataf(L'<', row, column + mapName.size() + 3 - 1);
 		}
+	}
+}
+
+void MapSelectorWindow::renderScrollBar() const
+{
+	static constexpr unsigned int ColumnOffset{ static_cast<unsigned int>(gScreenWidth * 0.7f) };
+	static constexpr unsigned int ScrollBarSize{ MaxShownMaps * 2 };
+
+	// maybe unnecessary sanity check
+	if constexpr (gScreenWidth < 7)
+		return;
+
+	// render the horizontal walls of the scroll bar
+	gPacMan.sendDataf(L'\u2550', BaseLine, ColumnOffset + 1);
+	gPacMan.sendDataf(L'\u2550', BaseLine + ScrollBarSize, ColumnOffset + 1);
+	// the vertical walls
+	for (unsigned int i{ 1 }; i < ScrollBarSize; i++)
+	{
+		gPacMan.sendDataf(L'\u2551', BaseLine + i, ColumnOffset);
+		gPacMan.sendDataf(L'\u2551', BaseLine + i, ColumnOffset + 2);
+	}
+
+	//const unsigned int scrollBarChunkPerMap{ (ScrollBarSize - 2) / m_mapFileNames.size() };
+	const float shownMapsToTotalMapsRatio{ static_cast<float>(MaxShownMaps) / m_mapFileNames.size() };
+	for (unsigned int i{ 0 }; i < (ScrollBarSize - 2) * shownMapsToTotalMapsRatio; i++)
+	{
+		gPacMan.sendDataf(L'#', BaseLine + 1 + i + m_firstShownMapIndex, ColumnOffset + 1);
 	}
 }
 
@@ -83,9 +115,9 @@ std::wstring MapSelectorWindow::removeExtension(const std::wstring& path)
 
 void MapSelectorWindow::readMapFiles()
 {
-	constexpr wchar_t mapFolderName[]{ L"/Win32 Debug/maps" };
+	static constexpr wchar_t MapFolderName[]{ L"/Win32 Debug/maps" };
 	std::wstring mapFolder{ std::filesystem::current_path().c_str() };
-	mapFolder.append(mapFolderName);
+	mapFolder.append(MapFolderName);
 
 	// if this folder doesn't exist, there's no maps
 	if (!std::filesystem::exists(mapFolder))
