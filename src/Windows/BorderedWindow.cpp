@@ -1,7 +1,7 @@
 #include "../PacMan.h"
 #include "BorderedWindow.h"
 
-void BorderedWindow::renderHorizontalBars()
+void BorderedWindow::renderHorizontalBars() const
 {
 	for (unsigned int i{ 1 }; i < m_width; i++)
 	{
@@ -14,7 +14,7 @@ void BorderedWindow::renderHorizontalBars()
 	}
 }
 
-void BorderedWindow::renderVertBars()
+void BorderedWindow::renderVertBars() const
 {
 	for (unsigned int i{ 1 }; i < m_height; i++)
 	{
@@ -26,21 +26,21 @@ void BorderedWindow::renderVertBars()
 // startFromBottom means that offsetY will start from the bottom border of the
 // window instead of the top border
 void BorderedWindow::renderText(int offsetX, int offsetY,
-								const wchar_t* str, unsigned int str_len, bool startFromBottom)
+								const wchar_t* str, unsigned int str_len, bool startFromBottom) const
 {
 	const unsigned int startRow{ startFromBottom ? m_bottomLeftPosRow - 1 : m_topLeftPosRow + 1 };
 	gPacMan.sendDataf(str, str_len, startRow + offsetY, m_topLeftPosColumn + 1 + offsetX);
 }
 
 void BorderedWindow::renderText(int offsetX, int offsetY,
-								const std::wstring& str, bool startFromBottom)
+								const std::wstring& str, bool startFromBottom) const
 {
 	renderText(offsetX, offsetY, str.c_str(), str.size(), startFromBottom);
 }
 
 // both renderTextCentered return the offsetX that was calculated by this method
 unsigned int BorderedWindow::renderTextCentered(int offsetY, const wchar_t* str,
-												unsigned int str_len, bool startFromBottom)
+												unsigned int str_len, bool startFromBottom) const
 {
 	const unsigned int startRow{ startFromBottom ? m_bottomLeftPosRow - 1 : m_topLeftPosRow + 1 };
 	unsigned int column{ calcOffsetCenteredText(m_topLeftPosColumn + 1, m_topRightPosColumn, str_len) };
@@ -51,7 +51,7 @@ unsigned int BorderedWindow::renderTextCentered(int offsetY, const wchar_t* str,
 }
 
 unsigned int BorderedWindow::renderTextCentered(int offsetY, const std::wstring& str,
-												bool startFromBottom)
+												bool startFromBottom) const
 {
 	return renderTextCentered(offsetY, str.c_str(), str.size(), startFromBottom);
 }
@@ -73,26 +73,25 @@ void BorderedWindow::render()
 	// text rendering will happen in any derived class via renderText & renderTextCentered
 }
 
-unsigned int BorderedWindow::getWidth()
+unsigned int BorderedWindow::getWidth() const
 {
 	return m_width;
 }
 
-unsigned int BorderedWindow::getHeight()
+unsigned int BorderedWindow::getHeight() const
 {
 	return m_height;
 }
 
-int BorderedWindow::getOffsetX()
+int BorderedWindow::getOffsetX() const
 {
 	return m_offsetX;
 }
 
-int BorderedWindow::getOffsetY()
+int BorderedWindow::getOffsetY() const
 {
 	return m_offsetY;
 }
-
 
 // calculate the middle point between 2 columns, then adjust it for the text length
 // (...-txtSize/2), so you get the right offset for the 1st character of the string
@@ -103,7 +102,7 @@ unsigned int BorderedWindow::calcOffsetCenteredText(unsigned int col1, unsigned 
 }
 
 BorderedWindow::BorderedWindow(unsigned int width, unsigned int height, int offsetX, int offsetY)
-	: Window{ WindowType::Other }, m_width { width }, m_height{ height },
+	: Window{ WindowType::Other }, m_width{ width }, m_height{ height },
 	m_offsetX{ offsetX }, m_offsetY{ offsetY }
 {
 	m_topLeftPosRow = gScreenHeight / 2 - m_height / 2 + m_offsetY;

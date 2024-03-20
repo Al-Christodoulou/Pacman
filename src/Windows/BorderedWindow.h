@@ -27,21 +27,21 @@ private:
 
 	// render the horizontal content of the window (the horizontal
 	// bars and the empty space inside it)
-	void renderHorizontalBars();
-	void renderVertBars();
+	void renderHorizontalBars() const;
+	void renderVertBars() const;
 
 protected:
-	void renderText(int offsetX, int offsetY, const wchar_t* str, unsigned int str_len, bool = false);
-	void renderText(int offsetX, int offsetY, const std::wstring& str, bool = false);
-	unsigned int renderTextCentered(int offsetY, const wchar_t* str, unsigned int str_len, bool = false);
-	unsigned int renderTextCentered(int offsetY, const std::wstring& str, bool = false);
+	void renderText(int offsetX, int offsetY, const wchar_t* str, unsigned int str_len, bool = false) const;
+	void renderText(int offsetX, int offsetY, const std::wstring& str, bool = false) const;
+	unsigned int renderTextCentered(int offsetY, const wchar_t* str, unsigned int str_len, bool = false) const;
+	unsigned int renderTextCentered(int offsetY, const std::wstring& str, bool = false) const;
 public:
 	void render() override;
 
-	unsigned int getWidth();
-	unsigned int getHeight();
-	int getOffsetX();
-	int getOffsetY();
+	unsigned int getWidth() const;
+	unsigned int getHeight() const;
+	int getOffsetX() const;
+	int getOffsetY() const;
 
 	static unsigned int calcOffsetCenteredText(unsigned int, unsigned int, unsigned int);
 
