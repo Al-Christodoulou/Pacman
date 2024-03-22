@@ -39,15 +39,19 @@ void MapSelectorWindow::renderMapList() const
 void MapSelectorWindow::renderScrollBar() const
 {
 	static constexpr unsigned int ColumnOffset{ static_cast<unsigned int>(gScreenWidth * 0.7f) };
-	static constexpr unsigned int ScrollBarSize{ MaxShownMaps * 2 };
+	static const unsigned int ScrollBarSize{ m_mapFileNames.size() };
 
 	// maybe unnecessary sanity check
 	if constexpr (gScreenWidth < 7)
 		return;
 
 	// render the horizontal walls of the scroll bar
+	gPacMan.sendDataf(L'\u2554', BaseLine, ColumnOffset);
 	gPacMan.sendDataf(L'\u2550', BaseLine, ColumnOffset + 1);
+	gPacMan.sendDataf(L'\u2557', BaseLine, ColumnOffset + 2);
+	gPacMan.sendDataf(L'\u255A', BaseLine + ScrollBarSize, ColumnOffset);
 	gPacMan.sendDataf(L'\u2550', BaseLine + ScrollBarSize, ColumnOffset + 1);
+	gPacMan.sendDataf(L'\u255D', BaseLine + ScrollBarSize, ColumnOffset + 2);
 	// the vertical walls
 	for (unsigned int i{ 1 }; i < ScrollBarSize; i++)
 	{
@@ -55,11 +59,12 @@ void MapSelectorWindow::renderScrollBar() const
 		gPacMan.sendDataf(L'\u2551', BaseLine + i, ColumnOffset + 2);
 	}
 
-	//const unsigned int scrollBarChunkPerMap{ (ScrollBarSize - 2) / m_mapFileNames.size() };
 	const float shownMapsToTotalMapsRatio{ static_cast<float>(MaxShownMaps) / m_mapFileNames.size() };
-	for (unsigned int i{ 0 }; i < (ScrollBarSize - 2) * shownMapsToTotalMapsRatio; i++)
+	const unsigned int barSize{ static_cast<unsigned int>((ScrollBarSize - 1) * shownMapsToTotalMapsRatio) };
+
+	for (unsigned int i{ 0 }; i < barSize; i++)
 	{
-		gPacMan.sendDataf(L'#', BaseLine + 1 + i + m_firstShownMapIndex, ColumnOffset + 1);
+		gPacMan.sendDataf(L'\u2588', BaseLine + 1 + i + m_firstShownMapIndex, ColumnOffset + 1);
 	}
 }
 
