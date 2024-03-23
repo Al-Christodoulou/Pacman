@@ -13,13 +13,17 @@ void MapSelectorWindow::render()
 {
 	gPacMan.fillscreen(L' ');
 	renderMapList();
-	renderScrollBar();
+
+	if (m_mapFileNames.size() > MaxShownMaps)
+		renderScrollBar();
 }
 
 void MapSelectorWindow::renderMapList() const
 {
 	const size_t maxShownMaps{ std::min(m_mapFileNames.size(), MaxShownMaps) };
 	const size_t iGuard{ std::min(m_mapFileNames.size(), m_firstShownMapIndex + maxShownMaps) };
+	static constexpr unsigned int cursorToTextDist{ 3 };
+
 	for (size_t i = m_firstShownMapIndex; i < iGuard; i++)
 	{
 		const std::wstring& mapName{ m_mapFileNames[i] };
@@ -30,18 +34,24 @@ void MapSelectorWindow::renderMapList() const
 		// render the cursor
 		if (static_cast<unsigned int>(m_menuIndex) == i)
 		{
-			gPacMan.sendDataf(L'>', row, column - 3);
-			gPacMan.sendDataf(L'<', row, column + mapName.size() + 3 - 1);
+			const unsigned int textSize{ 1 };
+			gPacMan.sendDataf(L"\u25BA", textSize, row, column - cursorToTextDist - textSize);
+			gPacMan.sendDataf(L"\u25C4", textSize, row, column + mapName.size() + cursorToTextDist);
 		}
 	}
 }
 
 void MapSelectorWindow::renderScrollBar() const
 {
+	// the column offset of the scroll bar
 	static constexpr unsigned int ColumnOffset{ static_cast<unsigned int>(gScreenWidth * 0.7f) };
-	static const unsigned int ScrollBarSize{ m_mapFileNames.size() };
+	// this divisor is used so the scroll bar is "compressed" so as not to go out of bounds
+	// (since its size depends on the amount of maps available)
+	static const unsigned int ScrollbarDivisor{ m_mapFileNames.size() / MaxShownMaps };
+	static const unsigned int ScrollBarSize{ m_mapFileNames.size() / ScrollbarDivisor };
 
-	// maybe unnecessary sanity check
+	// maybe unnecessary sanity check, ColumnOffset would go out of bounds if the width
+	// is for some reason less than 7 blocks
 	if constexpr (gScreenWidth < 7)
 		return;
 
@@ -59,12 +69,20 @@ void MapSelectorWindow::renderScrollBar() const
 		gPacMan.sendDataf(L'\u2551', BaseLine + i, ColumnOffset + 2);
 	}
 
+	// this calculates the size of the inside bar that moves
 	const float shownMapsToTotalMapsRatio{ static_cast<float>(MaxShownMaps) / m_mapFileNames.size() };
-	const unsigned int barSize{ static_cast<unsigned int>((ScrollBarSize - 1) * shownMapsToTotalMapsRatio) };
+	const unsigned int innerBarSize{
+		std::max(1U, static_cast<unsigned int>((ScrollBarSize - 1) * shownMapsToTotalMapsRatio))
+	};
 
-	for (unsigned int i{ 0 }; i < barSize; i++)
+	// render the inner bar
+	for (unsigned int i{ 0 }; i < innerBarSize; i++)
 	{
-		gPacMan.sendDataf(L'\u2588', BaseLine + 1 + i + m_firstShownMapIndex, ColumnOffset + 1);
+		gPacMan.sendDataf(
+			L'\u2588',
+			BaseLine + 1 + i + m_firstShownMapIndex / ScrollbarDivisor,
+			ColumnOffset + 1
+		);
 	}
 }
 
@@ -82,8 +100,13 @@ void MapSelectorWindow::runLogic()
 	if (gPacMan.isKeyTapped(L'W'))
 	{
 		--m_menuIndex;
-		if (static_cast<size_t>(m_menuIndex) == m_mapFileNames.size() - 1) // if an underflow occured
+		// if an underflow occured, m_firstShownMapIndex needs to be updated (unless the total maps
+		// is less than MaxShownMaps)
+		if (static_cast<size_t>(m_menuIndex) == m_mapFileNames.size() - 1 &&
+			m_mapFileNames.size() > MaxShownMaps)
+		{
 			m_firstShownMapIndex = m_mapFileNames.size() - MaxShownMaps;
+		}
 		else if (m_menuIndex - m_firstShownMapIndex < MaxShownMaps / 2 && m_firstShownMapIndex > 0)
 			--m_firstShownMapIndex;
 	}
