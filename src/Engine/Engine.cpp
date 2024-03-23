@@ -123,7 +123,7 @@ void Engine::renderScreen(wchar_t* data)
 {
 	DWORD dwBytesWritten{};
 	// the last char of the array is the end
-	data[gScreenTotalPxs] = '\0';
+	data[gScreenTotalPxs - 1] = L'\0';
 	WriteConsoleOutputCharacter(m_hConsole, data, gScreenTotalPxs, { 0, 0 }, &dwBytesWritten);
 }
 
