@@ -41,7 +41,7 @@ private:
 	static constexpr float cFreezeTime{ 4.0f };
 	static constexpr unsigned int cInfoTextOffset{
 		gScreenWidth * gPlayableSpaceHeight +
-		gScreenWidth / 2
+		gScreenWidth + gScreenWidth / 2
 	};
 	static constexpr unsigned int cPlayerLivesTextOffset{
 		gScreenWidth * gPlayableSpaceHeight +
