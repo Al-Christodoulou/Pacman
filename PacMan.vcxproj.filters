@@ -25,6 +25,9 @@
     <Filter Include="Source Files\Engine">
       <UniqueIdentifier>{b599c442-f488-433a-bec2-0ba236daa261}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource Files\maps">
+      <UniqueIdentifier>{21b2b3aa-3ed2-408c-a41d-53f18227aa19}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Main.cpp">
@@ -173,5 +176,13 @@
     <ClInclude Include="src\Windows\OptionsWindow.h">
       <Filter>Header Files\Windows</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CopyFileToFolders Include="maps\classic.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="maps\classic.txt">
+      <Filter>Resource Files\maps</Filter>
+    </Text>
   </ItemGroup>
 </Project>
