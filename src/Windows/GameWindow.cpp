@@ -158,7 +158,7 @@ void GameWindow::initRound()
 			switch (mapDat[i][j])
 			{
 			case '#': // wall
-				m_entMgr.createDefaultEnt(j, i, '#');
+				m_entMgr.createDefaultEnt(j, i, L'\u2588');
 				break;
 			case 'p': // player spawn point
 				if (!m_player)

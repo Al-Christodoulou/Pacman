@@ -143,7 +143,7 @@ std::wstring MapSelectorWindow::removeExtension(const std::wstring& path)
 
 void MapSelectorWindow::readMapFiles()
 {
-	static constexpr wchar_t MapFolderName[]{ L"/Win32 Debug/maps" };
+	static constexpr wchar_t MapFolderName[]{ L"/maps" };
 	std::wstring mapFolder{ std::filesystem::current_path().c_str() };
 	mapFolder.append(MapFolderName);
 
