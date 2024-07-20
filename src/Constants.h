@@ -5,3 +5,4 @@ inline constexpr unsigned int gScreenHeight{ 40 };
 inline constexpr unsigned int gScreenTotalPxs{ gScreenWidth * gScreenHeight };
 
 inline constexpr unsigned int gPlayableSpaceHeight{ gScreenHeight - 3 };
+inline constexpr unsigned int gPlayableSpaceTotalPxs{ gScreenWidth * gPlayableSpaceHeight };
