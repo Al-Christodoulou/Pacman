@@ -92,12 +92,11 @@ void Graph::createGraph(unsigned int offset, const char* space)
 }
 
 void Graph::createConnection(const Direction direction,
-	const char* space,
-	bool* visited,
-	GraphNodeWPtr& topNode,
-	std::queue<GraphNodeWPtr>& queue) const
+							 const char* space,
+							 bool* visited,
+							 GraphNodeWPtr& topNode,
+							 std::queue<GraphNodeWPtr>& queue) const
 {
-
 	// a helper lambda
 	const auto isOutOfBounds{ [](unsigned int offset, int direction) {
 		return offset + static_cast<unsigned int>(direction) > gPlayableSpaceTotalPxs;
@@ -139,41 +138,6 @@ void Graph::createConnection(const Direction direction,
 
 		queue.push(newNeighbor);
 	}
-}
-
-GraphPath Graph::DepthFirstSearch(unsigned int goalOffset)
-{
-	GraphPath endPath{};
-	bool visited[gPlayableSpaceTotalPxs]{};
-
-	return DFSInner(goalOffset, m_rootNode, visited, endPath);
-}
-
-// this is quite a slow implementation of DFS, avoid
-GraphPath Graph::DFSInner(unsigned int goalOffset,
-						  GraphNodeWPtr node,
-						  bool* visited,
-						  GraphPath path)
-{
-	auto tempNode{ node.lock() };
-	visited[tempNode->getOffset()] = true;
-
-	if (tempNode->getOffset() == goalOffset)
-	{
-		path.push(node);
-		return path;
-	}
-	for (const auto& neighbor : tempNode->getRelatives())
-	{
-		if (neighbor && !visited[neighbor->getOffset()])
-		{
-			path.push(node);
-			GraphPath p{ DFSInner(goalOffset, neighbor, visited, path) };
-			if (!p.empty())
-				return p;
-		}
-	}
-	return {};
 }
 
 // if startOffset is -1, we start from the root node

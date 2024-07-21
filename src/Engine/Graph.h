@@ -72,13 +72,10 @@ private:
 		bool*,
 		GraphNodeWPtr&,
 		std::queue<GraphNodeWPtr>&) const;
-	GraphPath DFSInner(unsigned int, GraphNodeWPtr, bool*, GraphPath);
 	GraphPath BFSInner(unsigned int, const GraphNodeWPtr&);
 public:
 	Graph(unsigned int, const char*);
 
-	// starts from the root node
-	GraphPath DepthFirstSearch(unsigned int);
 	// starts from the root node, unless the second parameter is specified
 	GraphPath BreadthFirstSearch(unsigned int, int = -1);
 };
