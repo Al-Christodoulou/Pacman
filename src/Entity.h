@@ -15,11 +15,13 @@ class Entity
 {
 protected:
 	float m_x{ gScreenWidth / 2 }, m_y{ gScreenHeight / 2 };
-	wchar_t m_texture{ L'#' };
+	wchar_t m_texture{ DefaultTex };
 
 	EntityType m_entitytype;
 
 public:
+	static constexpr inline char DefaultTex{ '#' };
+
 	static unsigned int interpretXY(float, float);
 	unsigned int getPos() const;
 	float getVirtualX() const;
