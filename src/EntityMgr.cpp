@@ -89,7 +89,13 @@ bool EntityMgr::checkViolationFor(Character& character)
 	{
 		// if we're not checking against the same entity, and the positions are equal, we have a
 		// collision
-		if (**iter != static_cast<Entity&>(character) && (**iter).getPos() == character.getPos())
+		bool condition{
+			**iter != static_cast<Entity&>(character) && (**iter).getPos() == character.getPos()
+			&&
+			// Ghosts also don't collide with Dots
+			!(character.getEntType() == EntityType::Ghost && (**iter).getEntType() == EntityType::Dot)
+		};
+		if (condition)
 			return performCollisionTouch(character, iter);
 
 		++iter;

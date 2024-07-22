@@ -108,6 +108,17 @@ void GameWindow::runLogic()
 		break;
 	case GameState::Playing:
 	{
+		// sort the entity array by their EntityTypes, so Players and Ghosts get rendered last
+		// (so they're on top of the render chain)
+		std::sort(
+			m_entMgr.getEntities().begin(),
+			m_entMgr.getEntities().end(),
+			[](SharedEntityPtr ent1, SharedEntityPtr ent2)
+			{
+				return ent1->getEntType() > ent2->getEntType();
+			}
+		);
+
 		// make all characters think
 		EntityArray& entities{ m_entMgr.getEntities() };
 		size_t i{ 0 };
