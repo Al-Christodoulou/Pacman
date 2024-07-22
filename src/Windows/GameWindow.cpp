@@ -43,7 +43,19 @@ Graph GameWindow::createGraph()
 void GameWindow::render()
 {
 	gPacMan.fillscreen(L' ');
+
+#ifdef _DEBUG
+	// toggle graph visibility with R
+	static bool toggle{ false };
+	if (gPacMan.isKeyTapped(L'R'))
+		toggle = !toggle;
+	if (toggle)
+		renderAllEntities();
+	else
+		renderGraph();
+#else
 	renderAllEntities();
+#endif
 
 	gPacMan.swprintf_s(cPlayerLivesTextOffset, 20, L"Lives: %d", getPlayer()->getLives());
 	gPacMan.swprintf_s(cPlayerScoreTextOffset, 20, L"Score: %d", getPlayer()->getScore());
