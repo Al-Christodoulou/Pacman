@@ -206,7 +206,19 @@ GraphPath Graph::BFSInner(unsigned int goalOffset, const GraphNodeWPtr& startNod
 	while (!curParent.expired())
 	{
 		endPath.push(curParent);
+		auto olderParent{ curParent };
 		curParent = curParent.lock()->getParent();
+
+		if (!curParent.expired())
+		{
+			auto otherParent{ curParent.lock()->getParent().lock() };
+			if (otherParent != nullptr)
+			{
+				if (!otherParent->getParent().expired() &&
+					otherParent == olderParent.lock())
+					break;
+			}
+		}
 	}
 	return endPath;
 }
