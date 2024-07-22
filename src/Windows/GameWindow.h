@@ -63,6 +63,8 @@ public:
 	void runLogic() override;
 	void postMoveInit() override;
 
+	GraphPath findPath(const Entity&, const Entity&);
+
 	// the num of lives parameter's used for new game rounds
 	void initRound();
 	void renderAllEntities();

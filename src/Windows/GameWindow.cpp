@@ -194,6 +194,11 @@ void GameWindow::postMoveInit()
 	initRound();
 }
 
+GraphPath GameWindow::findPath(const Entity& startEnt, const Entity& endEnt)
+{
+	return m_graph.BreadthFirstSearch(endEnt.getPos(), startEnt.getPos());
+}
+
 void GameWindow::initRound()
 {
 	m_totalDotCount = 0;
