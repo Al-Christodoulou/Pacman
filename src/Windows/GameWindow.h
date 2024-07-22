@@ -66,6 +66,7 @@ public:
 	// the num of lives parameter's used for new game rounds
 	void initRound();
 	void renderAllEntities();
+	void renderGraph();
 	void restartRound(bool);
 	void addBlacklistedDotPos(const Entity&);
 

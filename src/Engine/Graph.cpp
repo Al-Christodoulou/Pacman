@@ -144,6 +144,11 @@ void Graph::createConnection(const Direction direction,
 	}
 }
 
+const GraphNodeWPtr Graph::getRootNode() const
+{
+	return m_rootNode;
+}
+
 // if startOffset is -1, we start from the root node
 GraphPath Graph::BreadthFirstSearch(unsigned int goalOffset, int startOffset)
 {

@@ -77,6 +77,7 @@ private:
 public:
 	Graph(unsigned int, unsigned int, const MapDataArray&);
 
+	const GraphNodeWPtr getRootNode() const;
 	// starts from the root node, unless the second parameter is specified
 	GraphPath BreadthFirstSearch(unsigned int, int = -1);
 };

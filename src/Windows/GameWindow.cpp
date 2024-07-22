@@ -243,6 +243,32 @@ void GameWindow::renderAllEntities()
 	}
 }
 
+void GameWindow::renderGraph()
+{
+	std::array<bool, gPlayableSpaceTotalPxs> visited{};
+	std::queue<GraphNodeWPtr> queue{};
+
+	auto rootNode{ m_graph.getRootNode().lock() };
+	visited[rootNode->getOffset()] = true;
+	queue.push(rootNode);
+	while (!queue.empty())
+	{
+		auto node{ queue.front() };
+		queue.pop();
+
+		auto tempNode{ node.lock() };
+		for (const auto& neighbor : tempNode->getRelatives())
+		{
+			if (neighbor != nullptr && !visited[neighbor->getOffset()])
+			{
+				visited[neighbor->getOffset()] = true;
+				gPacMan.sendData(L"*", 1, tempNode->getOffset());
+				queue.push(neighbor);
+			}
+		}
+	}
+}
+
 void GameWindow::restartRound(bool roundWon)
 {
 	Engine::Log << "*** Restart ***";
