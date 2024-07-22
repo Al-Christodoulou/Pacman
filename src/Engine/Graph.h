@@ -6,6 +6,7 @@
 #include <stack>
 // TODO: move Constants inside the Engine folder
 #include "../Constants.h"
+#include "../MapFile.h"
 
 struct GraphNode;
 using GraphNodePtr = std::shared_ptr<GraphNode>;
@@ -55,7 +56,7 @@ public:
 struct Graph
 {
 private:
-	const int DirectionDeltas[Direction::MAX_DIRECTIONS]{
+	static constexpr int DirectionDeltas[Direction::MAX_DIRECTIONS]{
 		-1, // Left
 		1,  // Right
 		gScreenWidth,					  // Down
@@ -63,18 +64,18 @@ private:
 	};
 
 private:
-	GraphNodePtr const m_rootNode;
+	GraphNodePtr m_rootNode;
 
-	void createGraph(unsigned int, const char*);
+	void createGraph(unsigned int, unsigned int, const MapDataArray&);
 	void createConnection(
 		const Direction,
-		const char*,
-		bool*,
+		const MapDataArray&,
+		std::array<bool, gPlayableSpaceTotalPxs>&,
 		GraphNodeWPtr&,
 		std::queue<GraphNodeWPtr>&) const;
 	GraphPath BFSInner(unsigned int, const GraphNodeWPtr&);
 public:
-	Graph(unsigned int, const char*);
+	Graph(unsigned int, unsigned int, const MapDataArray&);
 
 	// starts from the root node, unless the second parameter is specified
 	GraphPath BreadthFirstSearch(unsigned int, int = -1);

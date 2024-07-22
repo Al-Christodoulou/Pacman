@@ -1,4 +1,5 @@
 #include "Graph.h"
+#include "../Entity.h"
 #include <iostream>
 
 void GraphPath::reversePath()
@@ -62,21 +63,22 @@ void GraphNode::resetParent()
 // ==================
 // graph code below
 // ==================
-Graph::Graph(unsigned int offset, const char* space)
-	: m_rootNode{ std::make_shared<GraphNode>(offset) }
+Graph::Graph(unsigned int offsetX, unsigned int offsetY, const MapDataArray& data)
+	: m_rootNode{ std::make_shared<GraphNode>(offsetX + offsetY * gScreenWidth) }
 {
-	createGraph(offset, space);
+	createGraph(offsetX, offsetY, data);
 }
 
-void Graph::createGraph(unsigned int offset, const char* space)
+void Graph::createGraph(unsigned int offsetX, unsigned int offsetY, const MapDataArray& data)
 {
 	// create a copy of the space, so we can store what indices we've visited
-	bool visited[gPlayableSpaceTotalPxs]{};
+	//bool visited[gPlayableSpaceTotalPxs]{};
+	std::array<bool, gPlayableSpaceTotalPxs> visited{};
 
 	// beginning of basic BFS here (basic meaning no parent calculations since
 	// we don't need them here)
 	std::queue<GraphNodeWPtr> queue{};
-	visited[offset] = true; // root node is visited
+	visited[offsetX + offsetY * gScreenWidth] = true; // root node is visited
 	queue.push(m_rootNode);
 	while (!queue.empty())
 	{
@@ -86,14 +88,14 @@ void Graph::createGraph(unsigned int offset, const char* space)
 		// check all directions and see if we can explore the rest of the space
 		for (size_t dir{ 0 }; dir < Direction::MAX_DIRECTIONS; dir++)
 		{
-			createConnection(static_cast<Direction>(dir), space, visited, topNode, queue);
+			createConnection(static_cast<Direction>(dir), data, visited, topNode, queue);
 		}
 	}
 }
 
 void Graph::createConnection(const Direction direction,
-							 const char* space,
-							 bool* visited,
+							 const MapDataArray& data,
+							 std::array<bool, gPlayableSpaceTotalPxs>& visited,
 							 GraphNodeWPtr& topNode,
 							 std::queue<GraphNodeWPtr>& queue) const
 {
@@ -108,8 +110,10 @@ void Graph::createConnection(const Direction direction,
 
 	int delta{ DirectionDeltas[direction] };
 	bool canMakeConnection{
-		!isOutOfBounds(offset, delta) && visited[offset + delta] == false
-		&& space[offset + delta] != 1 // don't check walls
+		!isOutOfBounds(offset, delta) &&
+		visited[offset + delta] == false &&
+		// don't check walls
+		data[(offset + delta) / gScreenWidth][(offset + delta) % gScreenWidth] != Entity::DefaultTex
 	};
 
 	switch (direction)
@@ -163,7 +167,7 @@ GraphPath Graph::BreadthFirstSearch(unsigned int goalOffset, int startOffset)
 
 GraphPath Graph::BFSInner(unsigned int goalOffset, const GraphNodeWPtr& startNode)
 {
-	bool visited[gPlayableSpaceTotalPxs]{};
+	std::array<bool, gPlayableSpaceTotalPxs> visited{};
 	// the final node that we wanted to get to
 	GraphNodeWPtr goalNode{};
 
