@@ -1,6 +1,7 @@
 #pragma once
 #include <set>
 #include "../Engine/Window.h"
+#include "../Engine/Graph.h"
 #include "MessageWindow.h"
 #include "../EntityMgr.h"
 #include "../Player.h"
@@ -11,6 +12,7 @@ class GameWindow : public Window<WindowType>
 {
 private:
 	const MapFile m_mapFile;
+	Graph m_graph;
 	enum class GameState
 	{
 		FreezeTime = 0,
@@ -53,6 +55,8 @@ private:
 	};
 
 	Player* const getPlayer() const;
+	// this is called by the constructor
+	Graph createGraph();
 
 public:
 	void render() override;

@@ -13,6 +13,33 @@ Player* const GameWindow::getPlayer() const
 	return static_cast<Player* const>(m_player.get());
 }
 
+Graph GameWindow::createGraph()
+{
+	const auto& mapData{ m_mapFile.getData() };
+	int x{}, y{};
+
+	bool foundEmptySpace{ false };
+	// find the first empty space in the map file
+	for (size_t i{ 0 }; i < mapData.size(); i++)
+	{
+		for (size_t j{ 0 }; j < mapData[0].size(); j++)
+		{
+			if (mapData[i][j] != Entity::DefaultTex)
+			{
+				y = i, x = j;
+				foundEmptySpace = true;
+			}
+		}
+	}
+
+	// TODO: it's much better to create a MapSelectorWindow::mapHasEmptySpace instead of
+	// doing this
+	if (!foundEmptySpace)
+		throw "Couldn't find an empty space in the map!";
+
+	return Graph(x, y, m_mapFile.getData());
+}
+
 void GameWindow::render()
 {
 	gPacMan.fillscreen(L' ');
@@ -258,7 +285,8 @@ unsigned int GameWindow::getRound() const
 }
 
 GameWindow::GameWindow(const MapFile& mapFile)
-	: Window(WindowType::GameWindow), m_mapFile{ mapFile }
+	: Window(WindowType::GameWindow), m_mapFile{ mapFile },
+	m_graph{ createGraph() }
 {
 	// m_state_begin isn't used for the GameWindow specifically, but
 	// it should be updated anyway
