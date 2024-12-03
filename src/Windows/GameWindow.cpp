@@ -13,10 +13,49 @@ Player* const GameWindow::getPlayer() const
 	return static_cast<Player* const>(m_player.get());
 }
 
+Graph GameWindow::createGraph()
+{
+	const auto& mapData{ m_mapFile.getData() };
+	int x{}, y{};
+
+	bool foundEmptySpace{ false };
+	// find the first empty space in the map file
+	for (size_t i{ 0 }; i < mapData.size(); i++)
+	{
+		for (size_t j{ 0 }; j < mapData[0].size(); j++)
+		{
+			if (mapData[i][j] != Entity::DefaultTex)
+			{
+				y = i, x = j;
+				foundEmptySpace = true;
+			}
+		}
+	}
+
+	// TODO: it's much better to create a MapSelectorWindow::mapHasEmptySpace instead of
+	// doing this
+	if (!foundEmptySpace)
+		throw "Couldn't find an empty space in the map!";
+
+	return Graph(x, y, m_mapFile.getData());
+}
+
 void GameWindow::render()
 {
 	gPacMan.fillscreen(L' ');
+
+#ifdef _DEBUG
+	// toggle graph visibility with R
+	static bool toggle{ false };
+	if (gPacMan.isKeyTapped(L'R'))
+		toggle = !toggle;
+	if (toggle)
+		renderAllEntities();
+	else
+		renderGraph();
+#else
 	renderAllEntities();
+#endif
 
 	gPacMan.swprintf_s(cPlayerLivesTextOffset, 20, L"Lives: %d", getPlayer()->getLives());
 	gPacMan.swprintf_s(cPlayerScoreTextOffset, 20, L"Score: %d", getPlayer()->getScore());
@@ -69,6 +108,17 @@ void GameWindow::runLogic()
 		break;
 	case GameState::Playing:
 	{
+		// sort the entity array by their EntityTypes, so Players and Ghosts get rendered last
+		// (so they're on top of the render chain)
+		std::sort(
+			m_entMgr.getEntities().begin(),
+			m_entMgr.getEntities().end(),
+			[](SharedEntityPtr ent1, SharedEntityPtr ent2)
+			{
+				return ent1->getEntType() > ent2->getEntType();
+			}
+		);
+
 		// make all characters think
 		EntityArray& entities{ m_entMgr.getEntities() };
 		size_t i{ 0 };
@@ -144,6 +194,11 @@ void GameWindow::postMoveInit()
 	initRound();
 }
 
+GraphPath GameWindow::findPath(const Entity& startEnt, const Entity& endEnt)
+{
+	return m_graph.BreadthFirstSearch(endEnt.getPos(), startEnt.getPos());
+}
+
 void GameWindow::initRound()
 {
 	m_totalDotCount = 0;
@@ -216,6 +271,32 @@ void GameWindow::renderAllEntities()
 	}
 }
 
+void GameWindow::renderGraph()
+{
+	std::array<bool, gPlayableSpaceTotalPxs> visited{};
+	std::queue<GraphNodeWPtr> queue{};
+
+	auto rootNode{ m_graph.getRootNode().lock() };
+	visited[rootNode->getOffset()] = true;
+	queue.push(rootNode);
+	while (!queue.empty())
+	{
+		auto node{ queue.front() };
+		queue.pop();
+
+		auto tempNode{ node.lock() };
+		for (const auto& neighbor : tempNode->getRelatives())
+		{
+			if (neighbor != nullptr && !visited[neighbor->getOffset()])
+			{
+				visited[neighbor->getOffset()] = true;
+				gPacMan.sendData(L"*", 1, tempNode->getOffset());
+				queue.push(neighbor);
+			}
+		}
+	}
+}
+
 void GameWindow::restartRound(bool roundWon)
 {
 	Engine::Log << "*** Restart ***";
@@ -258,7 +339,8 @@ unsigned int GameWindow::getRound() const
 }
 
 GameWindow::GameWindow(const MapFile& mapFile)
-	: Window(WindowType::GameWindow), m_mapFile{ mapFile }
+	: Window(WindowType::GameWindow), m_mapFile{ mapFile },
+	m_graph{ createGraph() }
 {
 	// m_state_begin isn't used for the GameWindow specifically, but
 	// it should be updated anyway

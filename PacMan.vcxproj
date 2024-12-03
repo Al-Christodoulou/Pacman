@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Engine\Graph.cpp" />
     <ClCompile Include="src\SaveFile.cpp" />
     <ClCompile Include="src\Windows\OptionsWindow.cpp" />
     <ClCompile Include="src\Windows\PauseMenuWindow.cpp" />
@@ -43,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Engine\EngineStructs.h" />
+    <ClInclude Include="src\Engine\Graph.h" />
     <ClInclude Include="src\SaveFile.h" />
     <ClInclude Include="src\Windows\OptionsWindow.h" />
     <ClInclude Include="src\Windows\PauseMenuWindow.h" />
